@@ -1,11 +1,30 @@
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useState } from "react";
-import GoogleButton from "react-google-button";
-import { Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import React from "react";
 
 import "./Signup.scss";
 
 const Signup: React.FC = () => {
+  const responseGoogle = (response: any) => {
+    //console.log(response);
+    const userObject = jwt_decode(response.credential);
+    //console.log(userObject);
+    localStorage.setItem("user", JSON.stringify(userObject));
+    console.log(userObject)
+    const { name, sub, picture } = userObject as any;
+    const doc = {
+      _id: sub,
+      _type: "user",
+      userName: name,
+      image: picture,
+    };
+    console.log(doc);
+    // client.createIfNotExists(doc).then(() => {
+    //   navigate("/", { replace: true });
+    // });
+  };
+
   return (
     <div className="signup">
       <Formik
@@ -47,13 +66,19 @@ const Signup: React.FC = () => {
         )}
       </Formik>
       <hr />
-      {/* <h4>OR SIGN UP WITH</h4> */}
-      <GoogleButton
-        type="light" // can be light or dark
-        onClick={() => {
-          console.log("Google button clicked");
-        }}
-      />
+      <h4>OR SIGN UP WITH</h4>
+      <div className="">
+        <GoogleOAuthProvider
+          clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}
+        >
+          <GoogleLogin
+            onSuccess={responseGoogle}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
+        </GoogleOAuthProvider>
+      </div>
     </div>
   );
 };

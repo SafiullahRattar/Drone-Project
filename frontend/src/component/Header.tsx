@@ -11,7 +11,7 @@ const Header = () => {
     <header className="header">
       <div className="header__logo">LOGO</div>
       <nav className={`header__nav ${isMenuOpen ? "header__nav--open" : ""}`}>
-        <a href="#" className="header__nav-link">
+        {/* <a href="#" className="header__nav-link">
           Home
         </a>
         <a href="#" className="header__nav-link">
@@ -22,7 +22,7 @@ const Header = () => {
         </a>
         <a href="#" className="header__nav-link">
           Deliveries
-        </a>
+        </a> */}
         <div className="header__signin-btn">Sign In</div>
       </nav>
       <div className="header__menu-button" onClick={toggleMenu}>
