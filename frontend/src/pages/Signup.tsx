@@ -6,12 +6,16 @@ import React from "react";
 import "./Signup.scss";
 
 const Signup: React.FC = () => {
+  const handleGoogleLogin = () => {
+    window.open(`http://localhost:5000/api/users/auth/google`, '_self');
+  };
+
   const responseGoogle = (response: any) => {
     //console.log(response);
     const userObject = jwt_decode(response.credential);
     //console.log(userObject);
     localStorage.setItem("user", JSON.stringify(userObject));
-    console.log(userObject)
+    console.log(userObject);
     const { name, sub, picture } = userObject as any;
     const doc = {
       _id: sub,
@@ -79,6 +83,7 @@ const Signup: React.FC = () => {
           />
         </GoogleOAuthProvider>
       </div>
+      <button onClick={handleGoogleLogin}>asdf</button>
     </div>
   );
 };
