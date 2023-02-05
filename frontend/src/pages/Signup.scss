@@ -8,6 +8,19 @@
   align-items: center;
 }
 
+.google {
+  background-color: #dd4b39;
+  color: white;
+  display: block;
+  text-align: center;
+}
+
+.login-text {
+  display: inline-block;
+  min-width: 250px;
+}
+
+
 .form {
   display: flex;
   flex-direction: column;
