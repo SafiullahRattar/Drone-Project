@@ -19,21 +19,21 @@ const userModel_1 = __importDefault(require("../models/userModel"));
 exports.authMiddleware = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let token;
     if (req.headers.authorization &&
-        req.headers.authorization.startsWith('Bearer')) {
+        req.headers.authorization.startsWith("Bearer")) {
         try {
-            token = req.headers.authorization.split(' ')[1];
+            token = req.headers.authorization.split(" ")[1];
             const decoded = jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET);
-            req.body.user = yield userModel_1.default.findById(decoded.user_id).select('-password');
+            req.body.user = yield userModel_1.default.findById(decoded.user_id).select("-password");
             next();
         }
         catch (e) {
             res.status(401);
-            throw new Error('Auth token not found');
+            throw new Error("Auth token not found");
         }
     }
     if (!token) {
         res.status(401);
-        throw new Error('Auth token not found');
+        throw new Error("Auth token not found");
     }
 }));
 exports.adminMiddleware = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -42,6 +42,6 @@ exports.adminMiddleware = (0, express_async_handler_1.default)((req, res, next) 
     }
     else {
         res.status(401);
-        throw new Error('Unauthorized access denided');
+        throw new Error("Unauthorized access denided");
     }
 }));

@@ -10,16 +10,17 @@ passport.use(
       scope: ["profile", "email"],
     },
     function (accessToken, refreshToken, profile, callback) {
-        console.log(profile)
+        // console.log('------passport.ts ---')
+        // console.log(profile)
       callback(null, profile);
     }
   )
 );
 
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user);
+// });
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
+// passport.deserializeUser((user, done) => {
+//   done(null, user);
+// });

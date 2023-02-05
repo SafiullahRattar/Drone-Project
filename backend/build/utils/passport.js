@@ -11,12 +11,13 @@ passport_1.default.use(new passport_google_oauth20_1.Strategy({
     callbackURL: "/auth/google/callback",
     scope: ["profile", "email"],
 }, function (accessToken, refreshToken, profile, callback) {
-    console.log(profile);
+    // console.log('------passport.ts ---')
+    // console.log(profile)
     callback(null, profile);
 }));
-passport_1.default.serializeUser((user, done) => {
-    done(null, user);
-});
-passport_1.default.deserializeUser((user, done) => {
-    done(null, user);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user);
+// });
+// passport.deserializeUser((user, done) => {
+//   done(null, user);
+// });

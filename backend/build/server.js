@@ -11,28 +11,36 @@ const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const errorMiddleware_1 = require("./middleware/errorMiddleware");
 const passport_1 = __importDefault(require("passport"));
 const express_session_1 = __importDefault(require("express-session"));
+const authMiddleware_1 = require("./middleware/authMiddleware");
+const userController_1 = require("./controllers/userController");
 const app = (0, express_1.default)();
 dotenv_1.default.config();
-require('./utils/passport');
 app.use((0, express_session_1.default)({
     resave: false,
-    saveUninitialized: true,
-    secret: 'bla bla bla'
+    saveUninitialized: false,
+    secret: "bla bla bla",
+    // store: new mongoose({
+    //   url: process.env.MONGODB_URI,
+    //   collection: 'sessions'
+    // })
 }));
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
+require("./utils/passport");
 (0, db_1.default)();
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use("/api/users", userRoutes_1.default);
 app.get("/auth/google/callback", passport_1.default.authenticate("google", {
-    successRedirect: process.env.CLIENT_URL,
+    // successRedirect: process.env.CLIENT_URL,
     failureRedirect: "/login/failed",
-}));
+    session: false,
+}), userController_1.authUser);
 app.use("/hello", (req, res) => {
     res.send("hello world");
 });
 // app.use('/api/orders',orderRoutes)
+app.get("/", authMiddleware_1.authMiddleware, (req, res) => { });
 app.use(errorMiddleware_1.notFound);
 app.use(errorMiddleware_1.errorHandler);
 const PORT = process.env.PORT || 5000;
