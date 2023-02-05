@@ -1,7 +1,8 @@
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import jwt_decode from "jwt-decode";
-import React from "react";
+import React, { useEffect } from "react";
+import axios from 'axios'
 
 import "./Signup.scss";
 
@@ -9,6 +10,17 @@ const Signup: React.FC = () => {
   const handleGoogleLogin = () => {
     window.open(`http://localhost:5000/api/users/auth/google`, '_self');
   };
+  
+  useEffect(() => {
+    console.log(localStorage.getItem('JWT'))
+
+  },[])
+  
+  const ff = async () => {
+    const {data} = await axios.get(`http://localhost:5000/api/users/login/success`)
+    console.log('asdfasdfasdf')
+    console.log(data)
+  }
 
   const responseGoogle = (response: any) => {
     //console.log(response);
@@ -71,7 +83,7 @@ const Signup: React.FC = () => {
       </Formik>
       <hr />
       <h4>OR SIGN UP WITH</h4>
-      <div className="">
+      {/* <div className="">
         <GoogleOAuthProvider
           clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}
         >
@@ -82,8 +94,9 @@ const Signup: React.FC = () => {
             }}
           />
         </GoogleOAuthProvider>
-      </div>
+      </div> */}
       <button onClick={handleGoogleLogin}>asdf</button>
+      <button onClick={ff}>ff</button>
     </div>
   );
 };
