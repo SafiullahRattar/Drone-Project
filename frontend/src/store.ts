@@ -1,9 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { userSignInReducer } from "./reducers/userReducer";
 // ...
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    userSignInReducer,
+  },
 });
+
+export default store;
+// composeWithDevTools(applyMiddleware(...middleware))
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
