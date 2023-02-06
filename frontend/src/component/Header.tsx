@@ -1,16 +1,40 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
+import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from "react";
 import "../sass/Header.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../utils/hooks";
 import { signOutAction } from "../actions/userAction";
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [size, setSize] = useState({
+    width: 0,
+    height: 0,
+  });
+  useEffect(() => {
+    const handleResize = () => {
+      setSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (size.width > 768 && menuOpen) {
+      setMenuOpen(false);
+    }
+  }, [size.width, menuOpen]);
+
+  const menuToggleHandler = () => {
+    setMenuOpen((p) => !p);
+  };
+
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.userSignInReducer);
 
@@ -18,40 +42,54 @@ const Header = () => {
     dispatch(signOutAction());
     navigate("/");
   };
-
+  console.log("Navbar");
+  console.log(user);
   return (
     <header className="header">
-      <div className="header__logo">LOGO</div>
-      <nav className={`header__nav ${isMenuOpen ? "header__nav--open" : ""}`}>
-        {/* <a href="#" className="header__nav-link">
-          Home
-        </a>
-        <a href="#" className="header__nav-link">
-          Track
-        </a>
-        <a href="#" className="header__nav-link">
-          Pricing
-        </a>
-        <a href="#" className="header__nav-link">
-          Deliveries
-        </a> */}
-        {user !== null ? (
-          <Link to={"/signUp"}>
-            <div className="header__signin-btn">Sign In</div>
-          </Link>
-        ) : (
-          <div className="header__signin-btn" onClick={signOutHandler}>
-            Sign Out
-          </div>
-        )}
-      </nav>
-      <div className="header__menu-button" onClick={toggleMenu}>
-        {isMenuOpen ? (
-          <FontAwesomeIcon icon={faBars} />
-        ) : (
-          <FontAwesomeIcon icon={faBars} />
-        )}
-        {/* <i className={`fas fa-bars ${isMenuOpen ? "fa-times" : ""}`}></i> */}
+      <div className="header__content">
+        <Link to="/" className="header__content__logo">
+          Navbar
+        </Link>
+        <nav
+          className={`${"header__content__nav"} 
+          ${menuOpen && size.width < 768 ? `${"isMenu"}` : ""} 
+          }`}
+        >
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+            <li>
+              <Link to="/Works">Browse Works</Link>
+            </li>
+            <li>
+              <Link to="/help">Help</Link>
+            </li>
+
+            {Object.keys(user).length !== 0 ? (
+              <button className="btn" onClick={signOutHandler}>
+                Sign Out
+              </button>
+            ) : (
+              <Link to="/signUp">
+                <button className="btn">Register</button>
+              </Link>
+            )}
+            {/* <Link to="/login">
+              <button className="btn btn__login">Login</button>
+            </Link> */}
+          </ul>
+        </nav>
+        <div className="header__content__toggle">
+          {!menuOpen ? (
+            <FontAwesomeIcon icon={faBars} onClick={menuToggleHandler} />
+          ) : (
+            <FontAwesomeIcon icon={faClose} onClick={menuToggleHandler} />
+          )}
+        </div>
       </div>
     </header>
   );

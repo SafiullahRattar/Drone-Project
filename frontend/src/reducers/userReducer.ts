@@ -28,7 +28,7 @@ export const userSignInReducer = (
 
     case UserSingIn.LOGOUT:
       // return reducers(undefined, action)
-      return { ...state, user: null, error: "", loading: false };
+      return { ...state, user: {} as user, error: "", loading: false };
 
     default:
       return state;

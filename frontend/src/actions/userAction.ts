@@ -34,7 +34,7 @@ export const userSignInAction =
   };
 
 export const signOutAction = () => (dispatch: Dispatch) => {
-  Cookies.remove("jwt");
+  Cookies.remove("JWT");
   dispatch({
     type: UserSingIn.LOGOUT,
   });

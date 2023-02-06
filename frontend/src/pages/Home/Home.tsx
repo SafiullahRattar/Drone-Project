@@ -20,13 +20,6 @@ const Home = () => {
   // if (Object.keys(user).length === 0 && token) {
   //   console.log('Calling')
   //   dispatch(userSignInAction(token));
-  // }else{
-  //   console.log('bharwat')
-  // }
-  // useEffect(() => {
-  //   console.log("INSIDE HOME SCREEN")
-  // }, []);
-  //
   console.log(token);
   console.log(user);
   console.log(Object.keys(user).length);
