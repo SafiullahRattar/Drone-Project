@@ -57,16 +57,16 @@ const Header = () => {
         >
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">Tracking</Link>
             </li>
             <li>
-              <Link to="/profile">Profile</Link>
+              <Link to="/profile">Service</Link>
             </li>
             <li>
-              <Link to="/Works">Browse Works</Link>
+              <Link to="/Works">Book a Drone</Link>
             </li>
             <li>
-              <Link to="/help">Help</Link>
+              <Link to="/help">Profile</Link>
             </li>
 
             {Object.keys(user).length !== 0 ? (

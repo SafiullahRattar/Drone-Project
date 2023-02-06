@@ -10,7 +10,7 @@
 .header {
   background: rgb(255, 255, 255);
   width: 90%;
-  height: 100px;
+  height: 10vh;
   padding: 0 1.5rem;
   @include breakpoint(md) {
     padding: 0 3rem;
