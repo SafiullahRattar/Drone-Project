@@ -3,6 +3,7 @@ import connectDB from "./config/db";
 import bp from "body-parser";
 import express, { Request, Response } from "express";
 import userRoutes from "./routes/userRoutes";
+import packageRoutes from "./routes/packageRoutes";
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
 import passport from "passport";
 import session from "express-session";
@@ -35,6 +36,7 @@ app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 
 app.use("/api/users", userRoutes);
+app.use("/api/package", packageRoutes);
 
 app.get(
   "/auth/google/callback",

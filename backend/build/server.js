@@ -8,6 +8,7 @@ const db_1 = __importDefault(require("./config/db"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_1 = __importDefault(require("express"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
+const packageRoutes_1 = __importDefault(require("./routes/packageRoutes"));
 const errorMiddleware_1 = require("./middleware/errorMiddleware");
 const passport_1 = __importDefault(require("passport"));
 const express_session_1 = __importDefault(require("express-session"));
@@ -31,6 +32,7 @@ require("./utils/passport");
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use("/api/users", userRoutes_1.default);
+app.use("/api/package", packageRoutes_1.default);
 app.get("/auth/google/callback", passport_1.default.authenticate("google", {
     // successRedirect: process.env.CLIENT_URL,
     failureRedirect: "/login/failed",
