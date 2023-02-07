@@ -42,8 +42,8 @@ const Header = () => {
     dispatch(signOutAction());
     navigate("/");
   };
-  console.log("Navbar");
-  console.log(user);
+  // console.log("Navbar");
+  // console.log(user);
   return (
     <header className="header">
       <div className="header__content">

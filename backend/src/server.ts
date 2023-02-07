@@ -11,9 +11,18 @@ import session from "express-session";
 import { generateToken } from "./utils/generateToken";
 import { authMiddleware } from "./middleware/authMiddleware";
 import { authUser } from "./controllers/userController";
+import cors from "cors";
 
 const app = express();
 dotenv.config();
+
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 app.use(
   session({

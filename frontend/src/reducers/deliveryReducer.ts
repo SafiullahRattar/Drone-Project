@@ -5,7 +5,7 @@ const initialState: Delivery = {
   receiver: "",
   date: "",
   priority: "",
-  status: "",
+//   status: "",
   pickup_location: "",
   drop_location: "",
 };

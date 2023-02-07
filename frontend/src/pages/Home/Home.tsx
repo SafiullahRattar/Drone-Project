@@ -21,9 +21,9 @@ const Home = () => {
   // if (Object.keys(user).length === 0 && token) {
   //   console.log('Calling')
   //   dispatch(userSignInAction(token));
-  console.log(token);
-  console.log(user);
-  console.log(Object.keys(user).length);
+  // console.log(token);
+  // console.log(user);
+  // console.log(Object.keys(user).length);
 
   const [trackingId, setTrackingId] = useState("");
 

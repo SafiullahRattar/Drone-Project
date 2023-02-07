@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import { DeliveryActionTypes } from "../constants/action_types";
 import { Delivery, Package } from "../constants/interfaces";
 import { AppDispatch, RootState } from "../store";
@@ -94,14 +95,21 @@ export const postNewDelivery = (
 ) => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
-      const token = getState().userSignInReducer.user.token;
+    //   const token = getState().userSignInReducer.user.token;
+    const token = Cookies.get('JWT')
       const config = {
         headers: {
+          "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       };
+
+      const res = await axios.get("/api/package/63e2bb46caec961163ad9702");
+      console.log(res.data);
+      console.log({...package_data})
+
       const package_res = await axios.post(
-        "/api/package",
+        `http://localhost:5000/api/package/`,
         {
           ...package_data,
         },
@@ -109,13 +117,15 @@ export const postNewDelivery = (
       );
       const package_id = package_res.data._id;
       const delivery_res = await axios.post(
-        "/api/delivery",
+        `http://localhost:5000/api/delivery`,
         {
           package_id,
           ...delivery_data,
         },
         config
       );
+      console.log(delivery_res.data);
+      console.log("--------------\n-----------");
       dispatch({
         type: DeliveryActionTypes.POST_NEW_DELIVERY,
         payload: delivery_res.data,

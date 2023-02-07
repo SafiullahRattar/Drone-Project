@@ -42,7 +42,7 @@ export interface Delivery {
   receiver: string;
   date: string;
   priority: string;
-  status: string;
+  // status: string;
   pickup_location: string;
   drop_location: string;
 }

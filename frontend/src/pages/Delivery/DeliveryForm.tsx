@@ -1,9 +1,13 @@
 import { Formik } from "formik";
 import React from "react";
 import * as yup from "yup";
+import { postNewDelivery } from "../../actions/deliveryAction";
+import { useAppDispatch } from "../../utils/hooks";
 import "./DeliveryForm.scss";
 
 const DeliveryForm = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <div>
       <Formik
@@ -17,7 +21,7 @@ const DeliveryForm = () => {
             date: "",
             priority: "",
             // price: 0,
-            status: "",
+            // status: "",
             pickup_location: "",
             drop_location: "",
             // distance: 0,
@@ -33,7 +37,7 @@ const DeliveryForm = () => {
             date: yup.date().required("Date is required"),
             priority: yup.string().required("Priority is required"),
             // price: yup.number().required("Price is required"),
-            status: yup.string().required("Status is required"),
+            // status: yup.string().required("Status is required"),
             pickup_location: yup
               .string()
               .required("Pick up location is required"),
@@ -44,6 +48,8 @@ const DeliveryForm = () => {
         onSubmit={(values, { setSubmitting }) => {
           // submit the form
           setSubmitting(false);
+
+          dispatch(postNewDelivery(values.package, values.delivery));
         }}
       >
         {({
@@ -156,7 +162,7 @@ const DeliveryForm = () => {
                       <div className="error">{errors.delivery.price}</div>
                     )}
                 </div> */}
-                <div className="form-input-container">
+                {/* <div className="form-input-container">
                   <label>Status</label>
                   <input
                     type="text"
@@ -170,7 +176,7 @@ const DeliveryForm = () => {
                     errors.delivery.status && (
                       <div className="error">{errors.delivery.status}</div>
                     )}
-                </div>
+                </div> */}
                 <div className="form-input-container">
                   <label>Pickup Location</label>
                   <input
