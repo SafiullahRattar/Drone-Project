@@ -92,39 +92,37 @@ export const postNewDelivery = (
   package_data: Package,
   delivery_data: Delivery
 ) => {
-  return (delivery: Delivery, getState: () => RootState) => {
-    return async (dispatch: AppDispatch, getState: () => RootState) => {
-      try {
-        const token = getState().userSignInReducer.user.token;
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const package_res = await axios.post(
-          "/api/package",
-          {
-            ...package_data,
-          },
-          config
-        );
-        const package_id = package_res.data._id;
-        const delivery_res = await axios.post(
-          "/api/delivery",
-          {
-            package: package_id,
-            ...delivery_data,
-          },
-          config
-        );
-        dispatch({
-          type: DeliveryActionTypes.POST_NEW_DELIVERY,
-          payload: delivery_res.data,
-        });
-      } catch (err) {
-        console.error(err);
-      }
-    };
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    try {
+      const token = getState().userSignInReducer.user.token;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const package_res = await axios.post(
+        "/api/package",
+        {
+          ...package_data,
+        },
+        config
+      );
+      const package_id = package_res.data._id;
+      const delivery_res = await axios.post(
+        "/api/delivery",
+        {
+          package_id,
+          ...delivery_data,
+        },
+        config
+      );
+      dispatch({
+        type: DeliveryActionTypes.POST_NEW_DELIVERY,
+        payload: delivery_res.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 };
 

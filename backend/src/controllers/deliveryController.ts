@@ -2,13 +2,25 @@ import expressAsyncHandler from "express-async-handler";
 import Delivery from "../models/deliveryModel";
 
 export const addDelivery = expressAsyncHandler(async (req, res) => {
-  const { name, status, phone, address } = req.body;
+  const sender = req.body.user._id;
+  const {
+    package_id,
+    receiver,
+    date,
+    priority,
+    pickup_location,
+    drop_location,
+  } = req.body;
   try {
     const newDelivery = new Delivery({
-      name,
-      status,
-      phone,
-      address,
+      package_id,
+      receiver,
+      sender,
+      date,
+      priority,
+      // drop_location,
+      // pickup_location,
+      status: "pending",
     });
 
     const delivery = await newDelivery.save();

@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const addressModel_1 = __importDefault(require("./addressModel"));
 const packageModel_1 = __importDefault(require("./packageModel"));
 const userModel_1 = __importDefault(require("./userModel"));
 const deliverySchema = new mongoose_1.default.Schema({
@@ -13,7 +12,7 @@ const deliverySchema = new mongoose_1.default.Schema({
         ref: userModel_1.default,
         required: true,
     },
-    package: {
+    package_id: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: packageModel_1.default,
         required: true,
@@ -32,26 +31,26 @@ const deliverySchema = new mongoose_1.default.Schema({
     },
     price: {
         type: Number,
-        required: true,
+        default: 0
     },
     status: {
         type: String,
         enum: ["pending", "in-progress", "delivered"],
         required: true,
     },
-    pickup_location: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: addressModel_1.default,
-        required: true,
-    },
-    drop_location: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: addressModel_1.default,
-        required: true,
-    },
+    // pickup_location: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: Address,
+    //   required: true,
+    // },
+    // drop_location: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: Address,
+    //   required: true,
+    // },
     distance: {
         type: Number,
-        required: true,
+        default: 0
     },
 });
 const Delivery = mongoose_1.default.model("Delivery", deliverySchema);
