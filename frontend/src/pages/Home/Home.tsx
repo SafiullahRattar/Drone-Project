@@ -54,6 +54,18 @@ const Home = () => {
             Track
           </button>
         </form>
+        <h1 className="homePage__title">OR</h1>
+        {Object.keys(user).length !== 0 ? (
+          <>
+            <h1 className="homePage__title">Deliver A Package</h1>
+            <button className="btn">Deliver</button>
+          </>
+        ) : (
+          <>
+            <h1 className="homePage__title">Register to Send a Package</h1>
+            <button className="btn">Sign Up</button>
+          </>
+        )}
       </div>
       <div className="homePage__rightColumn">
         <img src="drone.svg" alt="drone" />
