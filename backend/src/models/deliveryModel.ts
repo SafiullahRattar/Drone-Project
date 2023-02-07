@@ -1,11 +1,17 @@
 import mongoose from "mongoose";
 import Address from "./addressModel";
+import Package from "./packageModel";
 import User from "./userModel";
 
 const deliverySchema = new mongoose.Schema({
   sender: {
     type: mongoose.Schema.Types.ObjectId,
     ref: User,
+    required: true,
+  },
+  package: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Package,
     required: true,
   },
   receiver: {

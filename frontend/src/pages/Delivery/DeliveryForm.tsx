@@ -224,7 +224,7 @@ const DeliveryForm = () => {
             </div>
             <div className="form-submit">
               <button type="submit" disabled={isSubmitting}>
-                Submit
+                Book
               </button>
             </div>
           </form>

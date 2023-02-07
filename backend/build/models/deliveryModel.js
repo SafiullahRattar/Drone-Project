@@ -5,11 +5,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const addressModel_1 = __importDefault(require("./addressModel"));
+const packageModel_1 = __importDefault(require("./packageModel"));
 const userModel_1 = __importDefault(require("./userModel"));
 const deliverySchema = new mongoose_1.default.Schema({
     sender: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: userModel_1.default,
+        required: true,
+    },
+    package: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        ref: packageModel_1.default,
         required: true,
     },
     receiver: {

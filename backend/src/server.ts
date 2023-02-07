@@ -4,6 +4,7 @@ import bp from "body-parser";
 import express, { Request, Response } from "express";
 import userRoutes from "./routes/userRoutes";
 import packageRoutes from "./routes/packageRoutes";
+import deliveryRoute from "./routes/deliveryRoute";
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
 import passport from "passport";
 import session from "express-session";
@@ -37,6 +38,7 @@ app.use(bp.urlencoded({ extended: true }));
 
 app.use("/api/users", userRoutes);
 app.use("/api/package", packageRoutes);
+app.use("/api/delivery", deliveryRoute);
 
 app.get(
   "/auth/google/callback",
