@@ -57,7 +57,7 @@ const Header = () => {
         >
           <ul>
             <li>
-              <Link to="/">Tracking</Link>
+              <Link to="/tracking">Tracking</Link>
             </li>
             <li>
               <Link to="/profile">Service</Link>

@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./component/Header";
 import DeliveryForm from "./pages/Delivery/DeliveryForm";
+import DeliveryTracking from "./pages/Delivery/DeliveryTracking";
 import Home from "./pages/Home/Home";
 
 import Signup from "./pages/Signup";
@@ -17,6 +18,8 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/signUp" element={<Signup />} />
           <Route path="/delivery" element={<DeliveryForm />} />
+          <Route path="/tracking" element={<DeliveryTracking />} />
+          <Route path="/tracking/:id" element={<DeliveryTracking />} />
         </Routes>
       </main>
     </Router>

@@ -9,7 +9,7 @@ export const getDeliveryById = (id: string) => {
     try {
       const token = getState().userSignInReducer.user.token;
       const res = await axios.get(
-        `${process.env.SERVER_URL}/deliveries/${id}`,
+        `api/delivery/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
