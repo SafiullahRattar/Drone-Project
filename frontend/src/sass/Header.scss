@@ -105,24 +105,24 @@
         border-radius: 12px;
         font-size: 1rem;
         font-family: inherit;
-        background: rgb(162, 162, 246);
-        color: rgb(32, 32, 32);
+        background: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         border: 1px solid transparent;
         transition: 0.3s ease all;
         margin: 0.5em 0.5em;
 
         &:hover {
-          border-color: rgb(162, 162, 246);
-          background: rgba(rgb(162, 162, 246), 0.1);
-          color: rgb(162, 162, 246);
+          border-color: rgb(0, 0, 0);
+          background: rgba(rgb(255, 255, 255), 0.1);
+          color: rgb(0, 0, 0);
         }
         &:active {
-          border-color: rgb(162, 162, 246);
+          border-color: rgb(0, 0, 0);
           background: linear-gradient(
-            rgba(rgb(162, 162, 246), 0.2),
-            rgba(rgb(162, 162, 246), 0.3)
+            rgba(rgb(255, 255, 255), 0.2),
+            rgba(rgb(255, 255, 255), 0.3)
           );
-          color: rgb(162, 162, 246);
+          color: rgb(0, 0, 0);
         }
         &__login {
           background-color: rgb(32, 32, 32);
@@ -144,7 +144,7 @@
       position: relative;
 
       &:hover {
-        color: rgb(162, 162, 246);
+        color: rgb(255, 255, 255);
       }
 
       @include breakpoint(md) {

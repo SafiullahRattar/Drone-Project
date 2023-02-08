@@ -172,7 +172,7 @@ export const fetchDeliveries = () => {
       });
       return dispatch({
         type: DeliveryUserListActionTypes.FETCH_DELIVERIES_SUCCESS,
-        payload: response.data,
+        payload: response.data, 
       });
     } catch (err) {
       return dispatch({
