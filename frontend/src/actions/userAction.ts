@@ -1,5 +1,8 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { UserSingIn } from "../constants/action_types";
+import {
+  DeliveryUserListActionTypes,
+  UserSingIn,
+} from "../constants/action_types";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -37,6 +40,9 @@ export const signOutAction = () => (dispatch: Dispatch) => {
   Cookies.remove("JWT");
   dispatch({
     type: UserSingIn.LOGOUT,
+  });
+  dispatch({
+    type: DeliveryUserListActionTypes.FETCH_DELIVERIES_RESET,
   });
 
   // dispatch({ type: PlaceOrder.RESET });

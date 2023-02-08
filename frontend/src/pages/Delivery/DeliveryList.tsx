@@ -4,6 +4,7 @@ import "./DeliveryList.scss";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { DeliveryBackend } from "../../constants/action_types";
 import { fetchDeliveries } from "../../actions/deliveryAction";
+import { useCheckJwtCookie } from "../../utils/config";
 
 const DeliveryList = () => {
   //   const [deliveries, setDeliveries] = useState<any[]>([]);
@@ -19,6 +20,7 @@ const DeliveryList = () => {
   const copyIdToClipboard = (id: string) => {
     navigator.clipboard.writeText(id);
   };
+  useCheckJwtCookie();
 
   useEffect(() => {
     dispatch(fetchDeliveries());

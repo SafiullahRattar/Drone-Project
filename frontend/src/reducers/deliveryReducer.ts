@@ -91,6 +91,8 @@ export const deliveryUserListReducer = (
       };
     case DeliveryUserListActionTypes.FETCH_DELIVERIES_FAILURE:
       return { ...state, error: action.payload, loading: false };
+    case DeliveryUserListActionTypes.FETCH_DELIVERIES_RESET:
+      return initialStateDeliveryList;
     default:
       return state;
   }

@@ -2,11 +2,13 @@ import { Formik } from "formik";
 import React from "react";
 import * as yup from "yup";
 import { postNewDelivery } from "../../actions/deliveryAction";
+import { useCheckJwtCookie } from "../../utils/config";
 import { useAppDispatch } from "../../utils/hooks";
 import "./DeliveryForm.scss";
 
 const DeliveryForm = () => {
   const dispatch = useAppDispatch();
+  useCheckJwtCookie();
 
   return (
     <div>
