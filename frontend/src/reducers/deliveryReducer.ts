@@ -1,11 +1,25 @@
-import { DeliveryActionTypes } from "../constants/action_types";
-import { Delivery, GetDeliveryByIdAction, GetAllDeliveriesAction, GetDeliveriesByUserAction, GetDeliveriesByStatusAction, PostNewDeliveryAction, UpdateDeliveryStatusAction } from "../constants/interfaces";
+import {
+  DeliveryActionTypes,
+  DeliveryBackend,
+  DeliveryBackendState,
+  DeliveryUserListAction,
+  DeliveryUserListActionTypes,
+} from "../constants/action_types";
+import {
+  Delivery,
+  GetDeliveryByIdAction,
+  GetAllDeliveriesAction,
+  GetDeliveriesByUserAction,
+  GetDeliveriesByStatusAction,
+  PostNewDeliveryAction,
+  UpdateDeliveryStatusAction,
+} from "../constants/interfaces";
 
 const initialState: Delivery = {
   receiver: "",
   date: "",
   priority: "",
-//   status: "",
+  //   status: "",
   pickup_location: "",
   drop_location: "",
 };
@@ -55,3 +69,29 @@ export function deliveryReducer(
       return state;
   }
 }
+
+const initialStateDeliveryList: DeliveryBackendState = {
+  deliveries: [] as DeliveryBackend[],
+  loading: false,
+  error: null,
+};
+
+export const deliveryUserListReducer = (
+  state = initialStateDeliveryList,
+  action: DeliveryUserListAction
+) => {
+  switch (action.type) {
+    case DeliveryUserListActionTypes.FETCH_DELIVERIES:
+      return { ...state, loading: true };
+    case DeliveryUserListActionTypes.FETCH_DELIVERIES_SUCCESS:
+      return {
+        ...state,
+        deliveries: action.payload as DeliveryBackend[],
+        loading: false,
+      };
+    case DeliveryUserListActionTypes.FETCH_DELIVERIES_FAILURE:
+      return { ...state, error: action.payload, loading: false };
+    default:
+      return state;
+  }
+};

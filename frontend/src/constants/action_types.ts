@@ -22,3 +22,37 @@ export const DeliveryActionTypes = {
   POST_NEW_DELIVERY: "POST_NEW_DELIVERY",
   UPDATE_DELIVERY_STATUS: "UPDATE_DELIVERY_STATUS",
 };
+
+// ---- Dlivery List
+
+// Delivery List interface
+
+export const DeliveryUserListActionTypes = {
+  FETCH_DELIVERIES: "FETCH_DELIVERIES",
+  FETCH_DELIVERIES_SUCCESS: "FETCH_DELIVERIES_SUCCESS",
+  FETCH_DELIVERIES_FAILURE: "FETCH_DELIVERIES_FAILURE",
+};
+
+export interface DeliveryBackendState {
+  deliveries: DeliveryBackend[];
+  loading: boolean;
+  error: Error | null;
+}
+
+export interface DeliveryBackend {
+  _id: string;
+  sender: string;
+  package_id: string;
+  receiver: string;
+  date: Date;
+  priority: string;
+  price: number;
+  status: string;
+  distance: number;
+  __v: number;
+}
+
+export interface DeliveryUserListAction {
+  type: string;
+  payload: any;
+}

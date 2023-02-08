@@ -1,0 +1,19 @@
+.deliveryList {
+  table {
+    width: 100%;
+    thead {
+      background-color: #e0e0e0;
+    }
+    th {
+      text-align: left;
+      padding: 10px 0px;
+    }
+    td {
+      cursor: pointer;
+      padding: 10px 0px;
+      &:hover {
+        background-color: #e0e0e0;
+      }
+    }
+  }
+}

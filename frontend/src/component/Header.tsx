@@ -66,7 +66,7 @@ const Header = () => {
               <Link to="/delivery">Book a Drone</Link>
             </li>
             <li>
-              <Link to="/help">Profile</Link>
+              <Link to="/profile">Profile</Link>
             </li>
 
             {Object.keys(user).length !== 0 ? (

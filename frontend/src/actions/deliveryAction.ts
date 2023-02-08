@@ -1,6 +1,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { DeliveryActionTypes } from "../constants/action_types";
+import {
+  DeliveryActionTypes,
+  DeliveryUserListAction,
+  DeliveryUserListActionTypes,
+} from "../constants/action_types";
 import { Delivery, Package } from "../constants/interfaces";
 import { AppDispatch, RootState } from "../store";
 
@@ -8,14 +12,11 @@ export const getDeliveryById = (id: string) => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
       const token = getState().userSignInReducer.user.token;
-      const res = await axios.get(
-        `api/delivery/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.get(`api/delivery/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       dispatch({
         type: DeliveryActionTypes.GET_DELIVERY_BY_ID,
         payload: res.data,
@@ -95,8 +96,8 @@ export const postNewDelivery = (
 ) => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
-    //   const token = getState().userSignInReducer.user.token;
-    const token = Cookies.get('JWT')
+      //   const token = getState().userSignInReducer.user.token;
+      const token = Cookies.get("JWT");
       const config = {
         headers: {
           "Content-type": "application/json",
@@ -106,7 +107,7 @@ export const postNewDelivery = (
 
       const res = await axios.get("/api/package/63e2bb46caec961163ad9702");
       console.log(res.data);
-      console.log({...package_data})
+      console.log({ ...package_data });
 
       const package_res = await axios.post(
         `http://localhost:5000/api/package/`,
@@ -155,6 +156,29 @@ export const updateDeliveryStatus = (id: string, status: string) => {
       });
     } catch (err) {
       console.error(err);
+    }
+  };
+};
+
+export const fetchDeliveries = () => {
+  return async (dispatch: AppDispatch) => {
+    dispatch({ type: DeliveryUserListActionTypes.FETCH_DELIVERIES });
+    try {
+      const token = Cookies.get("JWT");
+      const response = await axios.get(`/api/delivery/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return dispatch({
+        type: DeliveryUserListActionTypes.FETCH_DELIVERIES_SUCCESS,
+        payload: response.data,
+      });
+    } catch (err) {
+      return dispatch({
+        type: DeliveryUserListActionTypes.FETCH_DELIVERIES_FAILURE,
+        payload: err,
+      });
     }
   };
 };

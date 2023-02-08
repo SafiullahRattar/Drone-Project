@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { allReducers } from "./reducers";
+import { deliveryUserListReducer } from "./reducers/deliveryReducer";
 import { userSignInReducer } from "./reducers/userReducer";
+
 // ...
 
 const store = configureStore({
-  reducer: {
-    userSignInReducer,
-  },
+  reducer: allReducers,
 });
 
 export default store;
