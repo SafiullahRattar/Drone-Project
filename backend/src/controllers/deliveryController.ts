@@ -40,6 +40,16 @@ export const getDeliveryByStatus = expressAsyncHandler(async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+export const getDeliveryByUserId = expressAsyncHandler(async (req, res) => {
+  const sender = req.body.user._id;
+  try {
+    const delivery = await Delivery.find({ sender });
+    res.json(delivery);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("PROBLEM IN FETCHING LIST");
+  }
+});
 
 export const getDeliveryById = expressAsyncHandler(async (req, res) => {
   try {

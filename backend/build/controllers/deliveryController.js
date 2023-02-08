@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateDeliveryById = exports.getDeliveryById = exports.getDeliveryByStatus = exports.addDelivery = void 0;
+exports.updateDeliveryById = exports.getDeliveryById = exports.getDeliveryByUserId = exports.getDeliveryByStatus = exports.addDelivery = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const deliveryModel_1 = __importDefault(require("../models/deliveryModel"));
 exports.addDelivery = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -45,6 +45,17 @@ exports.getDeliveryByStatus = (0, express_async_handler_1.default)((req, res) =>
     catch (err) {
         console.error(err);
         res.status(500).send("Server Error");
+    }
+}));
+exports.getDeliveryByUserId = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const sender = req.body.user._id;
+    try {
+        const delivery = yield deliveryModel_1.default.find({ sender });
+        res.json(delivery);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).send("PROBLEM IN FETCHING LIST");
     }
 }));
 exports.getDeliveryById = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {

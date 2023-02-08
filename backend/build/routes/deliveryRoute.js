@@ -11,16 +11,22 @@ const router = express_1.default.Router();
 // @desc    Create delivery
 // @access  Public
 router.post("/", authMiddleware_1.authMiddleware, deliveryController_1.addDelivery);
-// @route   GET api/delivery
-// @desc    Get delivery by ID
+// @route   GET api/delivery/user
+// @desc    Get delivery list by user ID
 // @access  Public
-router.get("/:id", deliveryController_1.getDeliveryById);
+router.get("/user", authMiddleware_1.authMiddleware, deliveryController_1.getDeliveryByUserId);
 // @route   GET api/delivery
 // @desc    Get delivery by status
 // @access  Public
 router.get("/status/:status", deliveryController_1.getDeliveryByStatus);
+// @route   GET api/delivery
+// @desc    Get delivery by ID
+// @access  Public
+router
+    .route("/:id")
+    .get(deliveryController_1.getDeliveryById)
+    .put(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware, deliveryController_1.updateDeliveryById);
 // @route   PUT api/delivery/id
 // @desc    Update delivery
 // @access  Public
-router.put("/:id", authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware, deliveryController_1.updateDeliveryById);
 exports.default = router;
