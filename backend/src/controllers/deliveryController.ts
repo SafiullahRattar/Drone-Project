@@ -90,3 +90,36 @@ export const updateDeliveryById = expressAsyncHandler(async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+/**
+ * Update the status of an delivery by ID
+ * @returns The updated delivery object as a JSON response, or a 404 error if the delivery is not found
+ */
+export const updateDelivery = expressAsyncHandler(async (req, res) => {
+  try {
+    // Get the delivery ID from the request parameters
+    const id = req.params.id;
+
+    // Get the new status from the request body
+    const { status } = req.body;
+
+    // Find the delivery by ID and update its status
+    const updatedDelivery = await Delivery.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+
+    // If the delivery is not found, return a 404 error
+    if (!updatedDelivery) {
+      res.status(404).json({ error: "Delivery not found" });
+      return;
+    }
+
+    // Return the updated delivery object as a JSON response
+    res.json(updatedDelivery);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
