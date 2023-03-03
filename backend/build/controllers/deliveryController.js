@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateDelivery = exports.updateDeliveryById = exports.getDeliveryById = exports.getDeliveryByUserId = exports.getDeliveryByStatus = exports.addDelivery = void 0;
+exports.updateDeliveryStatus_Admin = exports.updateDeliveryById = exports.getDeliveryById = exports.getDeliveryByUserId = exports.getDeliveryByStatus = exports.addDelivery = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const deliveryModel_1 = __importDefault(require("../models/deliveryModel"));
 exports.addDelivery = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -96,7 +96,7 @@ exports.updateDeliveryById = (0, express_async_handler_1.default)((req, res) => 
  * Update the status of an delivery by ID
  * @returns The updated delivery object as a JSON response, or a 404 error if the delivery is not found
  */
-exports.updateDelivery = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateDeliveryStatus_Admin = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Get the delivery ID from the request parameters
         const id = req.params.id;

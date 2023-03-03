@@ -95,7 +95,7 @@ export const updateDeliveryById = expressAsyncHandler(async (req, res) => {
  * Update the status of an delivery by ID
  * @returns The updated delivery object as a JSON response, or a 404 error if the delivery is not found
  */
-export const updateDelivery = expressAsyncHandler(async (req, res) => {
+export const updateDeliveryStatus_Admin = expressAsyncHandler(async (req, res) => {
   try {
     // Get the delivery ID from the request parameters
     const id = req.params.id;

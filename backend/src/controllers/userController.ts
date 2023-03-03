@@ -42,3 +42,59 @@ export const getUserProfile = expressAsyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 });
+
+
+/**
+ * @desc   Fetch all users
+ * @route  GET /api/admin/users
+ * @access Private/Admin
+ */
+export const getAllUsers_Admin = expressAsyncHandler(async (req: Request, res: Response) => {
+  const users = await User.find({});
+  res.json(users);
+});
+
+
+/**
+ * @desc   Update user
+ * @route  PUT /api/admin/users/:id
+ * @access Private/Admin
+ */
+export const updateUser_Admin = expressAsyncHandler(async (req: Request, res: Response) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.isAdmin = req.body.isAdmin || user.isAdmin;
+
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+/**
+ * @desc   Delete user
+ * @route  DELETE /api/admin/users/:id
+ * @access Private/Admin
+ */
+export const deleteUser_Admin = expressAsyncHandler(async (req: Request, res: Response) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    await user.remove();
+    res.json({ message: "User removed" });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
