@@ -1,6 +1,7 @@
 import express from 'express';
 import { updateDeliveryStatus_Admin } from '../controllers/deliveryController';
-import { deleteUser_Admin, getAllUsers_Admin, updateUser_Admin } from '../controllers/userController';
+import { addDrone, deleteDrone, getAllDrones, getDroneById, updateDrone } from '../controllers/droneController';
+import {  deleteUser_Admin, getAllUsers_Admin, updateUser_Admin } from '../controllers/userController';
 import { adminMiddleware, authMiddleware } from '../middleware/authMiddleware';
 
 const adminRoutes = express.Router();
@@ -14,10 +15,11 @@ adminRoutes.put('/orders/:id/status', updateDeliveryStatus_Admin);
 // adminRoutes.put("/orders/:id", authenticateAdmin, updateOrderStatus);
 
 // Drones
-// adminRoutes.get("/drones", authenticateAdmin, getAllDrones);
-// adminRoutes.post("/drones", authenticateAdmin, addDrone);
-// adminRoutes.delete("/drones/:id", authenticateAdmin, deleteDrone);
-// adminRoutes.put("/drones/:id", authenticateAdmin, updateDrone);
+adminRoutes.get("/drones/:id", getDroneById);
+adminRoutes.get('/drones', getAllDrones);
+adminRoutes.post('/drones', addDrone);
+adminRoutes.delete('/drones/:id', deleteDrone);
+adminRoutes.put('/drones/:id', updateDrone);
 
 // Customers
 
