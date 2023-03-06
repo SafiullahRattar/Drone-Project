@@ -14,8 +14,8 @@ import Signup from "./pages/Signup";
 const App: React.FC = () => {
   return (
     <Router>
-      <Header />
       <main className="app">
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signUp" element={<Signup />} />

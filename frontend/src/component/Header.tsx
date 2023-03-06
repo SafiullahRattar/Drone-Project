@@ -46,27 +46,48 @@ const Header = () => {
   // console.log(user);
   return (
     <header className="header">
-      <div className="header__content">
+      <div className="nav-area">
         <Link to="/" className="header__content__logo">
-          Navbar
+          DDS
         </Link>
         <nav
-          className={`${"header__content__nav"} 
+          className={`${"nav-area"} 
           ${menuOpen && size.width < 768 ? `${"isMenu"}` : ""} 
           }`}
         >
-          <ul>
-            <li>
+          <ul className="menus">
+            <li className="menu-items">
               <Link to="/tracking">Tracking</Link>
             </li>
-            <li>
+            <li className="menu-items">
               <Link to="/profile">Service</Link>
             </li>
-            <li>
+            <li className="menu-items">
               <Link to="/delivery">Book a Drone</Link>
             </li>
-            <li>
+            <li className="menu-items">
               <Link to="/profile">Profile</Link>
+            </li>
+            <li className="menu-items menu-dropdown">
+              <button>
+                Admin
+                <span className="arrow"></span>
+              </button>
+              {/* <i className="fa fa-caret-down"></i> */}
+              <div className="dropdown">
+                <li className="menu-items">
+                  <Link to="/admin/drones">Drones</Link>
+                </li>
+                <li className="menu-items">
+                  <Link to="/admin/users">Users</Link>
+                </li>
+                <li className="menu-items">
+                  <Link to="/admin/deliveries">Deliveries</Link>
+                </li>
+                <li className="menu-items">
+                  <Link to="/admin/price-plan">Price Plan</Link>
+                </li>
+              </div>
             </li>
 
             {Object.keys(user).length !== 0 ? (
