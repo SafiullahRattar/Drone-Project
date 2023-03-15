@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "./component/Header";
+import UsersList from "./pages/Admin/Users/UsersList";
 import DeliveryForm from "./pages/Delivery/DeliveryForm";
 import DeliveryList from "./pages/Delivery/DeliveryList";
 import DeliveryTracking from "./pages/Delivery/DeliveryTracking";
@@ -23,6 +24,7 @@ const App: React.FC = () => {
           <Route path="/tracking" element={<DeliveryTracking />} />
           <Route path="/tracking/:id" element={<DeliveryTracking />} />
           <Route path="/profile" element={<DeliveryList />} />
+          <Route path="/admin/users" element={<UsersList />} />
         </Routes>
       </main>
     </Router>

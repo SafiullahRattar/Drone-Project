@@ -40,7 +40,7 @@ require("./utils/passport");
 (0, db_1.default)();
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
-app.use("/admin", adminRoutes_1.default);
+app.use("/api/admin", adminRoutes_1.default);
 app.use("/api/users", userRoutes_1.default);
 app.use("/api/package", packageRoutes_1.default);
 app.use("/api/delivery", deliveryRoute_1.default);

@@ -57,3 +57,14 @@ export interface DeliveryUserListAction {
   type: string;
   payload: any;
 }
+
+
+//---------------Admin
+
+export enum UserList {
+    REQUEST = "USER_LIST_REQUEST",
+    SUCCESS = "USER_LIST_SUCCESS",
+    FAIL = "USER_LIST_FAIL",
+    RESET = "USER_LIST_RESET",
+
+}

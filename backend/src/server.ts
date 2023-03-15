@@ -46,7 +46,7 @@ connectDB();
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 
-app.use("/admin", adminRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.use("/api/users", userRoutes);
 app.use("/api/package", packageRoutes);

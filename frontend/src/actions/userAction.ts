@@ -1,10 +1,12 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import {
   DeliveryUserListActionTypes,
+  UserList,
   UserSingIn,
 } from "../constants/action_types";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { AppDispatch, RootState } from "../store";
 
 export const userSignInAction =
   (token: string) => async (dispatch: Dispatch) => {
@@ -53,4 +55,33 @@ export const signOutAction = () => (dispatch: Dispatch) => {
   // dispatch({ type: UserEditDetail.RESET });
   // dispatch({ type: OrderListAsAdmin.RESET });
   // dispatch({ type: OrderDeliver.RESET });
+};
+
+
+export const userListAction = () => async (dispatch: AppDispatch, getState: () => RootState) => {
+    try {
+        dispatch({ type: UserList.REQUEST })
+        const config = {
+            headers: {
+                Authorization: `Bearer ${Cookies.get('JWT')}`
+            }
+        }
+        const { data } = await axios.get(
+            '/api/admin/users/',
+            config
+        )
+
+        dispatch({
+            type: UserList.SUCCESS,
+            payload: data
+        })
+
+    } catch (error: any) {
+        dispatch({
+            type: UserList.FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
 };

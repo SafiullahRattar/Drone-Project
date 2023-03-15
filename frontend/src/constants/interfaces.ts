@@ -19,6 +19,8 @@ export interface userSignInAction {
   payload?: any;
 }
 
+
+
 // ------------- USER EDIT ---------
 export interface UserEditState {
   error: string;
@@ -29,6 +31,18 @@ export interface UserEditState {
 export interface UserEditAction {
   type: string;
   payload: any;
+}
+
+
+export interface UserListState {
+    error: string,
+    loading: boolean,
+    users: user[]
+}
+
+export interface UserListAction {
+    type: string,
+    payload: any
 }
 
 // ---------- Delivery
@@ -76,3 +90,8 @@ export interface UpdateDeliveryStatusAction {
   type: typeof DeliveryActionTypes.UPDATE_DELIVERY_STATUS;
   payload: Delivery;
 }
+
+
+
+
+
