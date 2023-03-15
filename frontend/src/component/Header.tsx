@@ -8,35 +8,10 @@ import { signOutAction } from "../actions/userAction";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [size, setSize] = useState({
-    width: 0,
-    height: 0,
-  });
-  useEffect(() => {
-    const handleResize = () => {
-      setSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    if (size.width > 768 && menuOpen) {
-      setMenuOpen(false);
-    }
-  }, [size.width, menuOpen]);
-
-  const menuToggleHandler = () => {
-    setMenuOpen((p) => !p);
-  };
 
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.userSignInReducer);
+  console.log(user)
 
   const signOutHandler = () => {
     dispatch(signOutAction());
@@ -47,13 +22,12 @@ const Header = () => {
   return (
     <header className="header">
       <div className="nav-area">
-        <Link to="/" className="header__content__logo">
+        <Link to="/" className="logo">
           DDS
         </Link>
         <nav
           className={`${"nav-area"} 
-          ${menuOpen && size.width < 768 ? `${"isMenu"}` : ""} 
-          }`}
+          `}
         >
           <ul className="menus">
             <li className="menu-items">
@@ -74,7 +48,7 @@ const Header = () => {
                 <span className="arrow"></span>
               </button>
               {/* <i className="fa fa-caret-down"></i> */}
-              <div className="dropdown">
+              <ul className="dropdown">
                 <li className="menu-items">
                   <Link to="/admin/drones">Drones</Link>
                 </li>
@@ -87,7 +61,7 @@ const Header = () => {
                 <li className="menu-items">
                   <Link to="/admin/price-plan">Price Plan</Link>
                 </li>
-              </div>
+              </ul>
             </li>
 
             {Object.keys(user).length !== 0 ? (
@@ -104,13 +78,13 @@ const Header = () => {
             </Link> */}
           </ul>
         </nav>
-        <div className="header__content__toggle">
+        {/* <div className="header__content__toggle">
           {!menuOpen ? (
             <FontAwesomeIcon icon={faBars} onClick={menuToggleHandler} />
           ) : (
             <FontAwesomeIcon icon={faClose} onClick={menuToggleHandler} />
           )}
-        </div>
+        </div> */}
       </div>
     </header>
   );

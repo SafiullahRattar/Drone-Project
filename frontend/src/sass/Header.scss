@@ -5,9 +5,11 @@ header {
 
 .nav-area {
   display: flex;
+  height: 8vh;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
+  // max-width: 1200px;
+  // margin: 0 auto;
+  margin-left: auto;
   padding: 10px 20px;
 }
 
