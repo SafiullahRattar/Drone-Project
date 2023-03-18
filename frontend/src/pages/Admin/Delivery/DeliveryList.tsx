@@ -1,33 +1,46 @@
-
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { adminEditFormAction } from "../../../actions/adminAction";
 import { fetchDeliveriesAdmin } from "../../../actions/deliveryAction";
 import { userListAction } from "../../../actions/userAction";
 import Table, { TableColumn } from "../../../component/Table";
+import { DeliveryBackend } from "../../../constants/action_types";
 import { RootState } from "../../../store";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 
-const DeliveryList = () => {
+const AdminDeliveryList = () => {
   const columns: TableColumn[] = [
     {
       label: "Sender",
       accessor: "sender",
     },
     {
-      label: "Email",
-      accessor: "email",
+      label: "Package ID",
+      accessor: "package_id",
     },
     {
-      label: "Address",
-      accessor: "address",
+      label: "Receiver",
+      accessor: "receiver",
     },
     {
-      label: "Admin?",
-      accessor: "isAdmin",
+      label: "Date",
+      accessor: "date",
     },
     {
-      label: "Joined",
-      accessor: "createdAt",
+      label: "Priority",
+      accessor: "priority",
+    },
+    {
+      label: "Price",
+      accessor: "price",
+    },
+    {
+      label: "Status",
+      accessor: "status",
+    },
+    {
+      label: "Distance",
+      accessor: "distance",
     },
   ];
 
@@ -46,20 +59,26 @@ const DeliveryList = () => {
     } else if (!user.isAdmin) {
       navigate("/");
     }
-    dispatch(fetchDeliveriesAdmin);
+    dispatch(fetchDeliveriesAdmin());
   }, [dispatch, navigate, user]);
 
-  // console.log(users);
-  const onEditClick = (user: any) => {
-
-    console.log(user);
+  console.log(deliveries);
+  // get delivery and pass it admin delivery action
+  const onEditClick = (delivery: DeliveryBackend) => {
+    dispatch(adminEditFormAction(columns, delivery));
+    navigate("/admin/editForm")
   };
 
   return (
     <>
-      <Table columns={columns} data={deliveries} lastColumnEdit={true} onEditClick={onEditClick}></Table>
+      <Table
+        columns={columns}
+        data={deliveries}
+        lastColumnEdit={true}
+        onEditClick={onEditClick}
+      ></Table>
     </>
   );
 };
 
-export default DeliveryList;
+export default AdminDeliveryList;

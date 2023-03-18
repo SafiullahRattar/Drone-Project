@@ -1,4 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
+import { adminEditFormReducer } from "./adminReducer";
 import {
   deliveryUserListReducer,
   deliveryListReducer,
@@ -10,4 +11,5 @@ export const allReducers = combineReducers({
   deliveryUserListReducer,
   userListReducer,
   deliveryListReducer,
+  adminEditFormReducer,
 });

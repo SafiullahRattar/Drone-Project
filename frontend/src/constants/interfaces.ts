@@ -1,3 +1,4 @@
+import { TableColumn } from "../component/Table";
 import { DeliveryActionTypes, DeliveryBackend } from "./action_types";
 
 export interface user {
@@ -19,8 +20,6 @@ export interface userSignInAction {
   payload?: any;
 }
 
-
-
 // ------------- USER EDIT ---------
 export interface UserEditState {
   error: string;
@@ -33,24 +32,23 @@ export interface UserEditAction {
   payload: any;
 }
 
-
 export interface UserListState {
-    error: string,
-    loading: boolean,
-    users: user[]
+  error: string;
+  loading: boolean;
+  users: user[];
 }
 
 export interface UserListAction {
-    type: string,
-    payload: any
+  type: string;
+  payload: any;
 }
 
 // ---------- Delivery
 //
 
 export interface Package {
-  weight : number;
-  size : number;
+  weight: number;
+  size: number;
 }
 export interface Delivery {
   receiver: string;
@@ -91,12 +89,10 @@ export interface UpdateDeliveryStatusAction {
   payload: Delivery;
 }
 
-
 export interface DeliveryListAction {
   type: string;
   payload?: DeliveryBackend[];
 }
-
 
 export interface DeliveryListState {
   error: string;
@@ -104,4 +100,15 @@ export interface DeliveryListState {
   deliveries: Delivery[];
 }
 
+export interface AdminEditFormAction {
+  type: string;
+  payload?: any;
+}
 
+export interface AdminEditFormState {
+  error: string;
+  loading: boolean;
+  data: {};
+  columns: TableColumn[];
+  success: boolean;
+}

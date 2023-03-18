@@ -1,0 +1,10 @@
+@import "../../sass/Form.scss";
+
+form {
+  @include formOne;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}

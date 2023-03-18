@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "./component/Header";
+import AdminEditForm from "./pages/Admin/AdminEditForm";
+import AdminDeliveryList from "./pages/Admin/Delivery/DeliveryList";
 import UsersList from "./pages/Admin/Users/UsersList";
 import DeliveryForm from "./pages/Delivery/DeliveryForm";
 import DeliveryList from "./pages/Delivery/DeliveryList";
@@ -25,7 +27,8 @@ const App: React.FC = () => {
           <Route path="/tracking/:id" element={<DeliveryTracking />} />
           <Route path="/profile" element={<DeliveryList />} />
           <Route path="/admin/users" element={<UsersList />} />
-          <Route path="/admin/deliveries" element={<DeliveryList />} />
+          <Route path="/admin/deliveries" element={<AdminDeliveryList />} />
+          <Route path="/admin/editForm" element={<AdminEditForm />} />
         </Routes>
       </main>
     </Router>
