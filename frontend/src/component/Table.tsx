@@ -1,5 +1,4 @@
 import React from "react";
-// import "../sass/Table.scss";
 import "../sass/Table.scss"
 
 export type TableColumn = {

@@ -2,6 +2,7 @@ import {
   DeliveryActionTypes,
   DeliveryBackend,
   DeliveryBackendState,
+  DeliveryListActionTypes,
   DeliveryUserListAction,
   DeliveryUserListActionTypes,
 } from "../constants/action_types";
@@ -13,6 +14,7 @@ import {
   GetDeliveriesByStatusAction,
   PostNewDeliveryAction,
   UpdateDeliveryStatusAction,
+  DeliveryListAction,
 } from "../constants/interfaces";
 
 const initialState: Delivery = {
@@ -92,6 +94,30 @@ export const deliveryUserListReducer = (
     case DeliveryUserListActionTypes.FETCH_DELIVERIES_FAILURE:
       return { ...state, error: action.payload, loading: false };
     case DeliveryUserListActionTypes.FETCH_DELIVERIES_RESET:
+      return initialStateDeliveryList;
+    default:
+      return state;
+  }
+};
+
+
+
+export const deliveryListReducer = (
+  state = initialStateDeliveryList,
+  action: DeliveryListAction
+) => {
+  switch (action.type) {
+    case DeliveryListActionTypes.DELIVERY_LIST_REQUEST:
+      return { ...state, loading: true };
+    case DeliveryListActionTypes.DELIVERY_LIST_SUCCESS:
+      return {
+        ...state,
+        deliveries: action.payload as DeliveryBackend[],
+        loading: false,
+      };
+    case DeliveryListActionTypes.DELIVERY_LIST_FAIL:
+      return { ...state, error: action.payload, loading: false };
+    case DeliveryListActionTypes.DELIVERY_LIST_RESET:
       return initialStateDeliveryList;
     default:
       return state;

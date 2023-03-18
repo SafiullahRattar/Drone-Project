@@ -123,3 +123,22 @@ export const updateDeliveryStatus_Admin = expressAsyncHandler(async (req, res) =
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+
+
+/**
+ * Get All the deliveries
+ * @returns List of all the deliveries
+ */
+export const getAllDeliveries = expressAsyncHandler(async (req, res) => {
+  try {
+    // Get all the deliveries
+    const deliveries = await Delivery.find();
+
+    // Return the list of deliveries as a JSON response
+    res.json(deliveries);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});

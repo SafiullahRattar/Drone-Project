@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateDeliveryStatus_Admin = exports.updateDeliveryById = exports.getDeliveryById = exports.getDeliveryByUserId = exports.getDeliveryByStatus = exports.addDelivery = void 0;
+exports.getAllDeliveries = exports.updateDeliveryStatus_Admin = exports.updateDeliveryById = exports.getDeliveryById = exports.getDeliveryByUserId = exports.getDeliveryByStatus = exports.addDelivery = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const deliveryModel_1 = __importDefault(require("../models/deliveryModel"));
 exports.addDelivery = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -111,6 +111,22 @@ exports.updateDeliveryStatus_Admin = (0, express_async_handler_1.default)((req, 
         }
         // Return the updated delivery object as a JSON response
         res.json(updatedDelivery);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}));
+/**
+ * Get All the deliveries
+ * @returns List of all the deliveries
+ */
+exports.getAllDeliveries = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        // Get all the deliveries
+        const deliveries = yield deliveryModel_1.default.find();
+        // Return the list of deliveries as a JSON response
+        res.json(deliveries);
     }
     catch (error) {
         console.error(error);

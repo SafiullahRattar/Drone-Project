@@ -1,8 +1,21 @@
-import express from 'express';
-import { updateDeliveryStatus_Admin } from '../controllers/deliveryController';
-import { addDrone, deleteDrone, getAllDrones, getDroneById, updateDrone } from '../controllers/droneController';
-import {  deleteUser_Admin, getAllUsers_Admin, updateUser_Admin } from '../controllers/userController';
-import { adminMiddleware, authMiddleware } from '../middleware/authMiddleware';
+import express from "express";
+import {
+  getAllDeliveries,
+  updateDeliveryStatus_Admin,
+} from "../controllers/deliveryController";
+import {
+  addDrone,
+  deleteDrone,
+  getAllDrones,
+  getDroneById,
+  updateDrone,
+} from "../controllers/droneController";
+import {
+  deleteUser_Admin,
+  getAllUsers_Admin,
+  updateUser_Admin,
+} from "../controllers/userController";
+import { adminMiddleware, authMiddleware } from "../middleware/authMiddleware";
 
 const adminRoutes = express.Router();
 
@@ -11,19 +24,20 @@ adminRoutes.use(authMiddleware, adminMiddleware);
 
 // DELIVERY
 // Update the status of an Delivery by ID
-adminRoutes.put('/orders/:id/status', updateDeliveryStatus_Admin);
-// adminRoutes.put("/orders/:id", authenticateAdmin, updateOrderStatus);
+adminRoutes.put("/orders/:id/status", updateDeliveryStatus_Admin);
+//Get all the deliveries
+adminRoutes.get("/orders", getAllDeliveries);
 
 // Drones
 adminRoutes.get("/drones/:id", getDroneById);
-adminRoutes.get('/drones', getAllDrones);
-adminRoutes.post('/drones', addDrone);
-adminRoutes.delete('/drones/:id', deleteDrone);
-adminRoutes.put('/drones/:id', updateDrone);
+adminRoutes.get("/drones", getAllDrones);
+adminRoutes.post("/drones", addDrone);
+adminRoutes.delete("/drones/:id", deleteDrone);
+adminRoutes.put("/drones/:id", updateDrone);
 
 // Customers
 
-adminRoutes.get("/users",  getAllUsers_Admin);
+adminRoutes.get("/users", getAllUsers_Admin);
 adminRoutes.put("/users/:id", updateUser_Admin);
 adminRoutes.delete("/users/:id", deleteUser_Admin);
 

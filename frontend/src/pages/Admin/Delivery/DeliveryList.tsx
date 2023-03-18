@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { userListAction } from "../../../actions/userAction";
@@ -5,11 +6,11 @@ import Table, { TableColumn } from "../../../component/Table";
 import { RootState } from "../../../store";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 
-const UsersList = () => {
+const DeliveryList = () => {
   const columns: TableColumn[] = [
     {
-      label: "Name",
-      accessor: "name",
+      label: "Sender",
+      accessor: "sender",
     },
     {
       label: "Email",
@@ -61,4 +62,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList;
+export default DeliveryList;

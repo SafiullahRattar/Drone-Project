@@ -13,14 +13,15 @@ const adminRoutes = express_1.default.Router();
 adminRoutes.use(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware);
 // DELIVERY
 // Update the status of an Delivery by ID
-adminRoutes.put('/orders/:id/status', deliveryController_1.updateDeliveryStatus_Admin);
-// adminRoutes.put("/orders/:id", authenticateAdmin, updateOrderStatus);
+adminRoutes.put("/orders/:id/status", deliveryController_1.updateDeliveryStatus_Admin);
+//Get all the deliveries
+adminRoutes.get("/orders", deliveryController_1.getAllDeliveries);
 // Drones
 adminRoutes.get("/drones/:id", droneController_1.getDroneById);
-adminRoutes.get('/drones', droneController_1.getAllDrones);
-adminRoutes.post('/drones', droneController_1.addDrone);
-adminRoutes.delete('/drones/:id', droneController_1.deleteDrone);
-adminRoutes.put('/drones/:id', droneController_1.updateDrone);
+adminRoutes.get("/drones", droneController_1.getAllDrones);
+adminRoutes.post("/drones", droneController_1.addDrone);
+adminRoutes.delete("/drones/:id", droneController_1.deleteDrone);
+adminRoutes.put("/drones/:id", droneController_1.updateDrone);
 // Customers
 adminRoutes.get("/users", userController_1.getAllUsers_Admin);
 adminRoutes.put("/users/:id", userController_1.updateUser_Admin);

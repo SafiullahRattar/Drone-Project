@@ -2,6 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import {
   DeliveryActionTypes,
+  DeliveryListActionTypes,
   DeliveryUserListAction,
   DeliveryUserListActionTypes,
 } from "../constants/action_types";
@@ -177,6 +178,31 @@ export const fetchDeliveries = () => {
     } catch (err) {
       return dispatch({
         type: DeliveryUserListActionTypes.FETCH_DELIVERIES_FAILURE,
+        payload: err,
+      });
+    }
+  };
+};
+
+
+
+export const fetchDeliveriesAdmin = () => {
+  return async (dispatch: AppDispatch) => {
+    dispatch({ type: DeliveryListActionTypes.DELIVERY_LIST_REQUEST});
+    try {
+      const token = Cookies.get("JWT");
+      const response = await axios.get(`/api/delivery/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return dispatch({
+        type: DeliveryListActionTypes.DELIVERY_LIST_SUCCESS,
+        payload: response.data, 
+      });
+    } catch (err) {
+      return dispatch({
+        type: DeliveryListActionTypes.DELIVERY_LIST_FAIL,
         payload: err,
       });
     }

@@ -1,4 +1,4 @@
-import { DeliveryActionTypes } from "./action_types";
+import { DeliveryActionTypes, DeliveryBackend } from "./action_types";
 
 export interface user {
   _id: string;
@@ -92,6 +92,16 @@ export interface UpdateDeliveryStatusAction {
 }
 
 
+export interface DeliveryListAction {
+  type: string;
+  payload?: DeliveryBackend[];
+}
 
+
+export interface DeliveryListState {
+  error: string;
+  loading: boolean;
+  deliveries: Delivery[];
+}
 
 
