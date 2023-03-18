@@ -25,6 +25,7 @@ const App: React.FC = () => {
           <Route path="/tracking/:id" element={<DeliveryTracking />} />
           <Route path="/profile" element={<DeliveryList />} />
           <Route path="/admin/users" element={<UsersList />} />
+          <Route path="/admin/deliveries" element={<DeliveryList />} />
         </Routes>
       </main>
     </Router>

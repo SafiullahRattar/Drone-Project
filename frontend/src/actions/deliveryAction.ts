@@ -191,7 +191,7 @@ export const fetchDeliveriesAdmin = () => {
     dispatch({ type: DeliveryListActionTypes.DELIVERY_LIST_REQUEST});
     try {
       const token = Cookies.get("JWT");
-      const response = await axios.get(`/api/delivery/user`, {
+      const response = await axios.get(`/api/admin/orders`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -1,6 +1,7 @@
 
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchDeliveriesAdmin } from "../../../actions/deliveryAction";
 import { userListAction } from "../../../actions/userAction";
 import Table, { TableColumn } from "../../../component/Table";
 import { RootState } from "../../../store";
@@ -31,13 +32,12 @@ const DeliveryList = () => {
   ];
 
   const dispatch = useAppDispatch();
-  const { users, loading, error } = useAppSelector(
-    (state: RootState) => state.userListReducer
+  const { deliveries, loading, error } = useAppSelector(
+    (state: RootState) => state.deliveryListReducer
   );
   const { user } = useAppSelector(
     (state: RootState) => state.userSignInReducer
   );
-  // const { success: successDelete } = useAppSelector((state: RootState) => state.userDelete)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,10 +46,10 @@ const DeliveryList = () => {
     } else if (!user.isAdmin) {
       navigate("/");
     }
-    dispatch(userListAction());
+    dispatch(fetchDeliveriesAdmin);
   }, [dispatch, navigate, user]);
 
-  console.log(users);
+  // console.log(users);
   const onEditClick = (user: any) => {
 
     console.log(user);
@@ -57,7 +57,7 @@ const DeliveryList = () => {
 
   return (
     <>
-      <Table columns={columns} data={users} lastColumnEdit={true} onEditClick={onEditClick}></Table>
+      <Table columns={columns} data={deliveries} lastColumnEdit={true} onEditClick={onEditClick}></Table>
     </>
   );
 };
