@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TableColumn } from "../../component/Table";
 import { RootState } from "../../store";
 import { useAppSelector } from "../../utils/hooks";
 // import '../../sass/Form.scss'
-import './AdminEditForm.scss'
+import "./AdminEditForm.scss";
 
 interface EditFormProps {
   data: {
@@ -33,14 +33,9 @@ const AdminEditForm = () => {
   // });
 
   const navigate = useNavigate();
+  const {state} = useLocation();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(formData);
-    // Redirect back to the table page after submission
-    // navigate("/table");
-  };
-
+  // const handleSubmit = handleSubmit;
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -50,9 +45,10 @@ const AdminEditForm = () => {
       [name]: value,
     }));
   };
+console.log(state)
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={()=> {}}>
       {columns.map((field: TableColumn) => (
         <div key={field.accessor} className="form-field">
           <label htmlFor={field.accessor}>{field.label}</label>
@@ -80,7 +76,9 @@ const AdminEditForm = () => {
           {/* // )} */}
         </div>
       ))}
-      <button type="submit" className="submit">Save Changes</button>
+      <button type="submit" className="submit">
+        Save Changes
+      </button>
     </form>
   );
 };

@@ -7,15 +7,32 @@ const getAllDrones = expressAsyncHandler(async (req, res) => {
 });
 
 const addDrone = expressAsyncHandler(async (req, res) => {
-  const { name, status, currentLocation, batteryLevel, lastMaintenanceDate } =
-    req.body;
-
-  const newDrone = new Drone({
+  const {
+    id,
     name,
     status,
     currentLocation,
     batteryLevel,
     lastMaintenanceDate,
+    weightCapacity,
+    maxFlightDistance,
+    deliveryRange,
+    deliveryCapacity,
+    speed,
+  } = req.body;
+
+  const newDrone = new Drone({
+    id,
+    name,
+    status,
+    currentLocation,
+    batteryLevel,
+    lastMaintenanceDate: new Date(lastMaintenanceDate),
+    weightCapacity,
+    maxFlightDistance,
+    deliveryRange,
+    deliveryCapacity,
+    speed,
   });
 
   const createdDrone = await newDrone.save();
@@ -34,25 +51,46 @@ const deleteDrone = expressAsyncHandler(async (req, res) => {
   res.status(200).json({ drone: deletedDrone });
 });
 
+// @route   PUT api/admin/drones/:id
+// @desc    Update a drone
+// @access  Private (admin only)
 const updateDrone = expressAsyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { name, status, currentLocation, batteryLevel, lastMaintenanceDate } =
-    req.body;
+
+  const {
+    name,
+    status,
+    currentLocation,
+    batteryLevel,
+    lastMaintenanceDate,
+    weightCapacity,
+    maxFlightDistance,
+    deliveryRange,
+    deliveryCapacity,
+    speed,
+  } = req.body;
 
   const drone = await Drone.findById(id);
-  if (!drone) {
-    res.status(404).json({ message: "Drone not found" });
+
+  if (drone) {
+    drone.name = name || drone.name;
+    drone.status = status || drone.status;
+    drone.currentLocation = currentLocation || drone.currentLocation;
+    drone.batteryLevel = batteryLevel || drone.batteryLevel;
+    drone.lastMaintenanceDate =
+      lastMaintenanceDate || drone.lastMaintenanceDate;
+    drone.weightCapacity = weightCapacity || drone.weightCapacity;
+    drone.maxFlightDistance = maxFlightDistance || drone.maxFlightDistance;
+    drone.deliveryRange = deliveryRange || drone.deliveryRange;
+    drone.deliveryCapacity = deliveryCapacity || drone.deliveryCapacity;
+    drone.speed = speed || drone.speed;
+
+    const updatedDrone = await drone.save();
+    res.status(200).json({ drone: updatedDrone });
+  } else {
+    res.status(404);
     throw new Error("Drone not found");
   }
-
-  drone.name = name ?? drone.name;
-  drone.batteryLevel = batteryLevel ?? drone.batteryLevel;
-  drone.currentLocation = currentLocation ?? drone.currentLocation;
-  drone.lastMaintenanceDate = lastMaintenanceDate ?? drone.lastMaintenanceDate;
-  drone.status = status ?? drone.status;
-
-  const updatedDrone = await drone.save();
-  res.status(200).json({ drone: updatedDrone });
 });
 
 // @route   GET api/admin/drones/:id

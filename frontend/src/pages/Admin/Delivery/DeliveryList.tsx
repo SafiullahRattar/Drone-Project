@@ -66,7 +66,13 @@ const AdminDeliveryList = () => {
   // get delivery and pass it admin delivery action
   const onEditClick = (delivery: DeliveryBackend) => {
     dispatch(adminEditFormAction(columns, delivery));
-    navigate("/admin/editForm")
+    navigate("/admin/editForm", {
+      state: {
+        handleSubmit: (data: any) => {
+          console.log(data)
+        },
+      },
+    });
   };
 
   return (

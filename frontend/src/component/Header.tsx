@@ -11,7 +11,7 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.userSignInReducer);
-  console.log(user)
+  console.log(user);
 
   const signOutHandler = () => {
     dispatch(signOutAction());
@@ -42,27 +42,29 @@ const Header = () => {
             <li className="menu-items">
               <Link to="/profile">Profile</Link>
             </li>
-            <li className="menu-items menu-dropdown">
-              <button>
-                Admin
-                <span className="arrow"></span>
-              </button>
-              {/* <i className="fa fa-caret-down"></i> */}
-              <ul className="dropdown">
-                <li className="menu-items">
-                  <Link to="/admin/drones">Drones</Link>
-                </li>
-                <li className="menu-items">
-                  <Link to="/admin/users">Users</Link>
-                </li>
-                <li className="menu-items">
-                  <Link to="/admin/deliveries">Deliveries</Link>
-                </li>
-                <li className="menu-items">
-                  <Link to="/admin/price-plan">Price Plan</Link>
-                </li>
-              </ul>
-            </li>
+            {user && user.isAdmin && (
+              <li className="menu-items menu-dropdown">
+                <button>
+                  Admin
+                  <span className="arrow"></span>
+                </button>
+                {/* <i className="fa fa-caret-down"></i> */}
+                <ul className="dropdown">
+                  <li className="menu-items">
+                    <Link to="/admin/drones">Drones</Link>
+                  </li>
+                  <li className="menu-items">
+                    <Link to="/admin/users">Users</Link>
+                  </li>
+                  <li className="menu-items">
+                    <Link to="/admin/deliveries">Deliveries</Link>
+                  </li>
+                  <li className="menu-items">
+                    <Link to="/admin/price-plan">Price Plan</Link>
+                  </li>
+                </ul>
+              </li>
+            )}
 
             {Object.keys(user).length !== 0 ? (
               <button className="btn" onClick={signOutHandler}>
