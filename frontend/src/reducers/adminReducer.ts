@@ -9,6 +9,7 @@ const initialStateAdminEditForm: AdminEditFormState = {
   loading: false,
   data: {},
   columns: [],
+  apiForUpdate: "",
   success: false,
 };
 export const adminEditFormReducer = (
@@ -23,6 +24,7 @@ export const adminEditFormReducer = (
         ...state,
         data: action.payload.data,
         columns: action.payload.columns,
+        apiForUpdate: action.payload.apiForUpdate,
         loading: false,
       };
     case AdminEditFormActionTypes.ADMIN_EDITFORM_FAIL:

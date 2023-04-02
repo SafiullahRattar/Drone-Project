@@ -110,5 +110,6 @@ export interface AdminEditFormState {
   loading: boolean;
   data: {};
   columns: TableColumn[];
+  apiForUpdate: string;
   success: boolean;
 }

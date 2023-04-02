@@ -11,6 +11,7 @@ import DeliveryTracking from "./pages/Delivery/DeliveryTracking";
 import Home from "./pages/Home/Home";
 
 import Signup from "./pages/Signup";
+import AdminDroneList from "./pages/Admin/Drone/DroneList";
 
 // import "./App.scss";
 
@@ -28,6 +29,7 @@ const App: React.FC = () => {
           <Route path="/profile" element={<DeliveryList />} />
           <Route path="/admin/users" element={<UsersList />} />
           <Route path="/admin/deliveries" element={<AdminDeliveryList />} />
+          <Route path="/admin/drones" element={<AdminDroneList />} />
           <Route path="/admin/editForm" element={<AdminEditForm />} />
         </Routes>
       </main>

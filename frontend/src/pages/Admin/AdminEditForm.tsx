@@ -19,7 +19,7 @@ interface EditFormProps {
 }
 
 const AdminEditForm = () => {
-  const { data, columns } = useAppSelector(
+  const { data, columns, apiForUpdate } = useAppSelector(
     (state: RootState) => state.adminEditFormReducer
   );
   const [formData, setFormData] = useState<{ [key: string]: string }>(data);
@@ -33,9 +33,8 @@ const AdminEditForm = () => {
   // });
 
   const navigate = useNavigate();
-  const {state} = useLocation();
+  const { state } = useLocation();
 
-  // const handleSubmit = handleSubmit;
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -45,10 +44,15 @@ const AdminEditForm = () => {
       [name]: value,
     }));
   };
-console.log(state)
+  console.log(state);
 
   return (
-    <form onSubmit={()=> {}}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        console.log(formData, "formData", apiForUpdate, "apiForUpdate");
+      }}
+    >
       {columns.map((field: TableColumn) => (
         <div key={field.accessor} className="form-field">
           <label htmlFor={field.accessor}>{field.label}</label>

@@ -58,17 +58,14 @@ export interface DeliveryUserListAction {
   payload: any;
 }
 
-
 //---------------Admin
 
 export enum UserList {
-    REQUEST = "USER_LIST_REQUEST",
-    SUCCESS = "USER_LIST_SUCCESS",
-    FAIL = "USER_LIST_FAIL",
-    RESET = "USER_LIST_RESET",
-
+  REQUEST = "USER_LIST_REQUEST",
+  SUCCESS = "USER_LIST_SUCCESS",
+  FAIL = "USER_LIST_FAIL",
+  RESET = "USER_LIST_RESET",
 }
-
 
 export enum DeliveryListActionTypes {
   DELIVERY_LIST_REQUEST = "DELIVERY_LIST_REQUEST",
@@ -84,3 +81,9 @@ export enum AdminEditFormActionTypes {
   ADMIN_EDITFORM_RESET = "ADMIN_EDITFORM_RESET",
 }
 
+export enum AdminDroneListActionTypes {
+  REQUEST = "ADMIN_DRONE_LIST_REQUEST",
+  SUCCESS = "ADMIN_DRONE_LIST_SUCCESS",
+  FAIL = "ADMIN_DRONE_LIST_FAIL",
+  RESET = "ADMIN_DRONE_LIST_RESET",
+}

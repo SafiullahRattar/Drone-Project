@@ -4,6 +4,7 @@ import { userListAction } from "../../../actions/userAction";
 import Table, { TableColumn } from "../../../component/Table";
 import { RootState } from "../../../store";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
+import { adminEditFormAction } from "../../../actions/adminAction";
 
 const UsersList = () => {
   const columns: TableColumn[] = [
@@ -50,8 +51,9 @@ const UsersList = () => {
 
   console.log(users);
   const onEditClick = (user: any) => {
+    dispatch(adminEditFormAction(columns, user, "/api/admin/user"));
+    navigate("/admin/editForm");
 
-    console.log(user);
   };
 
   return (
