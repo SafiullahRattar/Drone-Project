@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TableColumn } from "../../component/Table";
 import { RootState } from "../../store";
-import { useAppSelector } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 // import '../../sass/Form.scss'
 import "./AdminEditForm.scss";
+import { updateDroneAdminAction } from "../../actions/droneAction";
 
 interface EditFormProps {
   data: {
@@ -33,7 +34,7 @@ const AdminEditForm = () => {
   // });
 
   const navigate = useNavigate();
-  const { state } = useLocation();
+  const dispatch = useAppDispatch();
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -44,19 +45,27 @@ const AdminEditForm = () => {
       [name]: value,
     }));
   };
-  console.log(state);
+
+  console.log({
+    columns,
+    data,
+    formData,
+  });
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        console.log(formData, "formData", apiForUpdate, "apiForUpdate");
+        if (apiForUpdate == "DRONE") {
+          dispatch(updateDroneAdminAction(formData));
+        }
       }}
     >
-      {columns.map((field: TableColumn) => (
-        <div key={field.accessor} className="form-field">
-          <label htmlFor={field.accessor}>{field.label}</label>
-          {/* {field.type === "select" ? (
+      {columns.map((field: TableColumn) => {
+        return (
+          <div key={field.accessor} className="form-field">
+            <label htmlFor={field.accessor}>{field.label}</label>
+            {field.type === "select" ? (
               <select
                 name={field.accessor}
                 id={field.accessor}
@@ -64,22 +73,23 @@ const AdminEditForm = () => {
                 onChange={handleChange}
               >
                 {field.options?.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
+                  <option key={option} value={option}>
+                    {option}
                   </option>
                 ))}
               </select>
-            ) : ( */}
-          <input
-            type={field.type}
-            name={field.accessor}
-            id={field.accessor}
-            value={formData[field.accessor]}
-            onChange={handleChange}
-          />
-          {/* // )} */}
-        </div>
-      ))}
+            ) : (
+              <input
+                type={field.type}
+                name={field.accessor}
+                id={field.accessor}
+                value={formData[field.accessor]}
+                onChange={handleChange}
+              />
+            )}
+          </div>
+        );
+      })}
       <button type="submit" className="submit">
         Save Changes
       </button>

@@ -1,10 +1,13 @@
 import React from "react";
-import "../sass/Table.scss"
+import "../sass/Table.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 export type TableColumn = {
   label: string;
   accessor: string;
   type?: "string" | "number" | "select";
+  options?: string[];
 };
 
 type TableProps = {
@@ -22,6 +25,10 @@ const Table: React.FC<TableProps> = ({
   lastColumnEdit = false,
   onEditClick,
 }) => {
+  console.log({
+    columns,
+    data,
+  });
   return (
     <table className="table">
       <thead>
@@ -37,22 +44,24 @@ const Table: React.FC<TableProps> = ({
           <tr key={row._id}>
             {columns.map((column) => (
               <td key={column.accessor}>
-                {column.type === "select" ? (
-                  <select>
-                    {row[column.accessor].map((option: string) => (
+                {/* {column.type === "select" ? (
+                  <select value={row[column.accessor]}>
+                    {column.options?.map((option: string) => (
                       <option key={option}>{option}</option>
                     ))}
                   </select>
-                ) : (
-                  row[column.accessor]
-                )}
+                ) : ( */}
+                {row[column.accessor]}
+                {/* )} */}
               </td>
             ))}
             {lastColumnEdit && (
               <td>
-                <button onClick={() => onEditClick && onEditClick(row)}>
-                  Edit
-                </button>
+                <FontAwesomeIcon
+                  cursor={"pointer"}
+                  icon={faEdit}
+                  onClick={() => onEditClick && onEditClick(row)}
+                />
               </td>
             )}
           </tr>

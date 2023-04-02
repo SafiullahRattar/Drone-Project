@@ -1,6 +1,10 @@
 import axios, { AxiosError } from "axios";
-import { AdminDroneListActionTypes } from "../constants/action_types";
+import {
+  AdminDroneListActionTypes,
+  AdminDroneUpdateActionTypes,
+} from "../constants/action_types";
 import { AppDispatch } from "../store";
+import { axios_config } from "../utils/config";
 
 // Get Drone List
 export const getDroneListAdminAction = () => async (dispatch: AppDispatch) => {
@@ -9,11 +13,11 @@ export const getDroneListAdminAction = () => async (dispatch: AppDispatch) => {
       type: AdminDroneListActionTypes.REQUEST,
     });
 
-    const { data } = await axios.get("/api/admin/drones");
+    const { data } = await axios.get("/api/admin/drones", axios_config());
 
     dispatch({
       type: AdminDroneListActionTypes.SUCCESS,
-      payload: data,
+      payload: data.drones,
     });
   } catch (error: AxiosError | any) {
     dispatch({
@@ -25,3 +29,33 @@ export const getDroneListAdminAction = () => async (dispatch: AppDispatch) => {
     });
   }
 };
+
+// update drone
+export const updateDroneAdminAction =
+  (drone: any) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch({
+        type: AdminDroneUpdateActionTypes.REQUEST,
+      });
+      console.log(drone);
+
+      const { data } = await axios.put(
+        `/api/admin/drones/${drone._id}`,
+        drone,
+        axios_config()
+      );
+
+      dispatch({
+        type: AdminDroneUpdateActionTypes.SUCCESS,
+        payload: data,
+      });
+    } catch (error: AxiosError | any) {
+      dispatch({
+        type: AdminDroneUpdateActionTypes.FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };

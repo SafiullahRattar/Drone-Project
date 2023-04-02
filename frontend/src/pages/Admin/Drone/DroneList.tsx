@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { adminEditFormAction } from "../../../actions/adminAction";
 import { fetchDeliveriesAdmin } from "../../../actions/deliveryAction";
 import Table, { TableColumn } from "../../../component/Table";
+import { getDroneListAdminAction } from "../../../actions/droneAction";
 
 const AdminDroneList = () => {
   const droneTableColumns: TableColumn[] = [
@@ -22,6 +23,7 @@ const AdminDroneList = () => {
       label: "Status",
       accessor: "status",
       type: "select",
+      options: ["available", "in-use", "maintenance"],
     },
     {
       label: "Latitude",
@@ -85,22 +87,14 @@ const AdminDroneList = () => {
     } else if (!user.isAdmin) {
       navigate("/");
     }
-    dispatch(fetchDeliveriesAdmin());
+    dispatch(getDroneListAdminAction());
   }, [dispatch, navigate, user]);
 
   console.log(drones);
   // get delivery and pass it admin delivery action
-  const onEditClick = () => {
-    dispatch(
-      adminEditFormAction(droneTableColumns, drones, "/api/admin/drones")
-    );
-    navigate("/admin/editForm", {
-      state: {
-        handleSubmit: (data: any) => {
-          console.log(data);
-        },
-      },
-    });
+  const onEditClick = (drone: any) => {
+    dispatch(adminEditFormAction(droneTableColumns, drone, "DRONE"));
+    navigate("/admin/editForm");
   };
 
   return (
