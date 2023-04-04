@@ -43,7 +43,7 @@ export const getDeliveryByStatus = expressAsyncHandler(async (req, res) => {
 export const getDeliveryByUserId = expressAsyncHandler(async (req, res) => {
   const sender = req.body.user._id;
   try {
-    const delivery = await Delivery.find({ sender });
+    const delivery = await Delivery.find({ sender })
     res.json(delivery);
   } catch (err) {
     console.error(err);

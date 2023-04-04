@@ -1,6 +1,10 @@
 .deliveryList {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
   table {
-    width: 100%;
+    border-collapse: collapse;
+    // width: 100%;
     thead {
       background-color: #e0e0e0;
     }
@@ -10,7 +14,9 @@
     }
     td {
       cursor: pointer;
-      padding: 10px 0px;
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
       &:hover {
         background-color: #e0e0e0;
       }
