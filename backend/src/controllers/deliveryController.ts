@@ -62,31 +62,27 @@ export const getDeliveryById = expressAsyncHandler(async (req, res) => {
 });
 
 export const updateDeliveryById = expressAsyncHandler(async (req, res) => {
-  const { name, status, phone, address } = req.body;
+  const { receiver, date, priority, price, status, distance } = req.body;
   //Build delivery object
-  const deliveryFields = {} as {
-    name: string;
-    status: string;
-    phone: string;
-    address: string;
-  };
-  if (name) deliveryFields.name = name;
-  if (status) deliveryFields.status = status;
-  if (phone) deliveryFields.phone = phone;
-  if (address) deliveryFields.address = address;
+
   try {
-    let delivery = await Delivery.findById(req.params.id);
+    const delivery = await Delivery.findById(req.params.id);
+    if (!delivery) {
+      res.status(404).json({ msg: "Delivery not found" });
+    } else {
+      delivery.receiver = receiver || delivery.receiver;
+      delivery.date = date || delivery.date;
+      delivery.priority = priority || delivery.priority;
+      delivery.price = price || delivery.price;
+      delivery.status = status || delivery.status;
+      delivery.distance = distance || delivery.distance;
 
-    if (!delivery) res.status(404).json({ msg: "Delivery not found" });
-
-    delivery = await Delivery.findByIdAndUpdate(
-      req.params.id,
-      { $set: deliveryFields },
-      { new: true }
-    );
-    res.json(delivery);
+      const updatedDelivery = await delivery.save();
+      res.status(200).json({
+        delivery: updatedDelivery,
+      });
+    }
   } catch (err) {
-    console.error(err);
     res.status(500).send("Server Error");
   }
 });
@@ -95,36 +91,36 @@ export const updateDeliveryById = expressAsyncHandler(async (req, res) => {
  * Update the status of an delivery by ID
  * @returns The updated delivery object as a JSON response, or a 404 error if the delivery is not found
  */
-export const updateDeliveryStatus_Admin = expressAsyncHandler(async (req, res) => {
-  try {
-    // Get the delivery ID from the request parameters
-    const id = req.params.id;
+export const updateDeliveryStatus_Admin = expressAsyncHandler(
+  async (req, res) => {
+    try {
+      // Get the delivery ID from the request parameters
+      const id = req.params.id;
 
-    // Get the new status from the request body
-    const { status } = req.body;
+      // Get the new status from the request body
+      const { status } = req.body;
 
-    // Find the delivery by ID and update its status
-    const updatedDelivery = await Delivery.findByIdAndUpdate(
-      id,
-      { status },
-      { new: true }
-    );
+      // Find the delivery by ID and update its status
+      const updatedDelivery = await Delivery.findByIdAndUpdate(
+        id,
+        { status },
+        { new: true }
+      );
 
-    // If the delivery is not found, return a 404 error
-    if (!updatedDelivery) {
-      res.status(404).json({ error: "Delivery not found" });
-      return;
+      // If the delivery is not found, return a 404 error
+      if (!updatedDelivery) {
+        res.status(404).json({ error: "Delivery not found" });
+        return;
+      }
+
+      // Return the updated delivery object as a JSON response
+      res.json(updatedDelivery);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
     }
-
-    // Return the updated delivery object as a JSON response
-    res.json(updatedDelivery);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
   }
-});
-
-
+);
 
 /**
  * Get All the deliveries

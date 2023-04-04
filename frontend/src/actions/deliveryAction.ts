@@ -1,13 +1,16 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Cookies from "js-cookie";
 import {
+  AdminDeliveryUpdateActionTypes,
   DeliveryActionTypes,
+  DeliveryBackend,
   DeliveryListActionTypes,
   DeliveryUserListAction,
   DeliveryUserListActionTypes,
 } from "../constants/action_types";
 import { Delivery, Package } from "../constants/interfaces";
 import { AppDispatch, RootState } from "../store";
+import { axios_config } from "../utils/config";
 
 export const getDeliveryById = (id: string) => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -173,7 +176,7 @@ export const fetchDeliveries = () => {
       });
       return dispatch({
         type: DeliveryUserListActionTypes.FETCH_DELIVERIES_SUCCESS,
-        payload: response.data, 
+        payload: response.data,
       });
     } catch (err) {
       return dispatch({
@@ -184,11 +187,9 @@ export const fetchDeliveries = () => {
   };
 };
 
-
-
 export const fetchDeliveriesAdmin = () => {
   return async (dispatch: AppDispatch) => {
-    dispatch({ type: DeliveryListActionTypes.DELIVERY_LIST_REQUEST});
+    dispatch({ type: DeliveryListActionTypes.DELIVERY_LIST_REQUEST });
     try {
       const token = Cookies.get("JWT");
       const response = await axios.get(`/api/admin/orders`, {
@@ -198,12 +199,39 @@ export const fetchDeliveriesAdmin = () => {
       });
       return dispatch({
         type: DeliveryListActionTypes.DELIVERY_LIST_SUCCESS,
-        payload: response.data, 
+        payload: response.data,
       });
     } catch (err) {
       return dispatch({
         type: DeliveryListActionTypes.DELIVERY_LIST_FAIL,
         payload: err,
+      });
+    }
+  };
+};
+
+// update delivery
+export const adminUpdateDeliveryAction = (delivery: any) => {
+  return async (dispatch: AppDispatch) => {
+    dispatch({ type: AdminDeliveryUpdateActionTypes.REQUEST });
+    try {
+      const { data } = await axios.put(
+        `/api/admin/orders/${delivery._id}`,
+        delivery,
+        axios_config()
+      );
+
+      dispatch({
+        type: AdminDeliveryUpdateActionTypes.SUCCESS,
+        payload: data,
+      });
+    } catch (error: AxiosError | any) {
+      dispatch({
+        type: AdminDeliveryUpdateActionTypes.FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
       });
     }
   };

@@ -31,7 +31,7 @@ router.get("/status/:status", getDeliveryByStatus);
 router
   .route("/:id")
   .get(getDeliveryById)
-  .put(authMiddleware, adminMiddleware, updateDeliveryById);
+  // .put(authMiddleware, adminMiddleware, updateDeliveryById);
 
 // @route   PUT api/delivery/id
 // @desc    Update delivery

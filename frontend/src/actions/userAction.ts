@@ -1,12 +1,14 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import {
+  AdminUserUpdateActionTypes,
   DeliveryUserListActionTypes,
   UserList,
   UserSingIn,
 } from "../constants/action_types";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Cookies from "js-cookie";
 import { AppDispatch, RootState } from "../store";
+import { axios_config } from "../utils/config";
 
 export const userSignInAction =
   (token: string) => async (dispatch: Dispatch) => {
@@ -57,31 +59,54 @@ export const signOutAction = () => (dispatch: Dispatch) => {
   // dispatch({ type: OrderDeliver.RESET });
 };
 
-
-export const userListAction = () => async (dispatch: AppDispatch, getState: () => RootState) => {
+export const userListAction =
+  () => async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
-        dispatch({ type: UserList.REQUEST })
-        const config = {
-            headers: {
-                Authorization: `Bearer ${Cookies.get('JWT')}`
-            }
-        }
-        const { data } = await axios.get(
-            '/api/admin/users/',
-            config
-        )
+      dispatch({ type: UserList.REQUEST });
+      const config = {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("JWT")}`,
+        },
+      };
+      const { data } = await axios.get("/api/admin/users/", config);
 
-        dispatch({
-            type: UserList.SUCCESS,
-            payload: data
-        })
-
+      dispatch({
+        type: UserList.SUCCESS,
+        payload: data,
+      });
     } catch (error: any) {
-        dispatch({
-            type: UserList.FAIL,
-            payload: error.response && error.response.data.message
-                ? error.response.data.message
-                : error.message,
-        })
+      dispatch({
+        type: UserList.FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
     }
+  };
+
+export const adminUpdateUserAction = (user: any) => {
+  return async (dispatch: AppDispatch) => {
+    dispatch({ type: AdminUserUpdateActionTypes.REQUEST });
+    try {
+      const { data } = await axios.put(
+        `/api/admin/users/${user._id}`,
+        user,
+        axios_config()
+      );
+
+      dispatch({
+        type: AdminUserUpdateActionTypes.SUCCESS,
+        payload: data,
+      });
+    } catch (error: AxiosError | any) {
+      dispatch({
+        type: AdminUserUpdateActionTypes.FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 };

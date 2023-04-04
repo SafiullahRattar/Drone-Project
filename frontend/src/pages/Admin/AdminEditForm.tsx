@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 // import '../../sass/Form.scss'
 import "./AdminEditForm.scss";
 import { updateDroneAdminAction } from "../../actions/droneAction";
+import { adminUpdateDeliveryAction } from "../../actions/deliveryAction";
+import { adminUpdateUserAction } from "../../actions/userAction";
 
 interface EditFormProps {
   data: {
@@ -57,7 +59,14 @@ const AdminEditForm = () => {
       onSubmit={(e) => {
         e.preventDefault();
         if (apiForUpdate == "DRONE") {
+          console.log("should update drone");
           dispatch(updateDroneAdminAction(formData));
+        } else if (apiForUpdate === "DELIVERY") {
+          console.log("should update delivery");
+          dispatch(adminUpdateDeliveryAction(formData));
+        } else if (apiForUpdate === "USER") {
+          console.log("should update user", formData);
+          dispatch(adminUpdateUserAction(formData));
         }
       }}
     >

@@ -37,7 +37,6 @@ export const updateDroneAdminAction =
       dispatch({
         type: AdminDroneUpdateActionTypes.REQUEST,
       });
-      console.log(drone);
 
       const { data } = await axios.put(
         `/api/admin/drones/${drone._id}`,

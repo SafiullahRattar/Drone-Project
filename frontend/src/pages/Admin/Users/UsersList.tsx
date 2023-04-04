@@ -51,14 +51,18 @@ const UsersList = () => {
 
   console.log(users);
   const onEditClick = (user: any) => {
-    dispatch(adminEditFormAction(columns, user, "/api/admin/user"));
+    dispatch(adminEditFormAction(columns, user, "USER"));
     navigate("/admin/editForm");
-
   };
 
   return (
     <>
-      <Table columns={columns} data={users} lastColumnEdit={true} onEditClick={onEditClick}></Table>
+      <Table
+        columns={columns}
+        data={users}
+        lastColumnEdit={true}
+        onEditClick={onEditClick}
+      ></Table>
     </>
   );
 };

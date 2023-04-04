@@ -28,6 +28,7 @@ const EditForm: React.FC<EditFormProps> = ({ data, fields }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log('handleSubmit')
     // handle form submission here
     // you can access the form data using the formData state variable
     console.log(formData);

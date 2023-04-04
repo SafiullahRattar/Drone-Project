@@ -69,26 +69,27 @@ exports.getDeliveryById = (0, express_async_handler_1.default)((req, res) => __a
     }
 }));
 exports.updateDeliveryById = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, status, phone, address } = req.body;
+    const { receiver, date, priority, price, status, distance } = req.body;
     //Build delivery object
-    const deliveryFields = {};
-    if (name)
-        deliveryFields.name = name;
-    if (status)
-        deliveryFields.status = status;
-    if (phone)
-        deliveryFields.phone = phone;
-    if (address)
-        deliveryFields.address = address;
     try {
-        let delivery = yield deliveryModel_1.default.findById(req.params.id);
-        if (!delivery)
+        const delivery = yield deliveryModel_1.default.findById(req.params.id);
+        if (!delivery) {
             res.status(404).json({ msg: "Delivery not found" });
-        delivery = yield deliveryModel_1.default.findByIdAndUpdate(req.params.id, { $set: deliveryFields }, { new: true });
-        res.json(delivery);
+        }
+        else {
+            delivery.receiver = receiver || delivery.receiver;
+            delivery.date = date || delivery.date;
+            delivery.priority = priority || delivery.priority;
+            delivery.price = price || delivery.price;
+            delivery.status = status || delivery.status;
+            delivery.distance = distance || delivery.distance;
+            const updatedDelivery = yield delivery.save();
+            res.status(200).json({
+                delivery: updatedDelivery,
+            });
+        }
     }
     catch (err) {
-        console.error(err);
         res.status(500).send("Server Error");
     }
 }));

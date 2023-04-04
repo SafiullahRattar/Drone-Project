@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getAllDeliveries,
+  updateDeliveryById,
   updateDeliveryStatus_Admin,
 } from "../controllers/deliveryController";
 import {
@@ -27,6 +28,9 @@ adminRoutes.use(authMiddleware, adminMiddleware);
 adminRoutes.put("/orders/:id/status", updateDeliveryStatus_Admin);
 //Get all the deliveries
 adminRoutes.get("/orders", getAllDeliveries);
+adminRoutes
+  .route("/orders/:id")
+  .put(authMiddleware, adminMiddleware, updateDeliveryById);
 
 // Drones
 adminRoutes.get("/drones/:id", getDroneById);

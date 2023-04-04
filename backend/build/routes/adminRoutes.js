@@ -16,6 +16,9 @@ adminRoutes.use(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddlewar
 adminRoutes.put("/orders/:id/status", deliveryController_1.updateDeliveryStatus_Admin);
 //Get all the deliveries
 adminRoutes.get("/orders", deliveryController_1.getAllDeliveries);
+adminRoutes
+    .route("/orders/:id")
+    .put(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware, deliveryController_1.updateDeliveryById);
 // Drones
 adminRoutes.get("/drones/:id", droneController_1.getDroneById);
 adminRoutes.get("/drones", droneController_1.getAllDrones);

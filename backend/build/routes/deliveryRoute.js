@@ -24,8 +24,8 @@ router.get("/status/:status", deliveryController_1.getDeliveryByStatus);
 // @access  Public
 router
     .route("/:id")
-    .get(deliveryController_1.getDeliveryById)
-    .put(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware, deliveryController_1.updateDeliveryById);
+    .get(deliveryController_1.getDeliveryById);
+// .put(authMiddleware, adminMiddleware, updateDeliveryById);
 // @route   PUT api/delivery/id
 // @desc    Update delivery
 // @access  Public
