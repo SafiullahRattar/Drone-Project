@@ -49,11 +49,9 @@ const AdminEditForm = () => {
     }));
   };
 
-
   useEffect(() => {
     if (!loading && !error && shouldGoBack) {
       navigate(-1);
-      
     }
   }, [loading, error, navigate]);
 
@@ -111,6 +109,7 @@ const AdminEditForm = () => {
       })}
       <button type="submit" className="submit">
         Save Changes
+        {loading && <span className="loading">Loading...</span>}
       </button>
     </form>
   );
