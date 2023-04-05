@@ -42,8 +42,8 @@ export interface DeliveryBackendState {
 
 export interface DeliveryBackend {
   _id: string;
-  sender: string;
-  package_id: string;
+  sender: any;
+  package_id: any;
   receiver: string;
   date: Date;
   priority: string;

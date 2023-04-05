@@ -1,4 +1,4 @@
-import { Formik } from "formik";
+import { Field, Formik } from "formik";
 import React from "react";
 import * as yup from "yup";
 import { postNewDelivery } from "../../actions/deliveryAction";
@@ -10,13 +10,42 @@ const DeliveryForm = () => {
   const dispatch = useAppDispatch();
   useCheckJwtCookie();
 
+  interface PackageOption {
+    value: number;
+    label: string;
+    dimensions: { length: number; width: number; height: number };
+  }
+
+  const packageOptions: PackageOption[] = [
+    {
+      value: 0,
+      label: "Small",
+      dimensions: { length: 10, width: 10, height: 10 },
+    },
+    {
+      value: 1,
+      label: "Medium",
+      dimensions: { length: 20, width: 20, height: 20 },
+    },
+    {
+      value: 2,
+      label: "Large",
+      dimensions: { length: 30, width: 30, height: 30 },
+    },
+    {
+      value: 3,
+      label: "Extra Large",
+      dimensions: { length: 40, width: 40, height: 40 },
+    },
+  ];
+
   return (
     <div>
       <Formik
         initialValues={{
           package: {
             weight: 0,
-            size: 0,
+            size: packageOptions[0].value,
           },
           delivery: {
             receiver: "",
@@ -84,7 +113,7 @@ const DeliveryForm = () => {
                       <div className="error">{errors.package.weight}</div>
                     )}
                 </div>
-                <div className="form-input-container">
+                {/* <div className="form-input-container">
                   <label>Size</label>
                   <input
                     type="number"
@@ -96,6 +125,24 @@ const DeliveryForm = () => {
                   {errors.package && touched.package && errors.package.size && (
                     <div className="error">{errors.package.size}</div>
                   )}
+                </div> */}
+                <div className="form-input-container">
+                  <label htmlFor="package-size">Select Package Size:</label>
+                  <Field
+                    name="package-size"
+                    as="select"
+                    className="form-select"
+                    // value={values.package.size}
+                    // onChange={handleChange}
+                  >
+                    {packageOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label} ({option.dimensions.length} x{" "}
+                        {option.dimensions.width} x {option.dimensions.height}{" "}
+                        cm)
+                      </option>
+                    ))}
+                  </Field>
                 </div>
               </div>
             </div>

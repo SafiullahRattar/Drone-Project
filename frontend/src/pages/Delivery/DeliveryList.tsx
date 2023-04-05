@@ -51,7 +51,7 @@ const DeliveryList = () => {
                   {delivery._id}
                 </td>
                 <td>{delivery.sender}</td>
-                <td>{delivery.package_id}</td>
+                <td>{delivery.package_id._id}</td>
                 <td>{delivery.receiver}</td>
                 <td>{delivery.date.toString()}</td>
                 <td>{delivery.priority}</td>

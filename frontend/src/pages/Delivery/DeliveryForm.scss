@@ -1,4 +1,5 @@
 .form-container {
+  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -7,7 +8,6 @@ align-items: center;
 
   .form-title {
     padding: 0.5rem;
-    background-color: #ffffff;
   }
 
   .form-inputs {
@@ -22,7 +22,7 @@ align-items: center;
       width: 50%;
     }
     .form-input-container {
-      margin: 0 auto;
+      // margin: 0 auto;
       // margin-bottom: 0.5rem;
       display: flex;
       flex-direction: column;
@@ -42,6 +42,18 @@ align-items: center;
         padding: 0.75rem 1.25rem;
       }
 
+      select {
+        font-size: 16px;
+        // font-size: max(16px, 1em);
+        font-family: inherit;
+        background-color: #fff;
+        border: 2px solid #000;
+        border-radius: 4px;
+        padding: 0.75rem 2.25rem;
+        // expand to parent width
+
+
+      }
       .error {
         font-size: 0.8rem;
         color: red;
@@ -52,7 +64,6 @@ align-items: center;
 
 .form-submit {
   padding: 0.5rem;
-  background-color: #f2f2f2;
 
   button {
     cursor: pointer;

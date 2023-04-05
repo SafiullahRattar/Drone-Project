@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TableColumn } from "../../component/Table";
 import { RootState } from "../../store";
@@ -22,10 +22,11 @@ interface EditFormProps {
 }
 
 const AdminEditForm = () => {
-  const { data, columns, apiForUpdate } = useAppSelector(
+  const { data, columns, apiForUpdate, loading, error } = useAppSelector(
     (state: RootState) => state.adminEditFormReducer
   );
   const [formData, setFormData] = useState<{ [key: string]: string }>(data);
+  const [shouldGoBack, setShouldGoBack] = useState(false);
 
   // Prefill the form data with the current data
   // columns.forEach((field: TableColumn) => {
@@ -48,6 +49,14 @@ const AdminEditForm = () => {
     }));
   };
 
+
+  useEffect(() => {
+    if (!loading && !error && shouldGoBack) {
+      navigate(-1);
+      
+    }
+  }, [loading, error, navigate]);
+
   console.log({
     columns,
     data,
@@ -68,6 +77,7 @@ const AdminEditForm = () => {
           console.log("should update user", formData);
           dispatch(adminUpdateUserAction(formData));
         }
+        setShouldGoBack(true);
       }}
     >
       {columns.map((field: TableColumn) => {

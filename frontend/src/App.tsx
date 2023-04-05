@@ -6,7 +6,6 @@ import AdminEditForm from "./pages/Admin/AdminEditForm";
 import AdminDeliveryList from "./pages/Admin/Delivery/DeliveryList";
 import UsersList from "./pages/Admin/Users/UsersList";
 import DeliveryForm from "./pages/Delivery/DeliveryForm";
-import DeliveryList from "./pages/Delivery/DeliveryList";
 import DeliveryTracking from "./pages/Delivery/DeliveryTracking";
 import Home from "./pages/Home/Home";
 

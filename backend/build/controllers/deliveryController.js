@@ -50,7 +50,7 @@ exports.getDeliveryByStatus = (0, express_async_handler_1.default)((req, res) =>
 exports.getDeliveryByUserId = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const sender = req.body.user._id;
     try {
-        const delivery = yield deliveryModel_1.default.find({ sender });
+        const delivery = yield deliveryModel_1.default.find({ sender }).populate("package_id");
         res.json(delivery);
     }
     catch (err) {
