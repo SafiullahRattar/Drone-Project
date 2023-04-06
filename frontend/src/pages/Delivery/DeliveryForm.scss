@@ -16,16 +16,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    // width: 50%;
+    width: 100%;
 
     @media screen and (min-width: 768px) {
-      width: 50%;
+      // width: 50%;
     }
     .form-input-container {
       // margin: 0 auto;
       // margin-bottom: 0.5rem;
       display: flex;
       flex-direction: column;
+      width: 100%;
 
       label {
         font-size: 0.9rem;
