@@ -5,6 +5,7 @@ import { userSignInAction } from "../../actions/userAction";
 import { RootState } from "../../store";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import "./Home.scss";
+import CustomLocation from "../../component/Map";
 
 const Home = () => {
   const dispatch = useAppDispatch();

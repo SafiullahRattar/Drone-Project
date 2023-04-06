@@ -12,6 +12,7 @@ import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup";
 import AdminDroneList from "./pages/Admin/Drone/DroneList";
 import Profile from "./pages/Profile/Profile";
+import Test from "./component/Test";
 
 // import "./App.scss";
 
