@@ -68,9 +68,6 @@ const DeliveryForm = () => {
             priority: "",
             // price: 0,
             // status: "",
-            pickup_location: "",
-            drop_location: "",
-            // distance: 0,
           },
         }}
         validationSchema={yup.object().shape({
@@ -90,7 +87,16 @@ const DeliveryForm = () => {
           // submit the form
           setSubmitting(false);
 
-          dispatch(postNewDelivery(values.package, values.delivery));
+          if (pickUpLocation && dropOffLocation) {
+            dispatch(
+              postNewDelivery(values.package, {
+                ...values.delivery,
+                pickup_location: pickUpLocation,
+                drop_location: dropOffLocation,
+                distance,
+              })
+            );
+          }
         }}
       >
         {({
@@ -245,7 +251,7 @@ const DeliveryForm = () => {
                       <div className="error">{errors.delivery.status}</div>
                     )}
                 </div> */}
-                      <div className="form-input-container">
+                      {/* <div className="form-input-container">
                         <label>Pickup Location</label>
                         <input
                           type="text"
@@ -278,7 +284,7 @@ const DeliveryForm = () => {
                               {errors.delivery.drop_location}
                             </div>
                           )}
-                      </div>
+                      </div> */}
                       {/* <div className="form-input-container">
                   <label>Distance</label>
                   <input
