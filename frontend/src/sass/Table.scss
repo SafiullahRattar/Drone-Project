@@ -1,12 +1,15 @@
 .table {
   border-collapse: collapse;
-  width: 100%;
+  width: 80%;
+  margin: 4rem auto;
+
 
   th,
   td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    // flex-wrap: wrap;
   }
 
   th {

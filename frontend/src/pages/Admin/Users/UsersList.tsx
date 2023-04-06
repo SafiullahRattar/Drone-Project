@@ -16,14 +16,14 @@ const UsersList = () => {
       label: "Email",
       accessor: "email",
     },
-    {
-      label: "Address",
-      accessor: "address",
-    },
-    {
-      label: "Admin?",
-      accessor: "isAdmin",
-    },
+    // {
+    //   label: "Address",
+    //   accessor: "address",
+    // },
+    // {
+    //   label: "Admin?",
+    //   accessor: "isAdmin",
+    // },
     {
       label: "Joined",
       accessor: "createdAt",

@@ -23,7 +23,11 @@ const AdminDroneList = () => {
       label: "Status",
       accessor: "status",
       type: "select",
-      options: ["available", "in-use", "maintenance"],
+      options: [
+        { value: "available", label: "available" },
+        { value: "in-use", label: "in-use" },
+        { value: "maintenance", label: "maintenance" },
+      ],
     },
     {
       label: "Latitude",

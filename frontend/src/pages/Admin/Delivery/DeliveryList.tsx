@@ -17,6 +17,26 @@ const AdminDeliveryList = () => {
     {
       label: "Package ID",
       accessor: "package_id",
+      type: "select",
+      options: [
+        {
+          value: 0,
+          label: "Small (10x10x10)",
+        },
+        {
+          value: 1,
+          label: "Medium (20x20x20)",
+        },
+        {
+          value: 2,
+          label: "Large (30x30x30)",
+        },
+
+        {
+          value: 3,
+          label: "Extra Large (40x40x40)",
+        },
+      ],
     },
     {
       label: "Receiver",
@@ -38,6 +58,17 @@ const AdminDeliveryList = () => {
       label: "Status",
       accessor: "status",
     },
+    {
+      label: "Pick Up Location",
+      accessor: "pickup_location",
+      isList: true,
+    },
+    {
+      label: "Drop Off Location",
+      accessor: "drop_location",
+      isList: true,
+    },
+
     {
       label: "Distance",
       accessor: "distance",

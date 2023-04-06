@@ -7,7 +7,8 @@ export type TableColumn = {
   label: string;
   accessor: string;
   type?: "string" | "number" | "select";
-  options?: string[];
+  options?: { value: any; label: any }[];
+  isList?: boolean;
 };
 
 type TableProps = {
@@ -16,6 +17,7 @@ type TableProps = {
   numColumns?: number;
   lastColumnEdit?: boolean;
   onEditClick?: (row: any) => void;
+  isList?: boolean;
 };
 
 const Table: React.FC<TableProps> = ({
@@ -51,7 +53,9 @@ const Table: React.FC<TableProps> = ({
                     ))}
                   </select>
                 ) : ( */}
-                {row[column.accessor]}
+                {column.isList
+                  ? row[column.accessor].map((item: any) => <div>{item}</div>)
+                  : row[column.accessor]}
                 {/* )} */}
               </td>
             ))}

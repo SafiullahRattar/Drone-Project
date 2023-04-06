@@ -5,6 +5,16 @@ form {
 }
 
 .form-field {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  // flex-wrap: wrap;
+}
+
+select {
+  // font-size: max(16px, 1em);
+  font-family: inherit;
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 4px;
+  padding: 0.75rem 2.25rem;
 }
