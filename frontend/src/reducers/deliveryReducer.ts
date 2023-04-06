@@ -22,8 +22,9 @@ const initialState: Delivery = {
   date: "",
   priority: "",
   //   status: "",
-  pickup_location: "",
-  drop_location: "",
+  pickup_location: [0, 0],
+  drop_location: [0, 0],
+  distance: 0,
 };
 
 export function deliveryReducer(
@@ -99,8 +100,6 @@ export const deliveryUserListReducer = (
       return state;
   }
 };
-
-
 
 export const deliveryListReducer = (
   state = initialStateDeliveryList,

@@ -51,15 +51,14 @@ export interface Package {
   size: number;
 }
 
-const google = window.google;
 export interface Delivery {
   receiver: any;
   date: string;
   priority: string;
   distance: number;
   // status: string;
-  pickup_location: google.maps.LatLngLiteral;
-  drop_location: google.maps.LatLngLiteral;
+  pickup_location: [number, number];
+  drop_location: [number, number];
 }
 
 export interface GetDeliveryByIdAction {

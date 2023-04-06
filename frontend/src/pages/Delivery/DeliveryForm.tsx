@@ -91,8 +91,8 @@ const DeliveryForm = () => {
             dispatch(
               postNewDelivery(values.package, {
                 ...values.delivery,
-                pickup_location: pickUpLocation,
-                drop_location: dropOffLocation,
+                pickup_location: [pickUpLocation.lat, pickUpLocation.lng],
+                drop_location: [dropOffLocation.lat, dropOffLocation.lng],
                 distance,
               })
             );

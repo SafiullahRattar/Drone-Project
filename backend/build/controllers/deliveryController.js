@@ -17,7 +17,7 @@ const express_async_handler_1 = __importDefault(require("express-async-handler")
 const deliveryModel_1 = __importDefault(require("../models/deliveryModel"));
 exports.addDelivery = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const sender = req.body.user._id;
-    const { package_id, receiver, date, priority, pickup_location, drop_location, } = req.body;
+    const { package_id, receiver, date, priority, pickup_location, drop_location, distance, } = req.body;
     try {
         const newDelivery = new deliveryModel_1.default({
             package_id,
@@ -25,8 +25,9 @@ exports.addDelivery = (0, express_async_handler_1.default)((req, res) => __await
             sender,
             date,
             priority,
-            // drop_location,
-            // pickup_location,
+            drop_location,
+            pickup_location,
+            distance,
             status: "pending",
         });
         const delivery = yield newDelivery.save();
