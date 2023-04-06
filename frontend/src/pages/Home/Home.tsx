@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { userSignInAction } from "../../actions/userAction";
 import { RootState } from "../../store";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
@@ -9,6 +9,7 @@ import CustomLocation from "../../component/Map";
 
 const Home = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { user, loading, error } = useAppSelector(
     (state) => state.userSignInReducer
   );
@@ -41,7 +42,7 @@ const Home = () => {
     <div className="homePage">
       <div className="homePage__leftColumn">
         <h1 className="homePage__title">Drone Delivery</h1>
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}>
           <input
             className="input_field"
             placeholder="Tracking Id"
@@ -54,12 +55,14 @@ const Home = () => {
           <button type="submit" className="btn">
             Track
           </button>
-        </form>
-        <h1 className="homePage__title">OR</h1>
+        </form> */}
+        {/* <h1 className="homePage__title">OR</h1> */}
         {Object.keys(user).length !== 0 ? (
           <>
             <h1 className="homePage__title">Deliver A Package</h1>
-            <button className="btn">Deliver</button>
+            <Link to="/delivery">
+              <button className="btn">Deliver</button>
+            </Link>
           </>
         ) : (
           <>
@@ -67,6 +70,9 @@ const Home = () => {
             <button className="btn">Sign Up</button>
           </>
         )}
+        <Link to="/tracking">
+          <button className="btn">Track</button>
+        </Link>
       </div>
       <div className="homePage__rightColumn">
         <img src="drone.svg" alt="drone" />

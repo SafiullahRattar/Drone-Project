@@ -31,13 +31,13 @@ const Header = () => {
         >
           <ul className="menus">
             <li className="menu-items">
-              <Link to="/tracking">Tracking</Link>
+              <Link to="/tracking">Track</Link>
             </li>
             {/* <li className="menu-items">
               <Link to="/profile">Service</Link>
             </li> */}
             <li className="menu-items">
-              <Link to="/delivery">Book a Drone</Link>
+              <Link to="/delivery">Send Package</Link>
             </li>
             <li className="menu-items">
               <Link to="/profile">Profile</Link>
