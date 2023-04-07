@@ -132,19 +132,6 @@ const DeliveryForm = () => {
                             <div className="error">{errors.package.weight}</div>
                           )}
                       </div>
-                      {/* <div className="form-input-container">
-                  <label>Size</label>
-                  <input
-                    type="number"
-                    name="package.size"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.package.size}
-                  />
-                  {errors.package && touched.package && errors.package.size && (
-                    <div className="error">{errors.package.size}</div>
-                  )}
-                </div> */}
                       <div className="form-input-container">
                         <label htmlFor="package-size">
                           Select Package Size:
@@ -221,85 +208,6 @@ const DeliveryForm = () => {
                             </div>
                           )}
                       </div>
-                      {/* <div className="form-input-container">
-                  <label>Price</label>
-                  <input
-                    type="number"
-                    name="delivery.price"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.delivery.price}
-                  />
-                  {errors.delivery &&
-                    touched.delivery &&
-                    errors.delivery.price && (
-                      <div className="error">{errors.delivery.price}</div>
-                    )}
-                </div> */}
-                      {/* <div className="form-input-container">
-                  <label>Status</label>
-                  <input
-                    type="text"
-                    name="delivery.status"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.delivery.status}
-                  />
-                  {errors.delivery &&
-                    touched.delivery &&
-                    errors.delivery.status && (
-                      <div className="error">{errors.delivery.status}</div>
-                    )}
-                </div> */}
-                      {/* <div className="form-input-container">
-                        <label>Pickup Location</label>
-                        <input
-                          type="text"
-                          name="delivery.pickup_location"
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          value={values.delivery.pickup_location}
-                        />
-                        {errors.delivery &&
-                          touched.delivery &&
-                          errors.delivery.pickup_location && (
-                            <div className="error">
-                              {errors.delivery.pickup_location}
-                            </div>
-                          )}
-                      </div>
-                      <div className="form-input-container">
-                        <label>Drop Location</label>
-                        <input
-                          type="text"
-                          name="delivery.drop_location"
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          value={values.delivery.drop_location}
-                        />
-                        {errors.delivery &&
-                          touched.delivery &&
-                          errors.delivery.drop_location && (
-                            <div className="error">
-                              {errors.delivery.drop_location}
-                            </div>
-                          )}
-                      </div> */}
-                      {/* <div className="form-input-container">
-                  <label>Distance</label>
-                  <input
-                    type="number"
-                    name="delivery.distance"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.delivery.distance}
-                  />
-                  {errors.delivery &&
-                    touched.delivery &&
-                    errors.delivery.distance && (
-                      <div className="error">{errors.delivery.distance}</div>
-                    )}
-                </div> */}
                     </div>
                   </div>
                   <div className="form-submit">
