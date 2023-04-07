@@ -5,6 +5,7 @@ import express, { Request, Response } from "express";
 import userRoutes from "./routes/userRoutes";
 import packageRoutes from "./routes/packageRoutes";
 import deliveryRoute from "./routes/deliveryRoute";
+import pathRoutes from "./routes/pathRoutes";
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
 import passport from "passport";
 import session from "express-session";
@@ -51,6 +52,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/package", packageRoutes);
 app.use("/api/delivery", deliveryRoute);
+app.use('/api/path',  pathRoutes)
 
 app.get(
   "/auth/google/callback",

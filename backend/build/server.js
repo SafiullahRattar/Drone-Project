@@ -10,6 +10,7 @@ const express_1 = __importDefault(require("express"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const packageRoutes_1 = __importDefault(require("./routes/packageRoutes"));
 const deliveryRoute_1 = __importDefault(require("./routes/deliveryRoute"));
+const pathRoutes_1 = __importDefault(require("./routes/pathRoutes"));
 const errorMiddleware_1 = require("./middleware/errorMiddleware");
 const passport_1 = __importDefault(require("passport"));
 const express_session_1 = __importDefault(require("express-session"));
@@ -44,6 +45,7 @@ app.use("/api/admin", adminRoutes_1.default);
 app.use("/api/users", userRoutes_1.default);
 app.use("/api/package", packageRoutes_1.default);
 app.use("/api/delivery", deliveryRoute_1.default);
+app.use('/api/path', pathRoutes_1.default);
 app.get("/auth/google/callback", passport_1.default.authenticate("google", {
     // successRedirect: process.env.CLIENT_URL,
     failureRedirect: "/login/failed",
