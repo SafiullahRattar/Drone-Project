@@ -64,14 +64,34 @@ const AdminDroneList = () => {
       accessor: "deliveryRange",
       type: "number",
     },
-    {
-      label: "Delivery Capacity",
-      accessor: "deliveryCapacity",
-      type: "number",
-    },
+    // {
+    //   label: "Delivery Capacity",
+    //   accessor: "deliveryCapacity",
+    //   type: "number",
+    // },
     {
       label: "Speed",
       accessor: "speed",
+      type: "number",
+    },
+    {
+      label: "Charge Rate",
+      accessor: "chargeRate",
+      type: "number",
+    },
+    {
+      label: "Drain Rate",
+      accessor: "drainRate",
+      type: "number",
+    },
+    {
+      label: "BCR",
+      accessor: "bcr",
+      type: "number",
+    },
+    {
+      label: "Total Battery Capacity",
+      accessor: "totalBatteryCapacity",
       type: "number",
     },
   ];

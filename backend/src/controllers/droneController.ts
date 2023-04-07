@@ -19,6 +19,10 @@ const addDrone = expressAsyncHandler(async (req, res) => {
     deliveryRange,
     deliveryCapacity,
     speed,
+    chargeRate,
+    drainRate,
+    bcr,
+    totalBatteryCapacity,
   } = req.body;
 
   const newDrone = new Drone({
@@ -33,6 +37,10 @@ const addDrone = expressAsyncHandler(async (req, res) => {
     deliveryRange,
     deliveryCapacity,
     speed,
+    chargeRate,
+    drainRate,
+    bcr,
+    totalBatteryCapacity,
   });
 
   const createdDrone = await newDrone.save();
@@ -66,8 +74,12 @@ const updateDrone = expressAsyncHandler(async (req, res) => {
     weightCapacity,
     maxFlightDistance,
     deliveryRange,
-    deliveryCapacity,
+    // deliveryCapacity,
     speed,
+    chargeRate,
+    drainRate,
+    bcr,
+    totalBatteryCapacity,
   } = req.body;
 
   const drone = await Drone.findById(id);
@@ -82,8 +94,13 @@ const updateDrone = expressAsyncHandler(async (req, res) => {
     drone.weightCapacity = weightCapacity || drone.weightCapacity;
     drone.maxFlightDistance = maxFlightDistance || drone.maxFlightDistance;
     drone.deliveryRange = deliveryRange || drone.deliveryRange;
-    drone.deliveryCapacity = deliveryCapacity || drone.deliveryCapacity;
+    // drone.deliveryCapacity = deliveryCapacity || drone.deliveryCapacity;
     drone.speed = speed || drone.speed;
+    drone.chargeRate = chargeRate || drone.chargeRate;
+    drone.drainRate = drainRate || drone.drainRate;
+    drone.bcr = bcr || drone.bcr;
+    drone.totalBatteryCapacity =
+      totalBatteryCapacity || drone.totalBatteryCapacity;
 
     const updatedDrone = await drone.save();
     res.status(200).json({ drone: updatedDrone });
