@@ -192,7 +192,7 @@ const CustomLocation: React.FC<Iprops> = ({
       </div>
     </div>
   ) : (
-    <></>
+    <>Loading Maps...</>
   );
 };
 
