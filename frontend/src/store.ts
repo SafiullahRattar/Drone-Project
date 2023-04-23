@@ -9,9 +9,9 @@ const store = configureStore({
   reducer: allReducers,
 });
 
-if (window.Cypress) {
-  window.store = store;
-}
+// if (window.Cypress) {
+//   window.store = store;
+// }
 
 export default store;
 // composeWithDevTools(applyMiddleware(...middleware))
