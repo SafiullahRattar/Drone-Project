@@ -12,7 +12,7 @@ import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup";
 import AdminDroneList from "./pages/Admin/Drone/DroneList";
 import Profile from "./pages/Profile/Profile";
-import Test from "./component/Test";
+import Test from "./Test";
 
 // import "./App.scss";
 
@@ -32,6 +32,7 @@ const App: React.FC = () => {
           <Route path="/admin/deliveries" element={<AdminDeliveryList />} />
           <Route path="/admin/drones" element={<AdminDroneList />} />
           <Route path="/admin/editForm" element={<AdminEditForm />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
       </main>
     </Router>
