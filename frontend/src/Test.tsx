@@ -126,20 +126,31 @@ const Square = () => {
                 }}
               />
               {/* should draw a box at the end of the line when transition is over and not draw for (0, 0) */}
-              {index <= currentIndex && (
-                <motion.rect
-                  x={`${nextCoordinate.x * 50}px`}
-                  y={`${nextCoordinate.y * 50}px`}
-                  //width = drone_width/5
-                  width={`${drone_width / 5}px`}
-                  height={`${drone_height / 5}px`}
-                  fill="red"
-                  animate={{}}
-                  transition={{
-                    duration: distance / speed,
-                  }}
-                />
-              )}
+              {index <= currentIndex &&
+                !(
+                  coordinates[index + 1].x === 0 &&
+                  coordinates[index + 1].y === 0
+                ) && (
+                  <motion.rect
+                    x={`${nextCoordinate.x * 50}px`}
+                    y={`${nextCoordinate.y * 50}px`}
+                    //width = drone_width/5
+                    width={`${drone_width / 5}px`}
+                    height={`${drone_height / 5}px`}
+                    fill="red"
+                    opacity={0}
+                    animate={{
+                      opacity: 1,
+                    }}
+                    transition={{
+                      delay: distance / speed,
+                      duration: 0.5,
+                    }}
+                    exit={{
+                      opacity: 0,
+                    }}
+                  />
+                )}
             </g>
           );
         })}
