@@ -1,115 +1,169 @@
-import React from "react";
-// @ts-ignore
-import { useSpring, animated } from "react-spring";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 const coordinates = [
-  [0, 0],
-  [3, 5],
-  [6, 7],
-  [0, 0],
-  [8, 3],
-  [0, 0],
+  { x: 0, y: 0 },
+  { x: 1, y: 3 },
+  { x: 3, y: 6 },
+  { x: 0, y: 0 },
+  { x: 2, y: 9 },
+  { x: 0, y: 0 },
 ];
-const weights = [15, 20, 5];
 
-interface PathProps {
-  x1: number;
-  y1: number;
-  x2: number;
-  y2: number;
-  weight: number;
-  weightLoss: number;
-  delay: number;
-}
+const Square = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-const Path = ({ x1, y1, x2, y2, weight, weightLoss, delay }: PathProps) => {
-  const pathSpring = useSpring({
-    from: { weightLoss: 0 },
-    to: { weightLoss: weightLoss },
-    delay: delay * 500,
-  });
+  const nextCoordinate = () => {
+    setCurrentIndex((prevIndex) => prevIndex + 1);
+  };
 
-  return (
-    <React.Fragment>
-      <animated.line
-        x1={x1}
-        y1={y1}
-        x2={x2}
-        y2={y2}
-        stroke="black"
-        strokeWidth="0.1"
-      />
-      <animated.circle
-        cx={x2}
-        cy={y2}
-        // r={pathSpring.weightLoss.interpolate((val: number) =>
-        //   Math.max(0, weight - val)
-        // )}
-        r={1}
-      // fill random color
-        fill={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
-      />
-    </React.Fragment>
-  );
-};
+  const isLastCoordinate = () => {
+    return currentIndex >= coordinates.length - 2;
+  };
 
-const PathAnimation = () => {
-  const paths = [];
-  let currentWeightIndex = 0;
-  let totalWeight = 0;
+  const currentCoordinate = coordinates[currentIndex];
+  const nextCoordinateData = coordinates[currentIndex + 1];
 
-  for (let i = 0; i < coordinates.length - 1; i++) {
-    const start = coordinates[i];
-    const end = coordinates[i + 1];
-    const dx = end[0] - start[0];
-    const dy = end[1] - start[1];
-    const distance = Math.sqrt(dx * dx + dy * dy);
-
-    const segmentWeight = weights[currentWeightIndex] || 0;
-    const segmentDistance = distance / 10;
-    const weightLoss = (segmentWeight * segmentDistance) / distance;
-
-    paths.push({
-      x1: start[0],
-      y1: start[1],
-      x2: end[0],
-      y2: end[1],
-      weight: segmentWeight,
-      weightLoss: weightLoss,
-    });
-
-    totalWeight += segmentWeight;
-    currentWeightIndex = Math.min(currentWeightIndex + 1, weights.length - 1);
-  }
-
-  const weightSpring = useSpring({
-    from: { weight: 0 },
-    to: { weight: totalWeight },
-  });
+  const drone_width = 100;
+  const drone_height = 100;
+  const speed = 3;
 
   return (
-    <div style={{
-    }}>
-      <svg viewBox="0 0 10 10">
-        {paths.map(({ x1, y1, x2, y2, weight, weightLoss }, i) => (
-          <Path
-            key={i}
-            x1={x1}
-            y1={y1}
-            x2={x2}
-            y2={y2}
-            weight={weight}
-            weightLoss={weightLoss}
-            delay={i}
-          />
-        ))}
-        <text x="50" y="50" textAnchor="middle">
-          {/* Total Weight: {weightSpring.weight.interpolate((val: number) => val.toFixed(2))} */}
-          
-        </text>
+    <div
+      style={{
+        width:
+          coordinates.reduce((acc, curr) => {
+            return Math.max(acc, curr.x * 50);
+          }, 0) + drone_width,
+        height:
+          coordinates.reduce((acc, curr) => {
+            return Math.max(acc, curr.y * 50);
+          }, 0) + drone_height,
+        // backgroundColor: "blue",
+      }}
+    >
+      <motion.div
+        style={{
+          width: `${drone_width}px`,
+          height: `${drone_height}px`,
+          // backgroundColor: "red",
+          // public/drone.png
+          backgroundImage: "url(./drone.png)",
+          backgroundSize: "cover",
+
+          position: "relative",
+          top: `${currentCoordinate.y * 50}px`,
+          left: `${currentCoordinate.x * 50}px`,
+        }}
+        animate={{
+          top: `${nextCoordinateData.y * 50}px`,
+          left: `${nextCoordinateData.x * 50}px`,
+        }}
+        // duration = distance
+        transition={{
+          duration:
+            Math.sqrt(
+              Math.pow(nextCoordinateData.x - currentCoordinate.x, 2) +
+                Math.pow(nextCoordinateData.y - currentCoordinate.y, 2)
+            ) / speed,
+        }}
+        onAnimationComplete={() => {
+          if (!isLastCoordinate()) {
+            nextCoordinate();
+          } else {
+            setCurrentIndex(0);
+          }
+        }}
+      >
+        {!isLastCoordinate() && (
+          // show coordinates
+          <div
+            style={{
+              position: "absolute",
+              top: -drone_height / 2,
+              left: -drone_width / 2,
+              backgroundColor: "white",
+              padding: "10px",
+              borderRadius: "10px",
+              fontSize: "20px",
+            }}
+          >
+            {`(${nextCoordinateData.x}, ${nextCoordinateData.y})`}
+          </div>
+        )}
+      </motion.div>
+      <svg
+        height="100%"
+        width="100%"
+        style={{
+          position: "relative",
+          top: -drone_height / 2,
+          left: drone_width / 2,
+        }}
+      >
+        {/* show the path along the coordinates and also label the corrdinates at the end  */}
+        {coordinates.map((coordinate, index) => {
+          if (index === coordinates.length - 1) {
+            return null;
+          }
+          const nextCoordinate = coordinates[index + 1];
+          const distance = Math.sqrt(
+            Math.pow(nextCoordinate.x - coordinate.x, 2) +
+              Math.pow(nextCoordinate.y - coordinate.y, 2)
+          );
+          return (
+            <g>
+              <motion.line
+                x1={`${coordinate.x * 50}px`}
+                y1={`${coordinate.y * 50}px`}
+                x2={`${nextCoordinate.x * 50}px`}
+                y2={`${nextCoordinate.y * 50}px`}
+                stroke="black"
+                strokeWidth={index <= currentIndex ? "3" : "0"}
+                animate={{}}
+                transition={{
+                  duration: distance / speed,
+                }}
+              />
+              {/* should draw a box at the end of the line when transition is over and not draw for (0, 0) */}
+              {index <= currentIndex && (
+                <motion.rect
+                  x={`${nextCoordinate.x * 50}px`}
+                  y={`${nextCoordinate.y * 50}px`}
+                  //width = drone_width/5
+                  width={`${drone_width / 5}px`}
+                  height={`${drone_height / 5}px`}
+                  fill="red"
+                  animate={{}}
+                  transition={{
+                    duration: distance / speed,
+                  }}
+                />
+              )}
+            </g>
+          );
+        })}
       </svg>
     </div>
   );
 };
 
-export default PathAnimation;
+const App = () => {
+  return (
+    <div
+      style={{
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100vw",
+        height: "100vh",
+      }}
+    >
+      <Square />
+      {/* svg of paths */}
+    </div>
+  );
+};
+
+export default App;
