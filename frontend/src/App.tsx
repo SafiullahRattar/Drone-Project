@@ -8,6 +8,7 @@ import UsersList from "./pages/Admin/Users/UsersList";
 import DeliveryForm from "./pages/Delivery/DeliveryForm";
 import DeliveryTracking from "./pages/Delivery/DeliveryTracking";
 import Home from "./pages/Home/Home";
+import DroneAnimation from "./pages/Admin/Animation";
 
 import Signup from "./pages/Signup";
 import AdminDroneList from "./pages/Admin/Drone/DroneList";
@@ -32,7 +33,7 @@ const App: React.FC = () => {
           <Route path="/admin/deliveries" element={<AdminDeliveryList />} />
           <Route path="/admin/drones" element={<AdminDroneList />} />
           <Route path="/admin/editForm" element={<AdminEditForm />} />
-          <Route path="/test" element={<Test />} />
+          <Route path="/test" element={<DroneAnimation />} />
         </Routes>
       </main>
     </Router>

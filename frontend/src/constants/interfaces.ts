@@ -115,3 +115,15 @@ export interface AdminEditFormState {
   apiForUpdate: string;
   success: boolean;
 }
+
+// Animation
+export interface AnimationState {
+  loading: boolean;
+  error: string;
+  coordinates: { x: number; y: number }[];
+  weight_container: number[];
+  time_elapsed: number[];
+  selected_index: number;
+  drone: {};
+  speed: number;
+}

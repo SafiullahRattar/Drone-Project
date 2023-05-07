@@ -1,0 +1,51 @@
+.panel {
+  margin-top: 20px;
+  position: relative;
+  top: 0;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  .panel__header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .panel__tile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 10px;
+
+    button {
+      height: 1rem;
+      // text inside button to be centered vertically
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .right {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
+  .panel-body {
+    .form-group {
+      margin-bottom: 20px;
+      .form-control {
+        width: 100%;
+      }
+    }
+  }
+  .panel-footer {
+    text-align: right;
+    button {
+      margin-left: 10px;
+    }
+  }
+}

@@ -10,6 +10,8 @@ const coordinates = [
   { x: 0, y: 0 },
 ];
 
+const weight_container = [2, 3, 4, 5, 6, 7];
+
 const Square = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -146,10 +148,21 @@ const Square = () => {
                       delay: distance / speed,
                       duration: 0.5,
                     }}
+                    style={{
+                      zIndex: 100,
+                    }}
+                    whileHover={{
+                      scale: 1.2,
+                      transition: {
+                        duration: 0.1,
+                      },
+                    }}
                     exit={{
                       opacity: 0,
                     }}
-                  />
+                  >
+                    <title>{`(${nextCoordinate.x}, ${nextCoordinate.y})\n${weight_container[index]}kg`}</title>
+                  </motion.rect>
                 )}
             </g>
           );
