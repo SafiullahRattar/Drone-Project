@@ -131,7 +131,7 @@ export const updateDeliveryStatus_Admin = expressAsyncHandler(
 export const getAllDeliveries = expressAsyncHandler(async (req, res) => {
   try {
     // Get all the deliveries
-    const deliveries = await Delivery.find();
+    const deliveries = await Delivery.find().populate("package_id");
 
     // Return the list of deliveries as a JSON response
     res.json(deliveries);

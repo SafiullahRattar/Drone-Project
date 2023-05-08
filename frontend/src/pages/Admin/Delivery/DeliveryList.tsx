@@ -14,30 +14,30 @@ const AdminDeliveryList = () => {
       label: "Sender",
       accessor: "sender",
     },
-    {
-      label: "Package ID",
-      accessor: "package_id",
-      type: "select",
-      options: [
-        {
-          value: 0,
-          label: "Small (10x10x10)",
-        },
-        {
-          value: 1,
-          label: "Medium (20x20x20)",
-        },
-        {
-          value: 2,
-          label: "Large (30x30x30)",
-        },
+    // {
+    //   label: "Package ID",
+    //   accessor: "package_id",
+    //   type: "select",
+    //   options: [
+    //     {
+    //       value: 0,
+    //       label: "Small (10x10x10)",
+    //     },
+    //     {
+    //       value: 1,
+    //       label: "Medium (20x20x20)",
+    //     },
+    //     {
+    //       value: 2,
+    //       label: "Large (30x30x30)",
+    //     },
 
-        {
-          value: 3,
-          label: "Extra Large (40x40x40)",
-        },
-      ],
-    },
+    //     {
+    //       value: 3,
+    //       label: "Extra Large (40x40x40)",
+    //     },
+    //   ],
+    // },
     {
       label: "Receiver",
       accessor: "receiver",

@@ -20,10 +20,17 @@ const Signup: React.FC = () => {
     (state: RootState) => state.userSignInReducer
   );
 
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  const query = useQuery();
   useEffect(() => {
-    // if (user !== null) {
-    //   navigate(redirect ?? "/");
-    // }
+    if (query.get("jwt")) {
+      console.log(query.get("jwt"));
+      Cookies.set("JWT", query.get("jwt") ?? "");
+      dispatch(userSignInAction(query.get("jwt") ?? ""));
+    }
+    if (user !== null) {
+      navigate('/');
+    }
 
     console.log();
   }, []);

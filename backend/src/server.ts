@@ -14,6 +14,7 @@ import { authMiddleware } from "./middleware/authMiddleware";
 import { authUser } from "./controllers/userController";
 import cors from "cors";
 import adminRoutes from "./routes/adminRoutes";
+import morgan from "morgan";
 
 const app = express();
 dotenv.config();
@@ -37,6 +38,7 @@ app.use(
     // })
   })
 );
+app.use(morgan("dev"));
 
 app.use(passport.initialize());
 app.use(passport.session());

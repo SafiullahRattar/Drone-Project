@@ -126,7 +126,7 @@ exports.updateDeliveryStatus_Admin = (0, express_async_handler_1.default)((req, 
 exports.getAllDeliveries = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Get all the deliveries
-        const deliveries = yield deliveryModel_1.default.find();
+        const deliveries = yield deliveryModel_1.default.find().populate("package_id");
         // Return the list of deliveries as a JSON response
         res.json(deliveries);
     }

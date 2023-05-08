@@ -18,6 +18,7 @@ const authMiddleware_1 = require("./middleware/authMiddleware");
 const userController_1 = require("./controllers/userController");
 const cors_1 = __importDefault(require("cors"));
 const adminRoutes_1 = __importDefault(require("./routes/adminRoutes"));
+const morgan_1 = __importDefault(require("morgan"));
 const app = (0, express_1.default)();
 dotenv_1.default.config();
 const corsOptions = {
@@ -35,6 +36,7 @@ app.use((0, express_session_1.default)({
     //   collection: 'sessions'
     // })
 }));
+app.use((0, morgan_1.default)("dev"));
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
 require("./utils/passport");
