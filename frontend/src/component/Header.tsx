@@ -22,8 +22,8 @@ const Header = () => {
   return (
     <header className="header">
       <div className="nav-area">
-        <Link to="/" className="logo">
-          DDS
+        <Link to="/" className="">
+          <img src="./logo.png" alt="logo" className="logo" />
         </Link>
         <nav
           className={`${"nav-area"} 
