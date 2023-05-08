@@ -14,7 +14,8 @@ export const addPath = expressAsyncHandler(async (req, res) => {
 
 export const getPaths = expressAsyncHandler(async (req, res) => {
   try {
-    const paths = await Path.find();
+    // populate("delivery")  then populate("package_id")
+    const paths = await Path.find().populate("delivery").populate("package_id");
     res.json(paths);
   } catch (err) {
     res.status(500).json({ message: "" });

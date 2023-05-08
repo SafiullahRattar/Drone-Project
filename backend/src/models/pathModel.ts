@@ -1,18 +1,19 @@
 import mongoose from "mongoose";
 
 const pathModel = new mongoose.Schema({
-  delivery_id: {
+  delivery: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Delivery",
-  },
-  location: {
-    type: [Number],
     required: true,
   },
-  weight: Number,
-  quantity: Number,
-  priority: Number,
-  time: Number,
+  time_elapsed: {
+    type: Number,
+    required: true,
+  },
+  battery_level: {
+    type: Number,
+    required: true,
+  },
 });
 
 const pathSchema = new mongoose.Schema({

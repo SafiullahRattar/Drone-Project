@@ -27,7 +27,8 @@ exports.addPath = (0, express_async_handler_1.default)((req, res) => __awaiter(v
 }));
 exports.getPaths = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const paths = yield pathModel_1.default.find();
+        // populate("delivery")  then populate("package_id")
+        const paths = yield pathModel_1.default.find().populate("delivery").populate("package_id");
         res.json(paths);
     }
     catch (err) {

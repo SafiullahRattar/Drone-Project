@@ -5,18 +5,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const pathModel = new mongoose_1.default.Schema({
-    delivery_id: {
+    delivery: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: "Delivery",
-    },
-    location: {
-        type: [Number],
         required: true,
     },
-    weight: Number,
-    quantity: Number,
-    priority: Number,
-    time: Number,
+    time_elapsed: {
+        type: Number,
+        required: true,
+    },
+    battery_level: {
+        type: Number,
+        required: true,
+    },
 });
 const pathSchema = new mongoose_1.default.Schema({
     path: {

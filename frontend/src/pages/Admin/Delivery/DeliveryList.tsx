@@ -11,6 +11,10 @@ import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 const AdminDeliveryList = () => {
   const columns: TableColumn[] = [
     {
+      label: "Delivery ID",
+      accessor: "_id",
+    },
+    {
       label: "Sender",
       accessor: "sender",
     },
