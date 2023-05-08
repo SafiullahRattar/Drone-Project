@@ -4,7 +4,6 @@ const pathModel = new mongoose.Schema({
   delivery: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Delivery",
-    required: true,
   },
   time_elapsed: {
     type: Number,
@@ -12,6 +11,20 @@ const pathModel = new mongoose.Schema({
   },
   battery_level: {
     type: Number,
+    required: true,
+  },
+  drone: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Drone",
+    // required: true,
+  },
+  is_home: {
+    type: Boolean,
+    required: true,
+  },
+  // {x,y,z}
+  coordinates: {
+    type: [Number],
     required: true,
   },
 });

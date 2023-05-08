@@ -16,9 +16,12 @@ exports.getPaths = exports.addPath = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const pathModel_1 = __importDefault(require("../models/pathModel"));
 exports.addPath = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const path_data = req.body;
+    const path_data = req.body.slice(0, req.body.length - 2);
     try {
-        const savedPath = yield pathModel_1.default.create(path_data);
+        // path_data without path_data.user
+        const savedPath = new pathModel_1.default({ path: path_data });
+        console.log(path_data);
+        yield savedPath.save();
         res.status(201).json(savedPath);
     }
     catch (err) {
@@ -27,11 +30,12 @@ exports.addPath = (0, express_async_handler_1.default)((req, res) => __awaiter(v
 }));
 exports.getPaths = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // populate("delivery")  then populate("package_id")
-        const paths = yield pathModel_1.default.find().populate("delivery").populate("package_id");
+        // populate("delivery") then get delivery.package_id
+        // const paths = await Path.find().populate("delivery").populate("package_id");
+        const paths = yield pathModel_1.default.find();
         res.json(paths);
     }
     catch (err) {
-        res.status(500).json({ message: "" });
+        res.status(500).json({ message: err.message });
     }
 }));

@@ -47,7 +47,7 @@ app.use("/api/admin", adminRoutes_1.default);
 app.use("/api/users", userRoutes_1.default);
 app.use("/api/package", packageRoutes_1.default);
 app.use("/api/delivery", deliveryRoute_1.default);
-app.use('/api/path', pathRoutes_1.default);
+app.use('/api/admin/path', pathRoutes_1.default);
 app.get("/auth/google/callback", passport_1.default.authenticate("google", {
     // successRedirect: process.env.CLIENT_URL,
     failureRedirect: "/login/failed",

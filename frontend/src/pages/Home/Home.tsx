@@ -32,6 +32,7 @@ const Home = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // history.push(`/tracking/${trackingId}`);
+    navigate(`/tracking?tracking_id=${trackingId}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +43,7 @@ const Home = () => {
     <div className="homePage">
       <div className="homePage__leftColumn">
         <h1 className="homePage__title">Drone Delivery</h1>
-        {/* <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <input
             className="input_field"
             placeholder="Tracking Id"
@@ -55,14 +56,14 @@ const Home = () => {
           <button type="submit" className="btn">
             Track
           </button>
-        </form> */}
+        </form>
         {/* <h1 className="homePage__title">OR</h1> */}
         {Object.keys(user).length !== 0 ? (
           <>
-            <h1 className="homePage__title">Deliver A Package</h1>
-            <Link to="/delivery">
+            {/* <h1 className="homePage__title">Deliver A Package</h1> */}
+            {/* <Link to="/delivery">
               <button className="btn">Deliver</button>
-            </Link>
+            </Link> */}
           </>
         ) : (
           <>
@@ -70,9 +71,10 @@ const Home = () => {
             <button className="btn">Sign Up</button>
           </>
         )}
-        <Link to="/tracking">
+        
+        {/* <Link to="/tracking">
           <button className="btn">Track</button>
-        </Link>
+        </Link> */}
       </div>
       <div className="homePage__rightColumn">
         <img src="drone.svg" alt="drone" />

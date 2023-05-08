@@ -54,7 +54,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/package", packageRoutes);
 app.use("/api/delivery", deliveryRoute);
-app.use('/api/path',  pathRoutes)
+app.use('/api/admin/path',  pathRoutes)
 
 app.get(
   "/auth/google/callback",

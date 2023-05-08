@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./DeliveryTracking.scss";
+import { useLocation } from "react-router-dom";
 
 const DeliveryTracking = () => {
   const [trackingId, setTrackingId] = useState("");
@@ -18,11 +19,9 @@ const DeliveryTracking = () => {
   }>();
   const [error, setError] = useState<string>();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const fetchDeliveryData = async (tracking_id: string) => {
     try {
-      const { data } = await axios.get(`/api/delivery/${trackingId}`);
+      const { data } = await axios.get(`/api/delivery/${tracking_id}`);
       setDeliveryData(data);
       setError("");
     } catch (err) {
@@ -30,6 +29,24 @@ const DeliveryTracking = () => {
       setError("ERROR");
     }
   };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    fetchDeliveryData(trackingId);
+  };
+
+  // if url has tracking id, fetch the data
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  const query = useQuery();
+
+  useEffect(() => {
+    const trackingId = query.get("tracking_id");
+    if (trackingId) {
+      console.log(trackingId)
+      setTrackingId(trackingId);
+      fetchDeliveryData(trackingId);
+    }
+  }, []);
 
   return (
     <div className="delivery_tracking">
