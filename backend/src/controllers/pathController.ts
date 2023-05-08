@@ -7,7 +7,6 @@ export const addPath = expressAsyncHandler(async (req, res) => {
   try {
     // path_data without path_data.user
     const savedPath = new Path({path: path_data});
-    console.log(path_data)
     await savedPath.save();
     res.status(201).json(savedPath);
 

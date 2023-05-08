@@ -20,7 +20,6 @@ exports.addPath = (0, express_async_handler_1.default)((req, res) => __awaiter(v
     try {
         // path_data without path_data.user
         const savedPath = new pathModel_1.default({ path: path_data });
-        console.log(path_data);
         yield savedPath.save();
         res.status(201).json(savedPath);
     }

@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Weight from "./Weight";
-import './Animation.scss'
+import "./Animation.scss";
 import Drone from "./Drone";
 import Panel from "./Panel";
-
-const coordinates = [
-  { x: 0, y: 0 },
-  { x: 1, y: 3 },
-  { x: 3, y: 6 },
-  { x: 0, y: 0 },
-  { x: 2, y: 9 },
-  { x: 0, y: 0 },
-];
-
-const weight_container = [2, 3, 4, 5, 6, 7];
-
+import { getAnimationDataAction } from "../../../actions/animationActions";
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
+import { RootState } from "../../../store";
 
 const App = () => {
+  const dispatch = useAppDispatch();
+  const { loading, coordinates } = useAppSelector(
+    (state: RootState) => state.animationReducer
+  );
+
+  useEffect(() => {
+    dispatch(getAnimationDataAction());
+  }, []);
+
   return (
     <div
-    className="container"
+      className="container"
       style={{
         position: "relative",
         display: "flex",
