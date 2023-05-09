@@ -17,16 +17,38 @@ const Header = () => {
     dispatch(signOutAction());
     navigate("/");
   };
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  //when a link is clicked, close the menu
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+  }, [navigate]);
+
   // console.log("Navbar");
   // console.log(user);
   return (
-    <header className="header">
-      <div className="nav-area">
+    <header className={`header ${isMenuOpen ? "show" : ""}`}>
+      <div className="nav">
         <Link to="/" className="">
           <img src="./logo.png" alt="logo" className="logo" />
         </Link>
+        <div
+          className={`menu-btn ${isMenuOpen ? "close" : ""}`}
+          onClick={toggleMenu}
+        >
+          <div className="btn-line"></div>
+          <div className="btn-line"></div>
+          <div className="btn-line"></div>
+        </div>
         <nav
-          className={`${"nav-area"} 
+          className={`${"nav-area"} ${isMenuOpen ? "show" : ""} 
           `}
         >
           <ul className="menus">
