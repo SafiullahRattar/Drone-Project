@@ -43,6 +43,7 @@ exports.getUserProfile = (0, express_async_handler_1.default)((req, res) => __aw
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
+            isRegistered: user.isRegistered,
         });
     }
     else {

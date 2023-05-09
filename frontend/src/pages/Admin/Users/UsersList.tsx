@@ -16,6 +16,10 @@ const UsersList = () => {
       label: "Email",
       accessor: "email",
     },
+    {
+      label: "Registered?",
+      accessor: "isRegistered",
+    },
     // {
     //   label: "Address",
     //   accessor: "address",

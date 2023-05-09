@@ -27,6 +27,7 @@ export const userSignInAction =
         type: UserSingIn.SUCCESS,
         payload: data,
       });
+      console.log(data)
 
       localStorage.setItem("UserInfo", JSON.stringify(data));
     } catch (error: any) {

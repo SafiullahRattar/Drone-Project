@@ -36,6 +36,7 @@ export const getUserProfile = expressAsyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isRegistered: user.isRegistered,
     });
   } else {
     res.status(404);

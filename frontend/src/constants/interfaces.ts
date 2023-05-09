@@ -6,6 +6,7 @@ export interface user {
   name: string;
   email: string;
   isAdmin: string;
+  isRegistered: string;
   token: string;
 }
 

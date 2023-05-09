@@ -1,11 +1,12 @@
 import { Field, Formik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { postNewDelivery } from "../../actions/deliveryAction";
 import { useCheckJwtCookie } from "../../utils/config";
-import { useAppDispatch } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import "./DeliveryForm.scss";
 import CustomLocation from "../../component/Map";
+import { RootState } from "../../store";
 
 const DeliveryForm = () => {
   const dispatch = useAppDispatch();
@@ -47,6 +48,20 @@ const DeliveryForm = () => {
     useState<google.maps.LatLngLiteral | null>(null);
 
   const [distance, setDistance] = useState<number>(0);
+
+  const { user } = useAppSelector(
+    (state: RootState) => state.userSignInReducer
+  );
+
+  useEffect(() => {
+    if (Object.keys(user).length !== 0) {
+      if (!user.isRegistered){
+        alert("Please Register your accout to use delivery services")
+        window.location.href = "/";
+        
+      }
+    }
+  }, [user]);
 
   console.log({
     pickUpLocation,

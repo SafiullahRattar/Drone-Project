@@ -24,6 +24,11 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
+    isRegistered: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     timestamps: true,
