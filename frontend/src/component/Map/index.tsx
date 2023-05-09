@@ -77,8 +77,8 @@ const CustomLocation: React.FC<Iprops> = ({
 
   const [currentPosition, setCurrentPosition] =
     useState<google.maps.LatLngLiteral>({
-      lat: 41.3851,
-      lng: 2.1734,
+      lat: 33.642362142043844,
+      lng: 72.99006168363474,
     });
 
   // useEffect(() => {
@@ -95,6 +95,7 @@ const CustomLocation: React.FC<Iprops> = ({
         zoom={15}
         center={currentPosition}
       >
+        <div className="marker"></div>
         {pickUp && (
           <Marker
             position={pickUp}
