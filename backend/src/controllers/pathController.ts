@@ -2,15 +2,17 @@ import expressAsyncHandler from "express-async-handler";
 import Path from "../models/pathModel";
 
 export const addPath = expressAsyncHandler(async (req, res) => {
-  const path_data = req.body.slice(0, req.body.length - 2);
+  // const path_data = req.body.slice(0, req.body.length - 2);
+
+  delete req.body.user;
+  // every from req.body except req.body.user [{}, {}, {}, user: {}]
+  const path_data = req.body;
 
   try {
     // path_data without path_data.user
-    const savedPath = new Path({path: path_data});
+    const savedPath = new Path({ path: path_data });
     await savedPath.save();
     res.status(201).json(savedPath);
-
-
   } catch (err) {
     res.status(400).json({ message: "" });
   }

@@ -19,17 +19,20 @@ const Drone = () => {
     speed,
   } = useAppSelector((state: RootState) => state.animationReducer);
 
+  // console.log(coordinates, selected_index, currentIndex)
+
   const dispatch = useAppDispatch();
   const nextCoordinate = () => {
     setCurrentIndex((prevIndex) => prevIndex + 1);
   };
 
   const isLastCoordinate = () => {
-    return currentIndex >= coordinates.length - 2;
+    return currentIndex >= coordinates.length - 1;
   };
 
   const currentCoordinate = coordinates[currentIndex];
-  const nextCoordinateData = coordinates[currentIndex + 1];
+  const nextCoordinateData =
+    coordinates[(currentIndex + 1) % coordinates.length];
 
   const drone_width = 100;
   const drone_height = 100;
@@ -121,12 +124,13 @@ const Drone = () => {
               return null;
             }
             const nextCoordinate = coordinates[index + 1];
-            const distance = parseInt(
-              Math.sqrt(
-                Math.pow(nextCoordinate.x - coordinate.x, 2) +
-                  Math.pow(nextCoordinate.y - coordinate.y, 2)
-              ).toFixed(0)
-            ) + 0.1;
+            const distance =
+              parseInt(
+                Math.sqrt(
+                  Math.pow(nextCoordinate.x - coordinate.x, 2) +
+                    Math.pow(nextCoordinate.y - coordinate.y, 2)
+                ).toFixed(0)
+              ) + 0.1;
             return (
               <g>
                 <motion.line

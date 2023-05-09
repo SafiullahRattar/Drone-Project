@@ -2,14 +2,14 @@ import { AnimationActionTypes } from "../constants/action_types";
 import { AnimationState } from "../constants/interfaces";
 
 const initialAnimationState: AnimationState = {
-  loading: false,
+  loading: true,
   error: "",
   coordinates: [
     { x: 0, y: 0 },
-    { x: 1, y: 3 },
+    { x: -1, y: 3 },
     { x: 3, y: 6 },
     { x: 0, y: 0 },
-    { x: 2, y: 9 },
+    { x: 2, y: -9 },
     { x: 0, y: 0 },
   ],
   weight_container: [2, 3, 0, 4, 0, 6],

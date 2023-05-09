@@ -16,7 +16,10 @@ exports.getPaths = exports.addPath = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const pathModel_1 = __importDefault(require("../models/pathModel"));
 exports.addPath = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const path_data = req.body.slice(0, req.body.length - 2);
+    // const path_data = req.body.slice(0, req.body.length - 2);
+    delete req.body.user;
+    // every from req.body except req.body.user [{}, {}, {}, user: {}]
+    const path_data = req.body;
     try {
         // path_data without path_data.user
         const savedPath = new pathModel_1.default({ path: path_data });

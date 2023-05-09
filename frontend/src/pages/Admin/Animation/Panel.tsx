@@ -106,34 +106,15 @@ const Panel = () => {
                 {coordinates.map(
                   (
                     coord: {
-                      x:
-                        | string
-                        | number
-                        | boolean
-                        | React.ReactElement<
-                            any,
-                            string | React.JSXElementConstructor<any>
-                          >
-                        | React.ReactFragment
-                        | React.ReactPortal
-                        | null
-                        | undefined;
-                      y:
-                        | string
-                        | number
-                        | boolean
-                        | React.ReactElement<
-                            any,
-                            string | React.JSXElementConstructor<any>
-                          >
-                        | React.ReactFragment
-                        | React.ReactPortal
-                        | null
-                        | undefined;
+                      x: number;
+                      y: number;
                     },
                     index: React.Key | null | undefined
                   ) => (
-                    <li key={index}>
+                    <li
+                      key={index}
+                      className={`${index === selected_index ? "current" : ""}`}
+                    >
                       ({coord.x}, {coord.y})
                     </li>
                   )

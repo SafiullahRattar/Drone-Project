@@ -43,7 +43,10 @@ const DeliveryForm = () => {
 
   const google = window.google;
   const [pickUpLocation, setPickUpLocation] =
-    useState<google.maps.LatLngLiteral | null>(null);
+    useState<google.maps.LatLngLiteral | null>({
+      lat: 33.642362142043844,
+      lng: 72.99006168363474,
+    });
   const [dropOffLocation, setDropOffLocation] =
     useState<google.maps.LatLngLiteral | null>(null);
 
@@ -55,10 +58,9 @@ const DeliveryForm = () => {
 
   useEffect(() => {
     if (Object.keys(user).length !== 0) {
-      if (!user.isRegistered){
-        alert("Please Register your accout to use delivery services")
+      if (!user.isRegistered) {
+        alert("Please Register your accout to use delivery services");
         window.location.href = "/";
-        
       }
     }
   }, [user]);

@@ -15,25 +15,33 @@ const App = () => {
   );
 
   useEffect(() => {
-    // dispatch(getAnimationDataAction());
+    dispatch(getAnimationDataAction());
   }, []);
 
   return (
-    <div
-      className="container"
-      style={{
-        position: "relative",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-      }}
-    >
-      <Drone />
-      {/* <div>adsf</div> */}
-      <Panel />
-      {/* svg of paths */}
-    </div>
+    <>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div
+          className="container"
+          style={{
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <div className="animation">
+            <Drone />
+          </div>
+          {/* <div>adsf</div> */}
+          <Panel />
+          {/* svg of paths */}
+        </div>
+      )}
+    </>
   );
 };
 
