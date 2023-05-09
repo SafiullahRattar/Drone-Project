@@ -33,6 +33,7 @@ const Drone = () => {
 
   const drone_width = 100;
   const drone_height = 100;
+  const scale = 0.5;
 
   useEffect(() => {
     dispatch(setAnimationSlectedIndex(currentIndex));
@@ -41,6 +42,8 @@ const Drone = () => {
   return (
     <div
       style={{
+        // position: "relative",
+        // top: '50vh',
         minWidth:
           coordinates.reduce((acc: number, curr: { x: number }) => {
             return Math.max(acc, curr.x * 50);
@@ -118,10 +121,12 @@ const Drone = () => {
               return null;
             }
             const nextCoordinate = coordinates[index + 1];
-            const distance = Math.sqrt(
-              Math.pow(nextCoordinate.x - coordinate.x, 2) +
-                Math.pow(nextCoordinate.y - coordinate.y, 2)
-            );
+            const distance = parseInt(
+              Math.sqrt(
+                Math.pow(nextCoordinate.x - coordinate.x, 2) +
+                  Math.pow(nextCoordinate.y - coordinate.y, 2)
+              ).toFixed(0)
+            ) + 0.1;
             return (
               <g>
                 <motion.line
@@ -136,7 +141,7 @@ const Drone = () => {
                     duration: distance / speed,
                   }}
                 />
-                {index <= currentIndex &&
+                {/* {index <= currentIndex &&
                   !(
                     coordinates[index + 1].x === 0 &&
                     coordinates[index + 1].y === 0
@@ -150,7 +155,7 @@ const Drone = () => {
                       speed={speed}
                       weight={weight_container[index]}
                     />
-                  )}
+                  )} */}
               </g>
             );
           }

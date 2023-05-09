@@ -7,7 +7,12 @@
   justify-content: center;
 
   @media screen and (max-width: 1024px) {
+    // flex-direction: column;
+  }
+
+  @media screen and (max-width: 768px) {
     flex-direction: column;
+    
   }
 
   &__leftColumn {

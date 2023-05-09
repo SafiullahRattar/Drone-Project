@@ -20,8 +20,9 @@ export const getAnimationDataAction = () => async (dispatch: any) => {
     const { data } = await axios.get("/api/admin/path", axios_config());
     const path = data[0].path;
     console.log(path)
+    const scale = 0.1;
     const coordinates = path.map((p: any) => {
-      return { x: p.coordinates[0], y: p.coordinates[1] };
+      return { x: (p.coordinates[0] * scale ).toFixed(2), y: (p.coordinates[1] * scale).toFixed(2) };
     });
     const time_elapsed = path.map((p: any) => p.time_elapsed);
     const weight_container = path.map((p: any) => 2);
