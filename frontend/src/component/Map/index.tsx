@@ -24,11 +24,17 @@ const CustomLocation: React.FC<Iprops> = ({
 }) => {
   const google = window.google;
   const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [pickUp, setPickUp] = useState<google.maps.LatLngLiteral | null>(null);
+  const [pickUp, setPickUp] = useState<google.maps.LatLngLiteral | null>({
+    lat: 33.642362142043844,
+    lng: 72.99006168363474,
+  });
   const [dropOff, setDropOff] = useState<google.maps.LatLngLiteral | null>(
     null
   );
   const [distance, setDistance] = useState<string | null>(null);
+
+  const [showPicupInfo, setShowPickupInfo] = useState<boolean>(false);
+  const [showDropOffInfo, setShowDropOffInfo] = useState<boolean>(false);
 
   // const handleLoad = (map: GoogleMap) => {
   //   setMap(map);
@@ -101,13 +107,14 @@ const CustomLocation: React.FC<Iprops> = ({
             position={pickUp}
             onClick={(event: google.maps.MapMouseEvent) => {
               event.stop();
-              setPickUp(null);
-              setPickUpLocation(null);
-              setDistance(null);
-              setFormDistance(0);
+              // setPickUp(null);
+              // setPickUpLocation(null);
+              // setDistance(null);
+              // setFormDistance(0);
+              setShowPickupInfo(!showPicupInfo);
             }}
           >
-            {pickUp && (
+            {showPicupInfo && (
               <InfoWindow position={pickUp}>
                 <div>
                   <p>Pick-up Location</p>
@@ -122,13 +129,14 @@ const CustomLocation: React.FC<Iprops> = ({
             position={dropOff}
             onClick={(event: google.maps.MapMouseEvent) => {
               event.stop();
-              setDropOff(null);
-              setDropOffLocation(null);
-              setDistance(null);
-              setFormDistance(0);
+              // setDropOff(null);
+              // setDropOffLocation(null);
+              // setDistance(null);
+              // setFormDistance(0);
+              setShowDropOffInfo(!showDropOffInfo);
             }}
           >
-            {dropOff && (
+            {showDropOffInfo && (
               <InfoWindow position={dropOff}>
                 <div>
                   <p>Drop-off Location</p>
@@ -140,7 +148,7 @@ const CustomLocation: React.FC<Iprops> = ({
         )}
       </GoogleMap>
       <div className="form">
-        <div className="form__element">
+        {/* <div className="form__element">
           <label>Pick-up Location:</label>
           <button
             onClick={() => {
@@ -162,7 +170,7 @@ const CustomLocation: React.FC<Iprops> = ({
               <p>{`${pickUp.lat}, ${pickUp.lng}`}</p>
             </div>
           )}
-        </div>
+        </div> */}
         <div className="form__element">
           <label>Drop-off Location:</label>
           <button
