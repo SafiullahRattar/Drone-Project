@@ -2,7 +2,7 @@ import { AnimationActionTypes } from "../constants/action_types";
 import { AnimationState } from "../constants/interfaces";
 
 const initialAnimationState: AnimationState = {
-  loading: true,
+  loading: false,
   error: "",
   coordinates: [
     { x: 0, y: 0 },
@@ -16,7 +16,7 @@ const initialAnimationState: AnimationState = {
   time_elapsed: [10, 15, 30, 40, 45, 60],
   selected_index: 0,
   drone: {},
-  speed: 3,
+  speed: 1,
 };
 
 export const animationReducer = (

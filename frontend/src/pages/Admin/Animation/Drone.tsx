@@ -36,7 +36,7 @@ const Drone = () => {
 
   const drone_width = 100;
   const drone_height = 100;
-  const scale = 0.5;
+  const scale = 100;
 
   useEffect(() => {
     dispatch(setAnimationSlectedIndex(currentIndex));
@@ -132,17 +132,26 @@ const Drone = () => {
                 ).toFixed(0)
               ) + 0.1;
             return (
-              <g>
+              <g style={{
+                // zIndex: 100,
+              }}>
                 <motion.line
-                  x1={`${coordinate.x * 50}px`}
-                  y1={`${coordinate.y * 50}px`}
-                  x2={`${nextCoordinate.x * 50}px`}
-                  y2={`${nextCoordinate.y * 50}px`}
+                  x1={`${coordinate.x * scale}px`}
+                  y1={`${coordinate.y * scale}px`}
+                  x2={`${nextCoordinate.x * scale}px`}
+                  y2={`${nextCoordinate.y * scale}px`}
                   stroke="black"
                   strokeWidth={index <= currentIndex ? "3" : "0"}
                   animate={{}}
                   transition={{
                     duration: distance / speed,
+                  }}
+                  style={{
+                    zIndex: 100,
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    
                   }}
                 />
                 {/* {index <= currentIndex &&
