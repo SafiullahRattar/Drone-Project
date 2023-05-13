@@ -7,6 +7,16 @@ export const setAnimationSpeedAction = (speed: number) => ({
   payload: speed,
 });
 
+export const setAnimationScaleXAction = (scale: number) => ({
+  type: AnimationActionTypes.SET_SCALE_X,
+  payload: scale,
+});
+
+export const setAnimationScaleYAction = (scale: number) => ({
+  type: AnimationActionTypes.SET_SCALE_Y,
+  payload: scale,
+});
+
 export const setAnimationSlectedIndex = (index: number) => ({
   type: AnimationActionTypes.SET_SELECTED_INDEX,
   payload: index,
@@ -37,13 +47,13 @@ export const getAnimationDataAction = () => async (dispatch: any) => {
       });
       time_elapsed.push(p.time_elapsed);
       // if x,y is 0, then weight is 0, else 2
-      weight_container.push(p.coordinates[0] === 0 && p.coordinates[1] === 0 ? 0 : 2);
-      
-
+      weight_container.push(
+        p.coordinates[0] === 0 && p.coordinates[1] === 0 ? 0 : 2
+      );
     });
-    console.log(coordinates)
-    console.log(time_elapsed)
-    console.log(weight_container)
+    console.log(coordinates);
+    console.log(time_elapsed);
+    console.log(weight_container);
 
     dispatch({
       type: AnimationActionTypes.SET_DATA,

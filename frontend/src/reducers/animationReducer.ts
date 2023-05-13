@@ -10,13 +10,15 @@ const initialAnimationState: AnimationState = {
     { x: 3, y: 6 },
     { x: 0, y: 0 },
     { x: 2, y: -9 },
-    { x: 0, y: 0 },
+    // { x: 0, y: 0 },
   ],
   weight_container: [2, 3, 0, 4, 0, 6],
   time_elapsed: [10, 15, 30, 40, 45, 60],
   selected_index: 0,
   drone: {},
   speed: 1,
+  scaleX: 10,
+  scaleY: 10,
 };
 
 export const animationReducer = (
@@ -42,6 +44,16 @@ export const animationReducer = (
       return {
         ...state,
         speed: action.payload,
+      };
+    case AnimationActionTypes.SET_SCALE_X:
+      return {
+        ...state,
+        scaleX: action.payload,
+      };
+    case AnimationActionTypes.SET_SCALE_Y:
+      return {
+        ...state,
+        scaleY: action.payload,
       };
     default:
       return state;

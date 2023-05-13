@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import "./Panel.scss";
 import { RootState } from "../../../store";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
-import { setAnimationSpeedAction } from "../../../actions/animationActions";
+import {
+  setAnimationScaleXAction,
+  setAnimationScaleYAction,
+  setAnimationSpeedAction,
+} from "../../../actions/animationActions";
 
 const Panel = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +20,8 @@ const Panel = () => {
     selected_index,
     drone,
     speed,
+    scaleX,
+    scaleY,
   } = useAppSelector((state: RootState) => state.animationReducer);
 
   const [showDroneData, setShowDroneData] = useState(false);
@@ -42,6 +48,16 @@ const Panel = () => {
     dispatch(setAnimationSpeedAction(value));
   };
 
+  const handleScaleXChange = (value: number) => {
+    dispatch(setAnimationScaleXAction(value));
+  };
+
+  const handleScaleYChange = (value: number) => {
+    dispatch(setAnimationScaleYAction(value));
+  };
+
+  const scaleIncrement = 10;
+
   return (
     <div className="panel">
       <div className="panel__header">
@@ -57,6 +73,22 @@ const Panel = () => {
               <button onClick={() => handleSpeedChange(speed - 1)}>-</button>
               {speed}
               <button onClick={() => handleSpeedChange(speed + 1)}>+</button>
+            </div>
+          </div>
+          <div className="panel__tile">
+            <label htmlFor="left">Scale (X): </label>
+            <div className="right">
+              <button onClick={() => handleScaleXChange(scaleX - scaleIncrement)}>-</button>
+              {scaleX}
+              <button onClick={() => handleScaleXChange(scaleX + scaleIncrement)}>+</button>
+            </div>
+          </div>
+          <div className="panel__tile">
+            <label htmlFor="left">Scale (Y): </label>
+            <div className="right">
+              <button onClick={() => handleScaleYChange(scaleY - scaleIncrement)}>-</button>
+              {scaleY}
+              <button onClick={() => handleScaleYChange(scaleY + scaleIncrement)}>+</button>
             </div>
           </div>
           <div className="panel__tile">

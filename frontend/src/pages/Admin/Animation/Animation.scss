@@ -1,23 +1,16 @@
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap; /* Added flex-wrap property to allow wrapping */
+
+  /* Removed flex-direction: row as it's the default value */
+
   max-width: 100vw;
+}
 
-  //children to be centered
-  > div {
-    text-align: center;
-    width: 100%;
-  }
+.container > div {
+  text-align: center;
+  max-width: 40%;
 
-  .animation {
-    position: relative;
-    // top: 50%;
-    left: 50%;
-    padding: 100px;
-    // transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-  }
 }

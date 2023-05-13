@@ -127,4 +127,6 @@ export interface AnimationState {
   selected_index: number;
   drone: {};
   speed: number;
+  scaleX: number;
+  scaleY: number;
 }

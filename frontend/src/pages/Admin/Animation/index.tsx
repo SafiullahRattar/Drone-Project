@@ -10,7 +10,7 @@ import { RootState } from "../../../store";
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const { loading, coordinates } = useAppSelector(
+  const { loading } = useAppSelector(
     (state: RootState) => state.animationReducer
   );
 
@@ -23,16 +23,7 @@ const App = () => {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <div
-          className="container"
-          style={{
-            position: "relative",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
+        <div className="container">
           <div className="animation">
             <Drone />
           </div>
