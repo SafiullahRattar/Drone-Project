@@ -17,8 +17,8 @@ const initialAnimationState: AnimationState = {
   selected_index: 0,
   drone: {},
   speed: 1,
-  scaleX: 400,
-  scaleY: 400,
+  scaleX: 300,
+  scaleY: 300,
 };
 
 export const animationReducer = (

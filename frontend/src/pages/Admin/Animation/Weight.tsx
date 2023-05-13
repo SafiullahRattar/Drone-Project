@@ -2,7 +2,12 @@ import { motion } from "framer-motion";
 import React from "react";
 
 interface Props {
-  nextCoordinate: { x: number; y: number };
+  x: number;
+  y: number;
+  nextCoordinate: {
+    x: number;
+    y: number;
+  };
   index: number;
   distance: number;
   drone_width: number;
@@ -12,8 +17,10 @@ interface Props {
 }
 
 const Weight = ({
-  nextCoordinate,
+  x,
+  y,
   distance,
+  nextCoordinate,
   drone_width,
   drone_height,
   speed,
@@ -21,8 +28,8 @@ const Weight = ({
 }: Props) => {
   return (
     <motion.rect
-      x={`${nextCoordinate.x * 50}px`}
-      y={`${nextCoordinate.y * 50}px`}
+      x={`${x}px`}
+      y={`${y}px`}
       //width = drone_width/5
       opacity={0}
       animate={{
@@ -43,7 +50,7 @@ const Weight = ({
         opacity: 0,
       }}
     >
-      <title>{`(${nextCoordinate.x}, ${nextCoordinate.y})\n${weight}kg`}</title>
+      <title>{`( ${nextCoordinate.x}, ${nextCoordinate.y})\n${weight}kg`}</title>
     </motion.rect>
   );
 };

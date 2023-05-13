@@ -66,11 +66,15 @@ const Drone = () => {
     currentCoordinate,
     nextCoordinateData
   );
+
+  const width_padding = 100;
+  const height_padding = 100;
+
   return (
     <div
       style={{
-        width: `${width * scaleX}px`,
-        height: `${height * scaleY}px`,
+        width: `${width * scaleX + width_padding}px`,
+        height: `${height * scaleY + height_padding}px`,
         border: "1px solid black",
       }}
     >
@@ -114,8 +118,8 @@ const Drone = () => {
             // top: `${Math.abs(minY) * scaleY }px`,
             // left: `${Math.abs(minX) * scaleX }px`,
           }}
-          width={`${(maxX - minX) * scaleX}px`}
-          height={`${(maxY - minY) * scaleY}px`}
+          width={`${(maxX - minX) * scaleX + width_padding}px`}
+          height={`${(maxY - minY) * scaleY + height_padding}px`}
         >
           {coordinates.map(
             (coordinate: { x: number; y: number }, index: number) => {
@@ -126,12 +130,12 @@ const Drone = () => {
                   cy={`${(coordinate.y + offsetY) * scaleY}px`}
                   r="5"
                   fill="red"
-                  // animate={{
-                  //   opacity: selected_index === index ? 1 : 0.5,
-                  // }}
-                  // transition={{
-                  //   duration: 0.5,
-                  // }}
+                  animate={{
+                    opacity: selected_index === index ? 1 : 0.5,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                  }}
                 />
               );
             }
@@ -148,11 +152,37 @@ const Drone = () => {
                   x2={`${(nextCoordinate.x + offsetX) * scaleX}px`}
                   y2={`${(nextCoordinate.y + offsetY) * scaleY}px`}
                   stroke="black"
-                  // strokeWidth={index <= currentIndex ? "3" : "0"}
-                  // animate={{}}
-                  // transition={{
-                  //   duration: 0.5,
-                  // }}
+                  strokeWidth={index <= currentIndex ? "3" : "0.5"}
+                  animate={{}}
+                  transition={{
+                    duration: 0.5,
+                  }}
+                />
+              );
+            }
+          )}
+          {coordinates.map(
+            (coordinate: { x: number; y: number }, index: number) => {
+              const nextCoordinate =
+                coordinates[(index + 1) % coordinates.length];
+              const distance = Math.sqrt(
+                Math.pow(nextCoordinate.x - coordinate.x, 2) +
+                  Math.pow(nextCoordinate.y - coordinate.y, 2)
+              );
+              return (
+                <Weight
+                  key={index}
+                  x={(coordinate.x + offsetX) * scaleX}
+                  y={(coordinate.y + offsetY) * scaleY}
+                  index={index}
+                  distance={distance}
+                  drone_width={drone_width}
+                  drone_height={drone_height}
+                  speed={speed}
+                  weight={weight_container[index]}
+                  nextCoordinate={
+                    coordinates[(index ) % coordinates.length]
+                  }
                 />
               );
             }

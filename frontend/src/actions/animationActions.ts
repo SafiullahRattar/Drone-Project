@@ -45,7 +45,7 @@ export const getAnimationDataAction = () => async (dispatch: any) => {
         x: parseFloat((p.coordinates[0] * scale).toFixed(2)),
         y: parseFloat((p.coordinates[1] * scale).toFixed(2)),
       });
-      time_elapsed.push(p.time_elapsed);
+      time_elapsed.push(Math.ceil(p.time_elapsed));
       // if x,y is 0, then weight is 0, else 2
       weight_container.push(
         p.coordinates[0] === 0 && p.coordinates[1] === 0 ? 0 : 2
