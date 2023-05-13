@@ -51,8 +51,10 @@ const Drone = () => {
   const timeToNextCoordinate = () => {
     return (
       Math.sqrt(
-        Math.pow(nextCoordinateData.x - currentCoordinate.x, 2) +
-          Math.pow(nextCoordinateData.y - currentCoordinate.y, 2)
+        Math.pow(nextCoordinateData.x - currentCoordinate.x, 2) *
+          Math.pow(scaleX, 1) +
+          Math.pow(nextCoordinateData.y - currentCoordinate.y, 2) *
+            Math.pow(scaleY, 1)
       ) / speed || 0.1
     );
   };
@@ -76,6 +78,7 @@ const Drone = () => {
         width: `${width * scaleX + width_padding}px`,
         height: `${height * scaleY + height_padding}px`,
         border: "1px solid black",
+        padding: "50px",
       }}
     >
       <motion.div
@@ -180,9 +183,7 @@ const Drone = () => {
                   drone_height={drone_height}
                   speed={speed}
                   weight={weight_container[index]}
-                  nextCoordinate={
-                    coordinates[(index ) % coordinates.length]
-                  }
+                  nextCoordinate={coordinates[index % coordinates.length]}
                 />
               );
             }
