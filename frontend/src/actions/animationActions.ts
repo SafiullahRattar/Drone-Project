@@ -37,9 +37,9 @@ export const getAnimationDataAction = () => async (dispatch: any) => {
     // const time_elapsed = path.map((p: any) => p.time_elapsed);
     // const weight_container = path.map((p: any) => 2);
     //add a {x:0,y:0} at the beginning of the coordinates array
-    const coordinates = [{ x: 0, y: 0 }];
-    const time_elapsed = [0];
-    const weight_container = [0];
+    const coordinates: { x: number; y: number }[] = [];
+    const time_elapsed: any[] = [];
+    const weight_container: number[] = [];
     path.forEach((p: any) => {
       coordinates.push({
         x: parseFloat((p.coordinates[0] * scale).toFixed(2)),

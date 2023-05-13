@@ -2,7 +2,7 @@ import { AnimationActionTypes } from "../constants/action_types";
 import { AnimationState } from "../constants/interfaces";
 
 const initialAnimationState: AnimationState = {
-  loading: false,
+  loading: true,
   error: "",
   coordinates: [
     { x: 0, y: 0 },
@@ -17,8 +17,8 @@ const initialAnimationState: AnimationState = {
   selected_index: 0,
   drone: {},
   speed: 1,
-  scaleX: 10,
-  scaleY: 10,
+  scaleX: 400,
+  scaleY: 400,
 };
 
 export const animationReducer = (
