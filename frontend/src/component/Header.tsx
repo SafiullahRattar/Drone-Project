@@ -11,7 +11,6 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.userSignInReducer);
-  console.log(user);
 
   const signOutHandler = () => {
     dispatch(signOutAction());

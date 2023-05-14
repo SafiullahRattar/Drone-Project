@@ -7,6 +7,7 @@ import Table, { TableColumn } from "../../../component/Table";
 import { DeliveryBackend } from "../../../constants/action_types";
 import { RootState } from "../../../store";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
+import { withAdminAuth } from "../../../component/Wrapper/authWrapper";
 
 const AdminDeliveryList = () => {
   const columns: TableColumn[] = [
@@ -89,11 +90,11 @@ const AdminDeliveryList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
-      navigate("/signIn");
-    } else if (!user.isAdmin) {
-      navigate("/");
-    }
+    // if (!user) {
+    //   navigate("/signIn");
+    // } else if (!user.isAdmin) {
+    //   navigate("/");
+    // }
     dispatch(fetchDeliveriesAdmin());
   }, [dispatch, navigate, user]);
 
@@ -116,4 +117,4 @@ const AdminDeliveryList = () => {
   );
 };
 
-export default AdminDeliveryList;
+export default withAdminAuth(AdminDeliveryList);

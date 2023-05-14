@@ -41,20 +41,22 @@ export const withAdminAuth = <P extends object>(
       (state: RootState) => state.userSignInReducer
     );
 
+    const token = getToken();
+
     useEffect(() => {
-      const token = getToken();
-      if (!token) {
-        navigate("/signIn");
+      if (token) {
+        dispatch(userSignInAction(token));
       } else {
-        if (!user) {
-          dispatch(userSignInAction(token));
-        } else if (!user.isAdmin) {
+        navigate("/signUp");
+      }
+      if (Object.keys(user).length !== 0) {
+        if (!user.isAdmin) {
           navigate("/");
         }
       }
-    }, []);
+    }, [user]);
 
-    if (!getToken()) {
+    if (!token || Object.keys(user).length === 0 || !user.isAdmin) {
       return null; // Return null to prevent rendering the component
     }
 
