@@ -5,6 +5,7 @@ import Table, { TableColumn } from "../../../component/Table";
 import { RootState } from "../../../store";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { adminEditFormAction } from "../../../actions/adminAction";
+import { withAdminAuth } from "../../../component/Wrapper/authWrapper";
 
 const UsersList = () => {
   const columns: TableColumn[] = [
@@ -71,4 +72,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList;
+export default withAdminAuth(UsersList);

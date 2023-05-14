@@ -44,17 +44,18 @@ export const withAdminAuth = <P extends object>(
     const token = getToken();
 
     useEffect(() => {
-      if (token) {
+      if (Object.keys(user).length !== 0 && !user.isAdmin) {
+        navigate("/");
+      }
+    }, [user, navigate]);
+
+    useEffect(() => {
+      if (token && Object.keys(user).length === 0) {
         dispatch(userSignInAction(token));
-      } else {
+      } else if (!token) {
         navigate("/signUp");
       }
-      if (Object.keys(user).length !== 0) {
-        if (!user.isAdmin) {
-          navigate("/");
-        }
-      }
-    }, [user]);
+    }, [token, user, dispatch, navigate]);
 
     if (!token || Object.keys(user).length === 0 || !user.isAdmin) {
       return null; // Return null to prevent rendering the component
@@ -79,17 +80,19 @@ export const withRegisterAuth = <P extends object>(
     const token = getToken();
 
     useEffect(() => {
-      if (token) {
+      if (Object.keys(user).length !== 0 && !user.isRegistered) {
+        navigate("/");
+      }
+    }, [user, navigate]);
+
+    useEffect(() => {
+      if (token && Object.keys(user).length === 0) {
+        console.log('why the fk here')
         dispatch(userSignInAction(token));
-      } else {
+      } else if (!token) {
         navigate("/signUp");
       }
-      if (Object.keys(user).length !== 0) {
-        if (!user.isRegistered) {
-          navigate("/");
-        }
-      }
-    }, [user]);
+    }, [token, user, dispatch, navigate]);
 
     if (!token || Object.keys(user).length === 0 || !user.isRegistered) {
       return null; // Return null to prevent rendering the component

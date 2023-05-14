@@ -97,6 +97,7 @@ const DeliveryForm = () => {
           setSubmitting(false);
 
           if (pickUpLocation && dropOffLocation) {
+            // TODO: not to directly deliver upon location selection
             dispatch(
               postNewDelivery(values.package, {
                 ...values.delivery,

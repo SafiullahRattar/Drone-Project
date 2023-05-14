@@ -6,6 +6,7 @@ import { adminEditFormAction } from "../../../actions/adminAction";
 import { fetchDeliveriesAdmin } from "../../../actions/deliveryAction";
 import Table, { TableColumn } from "../../../component/Table";
 import { getDroneListAdminAction } from "../../../actions/droneAction";
+import { withAdminAuth } from "../../../component/Wrapper/authWrapper";
 
 const AdminDroneList = () => {
   const droneTableColumns: TableColumn[] = [
@@ -106,13 +107,8 @@ const AdminDroneList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
-      navigate("/signIn");
-    } else if (!user.isAdmin) {
-      navigate("/");
-    }
     dispatch(getDroneListAdminAction());
-  }, [dispatch, navigate, user]);
+  }, []);
 
   console.log(drones);
   // get delivery and pass it admin delivery action
@@ -133,4 +129,4 @@ const AdminDroneList = () => {
   );
 };
 
-export default AdminDroneList;
+export default withAdminAuth(AdminDroneList);
