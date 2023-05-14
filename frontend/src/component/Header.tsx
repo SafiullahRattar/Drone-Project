@@ -57,9 +57,11 @@ const Header = () => {
             {/* <li className="menu-items">
               <Link to="/profile">Service</Link>
             </li> */}
-            <li className="menu-items">
-              <Link to="/delivery">Send Package</Link>
-            </li>
+            {user && user.isRegistered && (
+              <li className="menu-items">
+                <Link to="/delivery">Send Package</Link>
+              </li>
+            )}
             <li className="menu-items">
               <Link to="/profile">Profile</Link>
             </li>

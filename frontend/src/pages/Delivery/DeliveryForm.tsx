@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import "./DeliveryForm.scss";
 import CustomLocation from "../../component/Map";
 import { RootState } from "../../store";
+import { withRegisterAuth } from "../../component/Wrapper/authWrapper";
 
 const DeliveryForm = () => {
   const dispatch = useAppDispatch();
@@ -55,15 +56,6 @@ const DeliveryForm = () => {
   const { user } = useAppSelector(
     (state: RootState) => state.userSignInReducer
   );
-
-  useEffect(() => {
-    if (Object.keys(user).length !== 0) {
-      if (!user.isRegistered) {
-        alert("Please Register your accout to use delivery services");
-        window.location.href = "/";
-      }
-    }
-  }, [user]);
 
   console.log({
     pickUpLocation,
@@ -251,4 +243,4 @@ const DeliveryForm = () => {
   );
 };
 
-export default DeliveryForm;
+export default withRegisterAuth(DeliveryForm);
