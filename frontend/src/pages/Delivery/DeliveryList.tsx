@@ -20,7 +20,7 @@ const DeliveryList = () => {
   const copyIdToClipboard = (id: string) => {
     navigator.clipboard.writeText(id);
   };
-  useCheckJwtCookie();
+  // useCheckJwtCookie();
 
   useEffect(() => {
     dispatch(fetchDeliveries());

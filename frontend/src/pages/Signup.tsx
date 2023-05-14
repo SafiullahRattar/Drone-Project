@@ -28,12 +28,11 @@ const Signup: React.FC = () => {
       Cookies.set("JWT", query.get("jwt") ?? "");
       dispatch(userSignInAction(query.get("jwt") ?? ""));
     }
-    if (user !== null) {
-      navigate('/');
+    if (Object.keys(user).length !== 0) {
+      console.log("firsadsfasdft");
+      navigate("/");
     }
-
-    console.log();
-  }, []);
+  }, [user]);
 
   const handleGoogleLogin = () => {
     window.open(`http://localhost:5000/api/users/auth/google`, "_self");
