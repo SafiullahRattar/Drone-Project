@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { adminEditFormAction } from "../../../actions/adminAction";
 import { fetchDeliveriesAdmin } from "../../../actions/deliveryAction";
@@ -8,16 +8,19 @@ import { DeliveryBackend } from "../../../constants/action_types";
 import { RootState } from "../../../store";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { withAdminAuth } from "../../../component/Wrapper/authWrapper";
+import DeliveryFilter from "../../../component/Admin/Filter/DeliveryFilter";
 
 const AdminDeliveryList = () => {
   const columns: TableColumn[] = [
     {
       label: "Delivery ID",
       accessor: "_id",
+      type: "id",
     },
     {
       label: "Sender",
       accessor: "sender",
+      type: "id",
     },
     // {
     //   label: "Package ID",
@@ -50,6 +53,7 @@ const AdminDeliveryList = () => {
     {
       label: "Date",
       accessor: "date",
+      type: "date",
     },
     {
       label: "Priority",
@@ -81,6 +85,14 @@ const AdminDeliveryList = () => {
   ];
 
   const dispatch = useAppDispatch();
+
+  const [filterId, setFilterId] = useState<string>("");
+  const [filterStatus, setFilterStatus] = useState<string>("");
+  const [filterPriority, setFilterPriority] = useState<string>("");
+  const [filterDate, setFilterDate] = useState<string>("");
+
+  const [deliveryData, setDeliveryData] = useState<DeliveryBackend[]>([]);
+
   const { deliveries, loading, error } = useAppSelector(
     (state: RootState) => state.deliveryListReducer
   );
@@ -90,15 +102,31 @@ const AdminDeliveryList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // if (!user) {
-    //   navigate("/signIn");
-    // } else if (!user.isAdmin) {
-    //   navigate("/");
-    // }
     dispatch(fetchDeliveriesAdmin());
   }, [dispatch, navigate, user]);
 
-  console.log(deliveries);
+  useEffect(() => {
+    if (deliveries) {
+      setDeliveryData(deliveries);
+    }
+  }, [deliveries]);
+
+  useEffect(() => {
+    if (deliveries) {
+      let filteredData = (deliveries as DeliveryBackend[]).filter((delivery) =>
+        delivery._id.includes(filterId)
+      );
+
+      if (filterStatus !== "") {
+        filteredData = filteredData.filter(
+          (delivery) => delivery.status === filterStatus.toLowerCase()
+        );
+      }
+
+      setDeliveryData(filteredData);
+    }
+  }, [filterId, filterStatus, filterPriority, filterDate]);
+
   // get delivery and pass it admin delivery action
   const onEditClick = (delivery: DeliveryBackend) => {
     dispatch(adminEditFormAction(columns, delivery, "DELIVERY"));
@@ -107,9 +135,14 @@ const AdminDeliveryList = () => {
 
   return (
     <>
+      <DeliveryFilter
+        setFilterId={setFilterId}
+        setFilterStatus={setFilterStatus}
+        setFilterDate={setFilterDate}
+      />
       <Table
         columns={columns}
-        data={deliveries}
+        data={deliveryData}
         lastColumnEdit={true}
         onEditClick={onEditClick}
       ></Table>

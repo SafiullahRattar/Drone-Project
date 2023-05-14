@@ -1,0 +1,29 @@
+@import "../../../sass/CommonVariables.scss";
+
+.filterList {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem;
+  .filterList__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+
+    input {
+        @include inputOne;
+    }
+
+    label {
+      font-size: 16px;
+      font-weight: 500;
+      margin-right: 10px;
+    }
+    select {
+      width: 200px;
+    }
+  }
+}

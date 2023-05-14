@@ -1,3 +1,5 @@
+@import './CommonVariables.scss';
+
 @mixin formOne {
   display: flex;
   flex-direction: column;
@@ -5,14 +7,15 @@
   gap: 1rem;
 
   input {
-    font-size: 16px;
-    // font-size: max(16px, 1em);
-    font-family: inherit;
-    padding: 0.25em 0.5em;
-    background-color: #fff;
-    border: 2px solid #000;
-    border-radius: 4px;
-    padding: 0.75rem 1.25rem;
+    // font-size: 16px;
+    // // font-size: max(16px, 1em);
+    // font-family: inherit;
+    // padding: 0.25em 0.5em;
+    // background-color: #fff;
+    // border: 2px solid #000;
+    // border-radius: 4px;
+    // padding: 0.75rem 1.25rem;
+    @include inputOne;
   }
 
   .submit {

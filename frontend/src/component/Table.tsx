@@ -6,7 +6,7 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 export type TableColumn = {
   label: string;
   accessor: string;
-  type?: "string" | "number" | "select";
+  type?: "string" | "number" | "select" | "date" | "id";
   options?: { value: any; label: any }[];
   isList?: boolean;
 };
@@ -20,6 +20,31 @@ type TableProps = {
   isList?: boolean;
 };
 
+const renderCellValue = (column: TableColumn, row: any) => {
+  const cellValue = row[column.accessor];
+
+  if (column.type === "date") {
+    // show date (dd/mm/yyyy)
+    return new Date(cellValue).toLocaleDateString("en-GB");
+  }
+
+  if (column.type === "id") {
+    return (
+      <span
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          // copy to clipboard
+          navigator.clipboard.writeText(cellValue);
+        }}
+      >
+        {cellValue.substring(0, 5)}...
+      </span>
+    );
+  }
+
+  return cellValue;
+};
+
 const Table: React.FC<TableProps> = ({
   columns,
   data,
@@ -27,10 +52,6 @@ const Table: React.FC<TableProps> = ({
   lastColumnEdit = false,
   onEditClick,
 }) => {
-  console.log({
-    columns,
-    data,
-  });
   return (
     <table className="table">
       <thead>
@@ -54,8 +75,10 @@ const Table: React.FC<TableProps> = ({
                   </select>
                 ) : ( */}
                 {column.isList
-                  ? row[column.accessor].map((item: any) => <div>{item}</div>)
-                  : row[column.accessor]}
+                  ? row[column.accessor].map((item: any) => (
+                      <div key={item._id}>{item}</div>
+                    ))
+                  : renderCellValue(column, row)}
                 {/* )} */}
               </td>
             ))}

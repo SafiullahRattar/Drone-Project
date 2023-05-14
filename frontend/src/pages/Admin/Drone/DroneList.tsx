@@ -48,7 +48,7 @@ const AdminDroneList = () => {
     {
       label: "Last Maintenance Date",
       accessor: "lastMaintenanceDate",
-      type: "string",
+      type: "date",
     },
     {
       label: "Weight Capacity",
