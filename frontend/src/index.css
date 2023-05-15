@@ -49,7 +49,7 @@ code {
 
 *::-webkit-scrollbar-track {
   background: #f2f2f2;
-  margin: 4px 0;
+  border: 3px white solid;
 }
 
 *::-webkit-scrollbar-thumb {

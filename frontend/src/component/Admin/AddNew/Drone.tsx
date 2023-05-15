@@ -72,16 +72,9 @@ const Drone = () => {
         //     totalBatteryCapacity: Yup.number().required("Required"),
         //   })}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-        }) => (
+        {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <div className="container">
+            <div className="addNewContainer">
               <div className="form-Fields">
                 <div className="form-Field-container">
                   <label htmlFor="name">Name</label>
