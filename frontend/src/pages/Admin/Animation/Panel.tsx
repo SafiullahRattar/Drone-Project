@@ -71,24 +71,41 @@ const Panel = () => {
             <label htmlFor="left">Speed: </label>
             <div className="right">
               <button onClick={() => handleSpeedChange(speed - 1)}>-</button>
-              {speed}
+              <span>{speed}</span>
+
               <button onClick={() => handleSpeedChange(speed + 1)}>+</button>
             </div>
           </div>
           <div className="panel__tile">
             <label htmlFor="left">Scale (X): </label>
             <div className="right">
-              <button onClick={() => handleScaleXChange(scaleX - scaleIncrement)}>-</button>
+              <button
+                onClick={() => handleScaleXChange(scaleX - scaleIncrement)}
+              >
+                -
+              </button>
               {scaleX}
-              <button onClick={() => handleScaleXChange(scaleX + scaleIncrement)}>+</button>
+              <button
+                onClick={() => handleScaleXChange(scaleX + scaleIncrement)}
+              >
+                +
+              </button>
             </div>
           </div>
           <div className="panel__tile">
             <label htmlFor="left">Scale (Y): </label>
             <div className="right">
-              <button onClick={() => handleScaleYChange(scaleY - scaleIncrement)}>-</button>
+              <button
+                onClick={() => handleScaleYChange(scaleY - scaleIncrement)}
+              >
+                -
+              </button>
               {scaleY}
-              <button onClick={() => handleScaleYChange(scaleY + scaleIncrement)}>+</button>
+              <button
+                onClick={() => handleScaleYChange(scaleY + scaleIncrement)}
+              >
+                +
+              </button>
             </div>
           </div>
           <div className="panel__tile">

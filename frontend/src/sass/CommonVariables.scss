@@ -1,15 +1,24 @@
 @mixin inputOne {
   font-size: 16px;
   // font-size: max(16px, 1em);
+  width: 250px;
+  height: 1.5rem;
   font-family: inherit;
   background-color: #f2f2f2;
   border: 0;
   border-radius: 4px;
   padding: 0.75rem 1.25rem;
+
+  &:focus {
+    outline: none;
+    background-color: #000;
+    color: #fff;
+  }
 }
 
 @mixin selectMenu {
   font-size: 16px;
+  width: 290px;
   // font-size: max(16px, 1em);
   font-family: inherit;
   background-color: #f2f2f2;
@@ -21,7 +30,8 @@
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2); // Example focus style
+    background-color: #000;
+    color: #fff;
   }
 }
 
