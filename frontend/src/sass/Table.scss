@@ -1,23 +1,29 @@
 // Variables
-$primary-color: #007bff;
-$secondary-color: #6c757d;
+$primary-color: #f2f2f2;
+$secondary-color: #ffffff;
 
 // Table styles
-$table-bg-color: #f8f9fa;
-$table-border-color: #dee2e6;
+$table-bg-color: #f2f2f2;
+$table-border-color: #ffffff;
 $table-header-bg-color: $secondary-color;
-$table-header-color: #fff;
+$table-header-color: #000000;
+
+$table-hover-bg-color: #000000;
+$table-hover-color: #fff;
 
 .table {
   width: 100%;
   border-collapse: collapse;
   background-color: $table-bg-color;
   border: 1px solid $table-border-color;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   th,
   td {
-    padding: 10px;
-    text-align: left;
+    padding: 0.5rem 1rem;
+    text-align: center;
     border-bottom: 1px solid $table-border-color;
   }
 
@@ -26,7 +32,12 @@ $table-header-color: #fff;
     color: $table-header-color;
   }
 
+  tr {
+    height: 3rem;
+  }
+
   tr:hover {
-    background-color: lighten($primary-color, 25%);
+    background-color: $table-hover-bg-color;
+    color: $table-hover-color;
   }
 }

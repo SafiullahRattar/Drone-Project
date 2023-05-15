@@ -75,9 +75,14 @@ const Table: React.FC<TableProps> = ({
                   </select>
                 ) : ( */}
                 {column.isList
-                  ? row[column.accessor].map((item: any) => (
-                      <div key={item._id}>{item}</div>
-                    ))
+                  ? // ? row[column.accessor].map((item: any) => (
+                    //     <div key={item._id}>
+                    //       {typeof item === "number" ? item.toFixed(2) : item}
+                    //     </div>
+                    //   ))
+                    row[column.accessor]
+                      .map((item: any) => item.toFixed(2))
+                      .join(", ")
                   : renderCellValue(column, row)}
                 {/* )} */}
               </td>

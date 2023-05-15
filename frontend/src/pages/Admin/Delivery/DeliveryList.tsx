@@ -140,12 +140,16 @@ const AdminDeliveryList = () => {
         setFilterStatus={setFilterStatus}
         setFilterDate={setFilterDate}
       />
-      <Table
-        columns={columns}
-        data={deliveryData}
-        lastColumnEdit={true}
-        onEditClick={onEditClick}
-      ></Table>
+      <div style={{
+        overflowX: "auto",
+      }}>
+        <Table
+          columns={columns}
+          data={deliveryData}
+          lastColumnEdit={true}
+          onEditClick={onEditClick}
+        ></Table>
+      </div>
     </>
   );
 };
