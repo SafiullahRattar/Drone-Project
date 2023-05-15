@@ -12,18 +12,16 @@
     justify-content: center;
     align-items: center;
     margin-right: 20px;
-
-    input {
-        @include inputOne;
-    }
+    gap: 1rem;
 
     label {
       font-size: 16px;
       font-weight: 500;
       margin-right: 10px;
+      align-self: flex-start;
     }
-    select {
-      width: 200px;
-    }
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
   }
 }

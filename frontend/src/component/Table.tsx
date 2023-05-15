@@ -25,7 +25,11 @@ const renderCellValue = (column: TableColumn, row: any) => {
 
   if (column.type === "date") {
     // show date (dd/mm/yyyy)
-    return new Date(cellValue).toLocaleDateString("en-GB");
+    return new Date(cellValue).toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: 'short',
+      year: "numeric",
+    });
   }
 
   if (column.type === "id") {
