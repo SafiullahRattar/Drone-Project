@@ -1,4 +1,4 @@
-@import './CommonVariables.scss';
+@import "./CommonVariables.scss";
 
 @mixin formOne {
   display: flex;
@@ -7,43 +7,52 @@
   gap: 1rem;
 
   input {
-    // font-size: 16px;
-    // // font-size: max(16px, 1em);
-    // font-family: inherit;
-    // padding: 0.25em 0.5em;
-    // background-color: #fff;
-    // border: 2px solid #000;
-    // border-radius: 4px;
-    // padding: 0.75rem 1.25rem;
     @include inputOne;
   }
 
   .submit {
-    cursor: pointer;
-    outline: none;
-    padding: 0.75rem 1.25rem;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-family: inherit;
-    border: 1px solid transparent;
-    transition: 0.3s ease all;
-    margin: 0.5em 0.5em;
-    border-color: rgb(0, 0, 0);
-    background: rgba(rgb(255, 255, 255), 0.1);
-    color: rgb(0, 0, 0);
+    @include buttonOne;
+  }
+}
 
-    &:hover {
-      background-color: rgb(32, 32, 32);
-      color: #fff;
-      border-color: rgb(0, 0, 0);
+@mixin formTwo {
+  // default show 4 columns
+  // if the screen is smaller than 768px, show 2 columns
+
+  .form-Fields {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+    width: 100%;
+    column-gap: 5rem;
+    justify-items: center;
+    // margin: 0 5rem;
+
+    .form-Field-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      white-space: nowrap;
+
+      @media screen and (max-width: 480px) {
+        flex-direction: column;
+      }
     }
-    &:active {
-      border-color: rgb(162, 162, 246);
-      background: linear-gradient(
-        rgba(rgb(162, 162, 246), 0.2),
-        rgba(rgb(162, 162, 246), 0.3)
-      );
-      color: rgb(162, 162, 246);
+
+    @media screen and (max-width: 850px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1rem;
+      width: 100%;
+      column-gap: 5rem;
+      justify-items: center;
+      margin: 0 2rem;
+    }
+
+    @media screen and (max-width: 480px) {
+      grid-template-columns: repeat(1, 1fr);
+      margin: 0 1rem;
     }
   }
 }

@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { DeliveryBackend } from "../../constants/action_types";
 import { fetchDeliveries } from "../../actions/deliveryAction";
 import { useCheckJwtCookie } from "../../utils/config";
+import "../../sass/Table.scss";
 
 const DeliveryList = () => {
   //   const [deliveries, setDeliveries] = useState<any[]>([]);
@@ -47,13 +48,24 @@ const DeliveryList = () => {
           {deliveries &&
             deliveries.map((delivery: DeliveryBackend) => (
               <tr key={delivery._id}>
-                <td onClick={() => copyIdToClipboard(delivery._id)}>
-                  {delivery._id}
+                <td
+                  className="selectable"
+                  onClick={() => copyIdToClipboard(delivery._id)}
+                >
+                  {delivery._id.substring(0, 5)}...
                 </td>
-                <td>{delivery.sender}</td>
-                <td>{delivery.package_id._id}</td>
+                <td className="selectable">
+                  {delivery.sender.substring(0, 5)}...
+                </td>
+                <td className="selectable">
+                  {delivery.package_id._id.substring(0, 5)}...
+                </td>
                 <td>{delivery.receiver}</td>
-                <td>{delivery.date.toString()}</td>
+                <td>{new Date(delivery.date).toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}</td>
                 <td>{delivery.priority}</td>
                 <td>{delivery.price}</td>
                 <td>{delivery.status}</td>

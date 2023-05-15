@@ -74,74 +74,68 @@ const Drone = () => {
       >
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <div className="addNewContainer">
-              <div className="form-Fields">
-                <div className="form-Field-container">
-                  <label htmlFor="name">Name</label>
-                  <Field type="text" id="name" name="name" />
-                </div>
-                <div className="form-Field-container">
-                  <label htmlFor="status">Status</label>
-                  <Field as="select" id="status" name="status">
-                    <option value="available">Available</option>
-                    <option value="in-use">In Use</option>
-                    <option value="maintenance">Maintenance</option>
-                  </Field>
-                </div>
-                <div className="form-Field-container">
-                  <label htmlFor="batteryLevel">Battery Level</label>
-                  <Field type="number" id="batteryLevel" name="batteryLevel" />
-                </div>
-                <div className="form-Field-container">
-                  <label htmlFor="weightCapacity">Weight Capacity</label>
-                  <Field
-                    type="number"
-                    id="weightCapacity"
-                    name="weightCapacity"
-                  />
-                </div>
-                <div className="form-Field-container">
-                  <label htmlFor="maxFlightDistance">Max Flight Distance</label>
-                  <Field
-                    type="number"
-                    id="maxFlightDistance"
-                    name="maxFlightDistance"
-                  />
-                </div>
-                <div className="form-Field-container">
-                  <label htmlFor="deliveryRange">Delivery Range</label>
-                  <Field
-                    type="number"
-                    id="deliveryRange"
-                    name="deliveryRange"
-                  />
-                </div>
-                <div className="form-Field-container">
-                  <label htmlFor="speed">Speed</label>
-                  <Field type="number" id="speed" name="speed" />
-                </div>
-                <div className="form-Field-container">
-                  <label htmlFor="chargeRate">Charge Rate</label>
-                  <Field type="number" id="chargeRate" name="chargeRate" />
-                </div>
-                <div className="form-Field-container">
-                  <label htmlFor="drainRate">Drain Rate</label>
-                  <Field type="number" id="drainRate" name="drainRate" />
-                </div>
-                <div className="form-Field-container">
-                  <label htmlFor="bcr">BCR</label>
-                  <Field type="number" id="bcr" name="bcr" />
-                </div>
-                <div className="form-Field-container">
-                  <label htmlFor="totalBatteryCapacity">
-                    Total Battery Capacity
-                  </label>
-                  <Field
-                    type="number"
-                    id="totalBatteryCapacity"
-                    name="totalBatteryCapacity"
-                  />
-                </div>
+            <div className="form-Fields">
+              <div className="form-Field-container">
+                <label htmlFor="name">Name</label>
+                <Field type="text" id="name" name="name" />
+              </div>
+              <div className="form-Field-container">
+                <label htmlFor="status">Status</label>
+                <Field as="select" id="status" name="status">
+                  <option value="available">Available</option>
+                  <option value="in-use">In Use</option>
+                  <option value="maintenance">Maintenance</option>
+                </Field>
+              </div>
+              <div className="form-Field-container">
+                <label htmlFor="batteryLevel">Battery Level</label>
+                <Field type="number" id="batteryLevel" name="batteryLevel" />
+              </div>
+              <div className="form-Field-container">
+                <label htmlFor="weightCapacity">Weight Capacity</label>
+                <Field
+                  type="number"
+                  id="weightCapacity"
+                  name="weightCapacity"
+                />
+              </div>
+              <div className="form-Field-container">
+                <label htmlFor="maxFlightDistance">Max Flight Distance</label>
+                <Field
+                  type="number"
+                  id="maxFlightDistance"
+                  name="maxFlightDistance"
+                />
+              </div>
+              <div className="form-Field-container">
+                <label htmlFor="deliveryRange">Delivery Range</label>
+                <Field type="number" id="deliveryRange" name="deliveryRange" />
+              </div>
+              <div className="form-Field-container">
+                <label htmlFor="speed">Speed</label>
+                <Field type="number" id="speed" name="speed" />
+              </div>
+              <div className="form-Field-container">
+                <label htmlFor="chargeRate">Charge Rate</label>
+                <Field type="number" id="chargeRate" name="chargeRate" />
+              </div>
+              <div className="form-Field-container">
+                <label htmlFor="drainRate">Drain Rate</label>
+                <Field type="number" id="drainRate" name="drainRate" />
+              </div>
+              <div className="form-Field-container">
+                <label htmlFor="bcr">BCR</label>
+                <Field type="number" id="bcr" name="bcr" />
+              </div>
+              <div className="form-Field-container">
+                <label htmlFor="totalBatteryCapacity">
+                  Total Battery Capacity
+                </label>
+                <Field
+                  type="number"
+                  id="totalBatteryCapacity"
+                  name="totalBatteryCapacity"
+                />
               </div>
             </div>
 

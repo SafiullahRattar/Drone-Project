@@ -20,8 +20,8 @@ import Test from "./Test";
 const App: React.FC = () => {
   return (
     <Router>
+      <Header />
       <main className="app">
-        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signUp" element={<Signup />} />

@@ -11,7 +11,7 @@ $table-header-color: #000000;
 $table-hover-bg-color: #000000;
 $table-hover-color: #fff;
 
-.table {
+table {
   width: 100%;
   border-collapse: collapse;
   background-color: $table-bg-color;
@@ -39,5 +39,9 @@ $table-hover-color: #fff;
   tr:hover {
     background-color: $table-hover-bg-color;
     color: $table-hover-color;
+  }
+
+  td.selectable {
+    cursor: pointer;
   }
 }

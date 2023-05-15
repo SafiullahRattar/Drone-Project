@@ -8,6 +8,7 @@ import Table, { TableColumn } from "../../../component/Table";
 import { getDroneListAdminAction } from "../../../actions/droneAction";
 import { withAdminAuth } from "../../../component/Wrapper/authWrapper";
 import Drone from "../../../component/Admin/AddNew/Drone";
+import "../AdminList.scss";
 
 const AdminDroneList = () => {
   const droneTableColumns: TableColumn[] = [
@@ -121,9 +122,9 @@ const AdminDroneList = () => {
   };
 
   return (
-    <>
-      <h1>Drone List</h1>
-      <div>
+    <div className="list">
+      <h1>Drones</h1>
+      <div className="addNewButton">
         <button onClick={() => setShowNewForm(!showNewForm)}>Add New</button>
       </div>
       <div
@@ -142,7 +143,7 @@ const AdminDroneList = () => {
           ></Table>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

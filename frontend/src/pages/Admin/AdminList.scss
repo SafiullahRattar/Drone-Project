@@ -1,0 +1,20 @@
+@import "../../sass/CommonVariables.scss";
+
+.list {
+  h1 {
+    font-size: 2rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .addNewButton {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+
+    button {
+      @include buttonOne;
+    }
+  }
+}

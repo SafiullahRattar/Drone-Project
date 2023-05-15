@@ -1,10 +1,6 @@
-.addNew {
+form {
   // default show 4 columns
   // if the screen is smaller than 768px, show 2 columns
-
-  .addNewContainer {
-    // margin: 0 auto;
-  }
 
   .form-Fields {
     display: grid;
@@ -23,9 +19,8 @@
       width: 100%;
       white-space: nowrap;
 
-      @media screen and (max-width: 480px){
+      @media screen and (max-width: 480px) {
         flex-direction: column;
-        
       }
     }
 
@@ -39,7 +34,7 @@
     }
 
     @media screen and (max-width: 480px) {
-        grid-template-columns: repeat(1, 1fr);
+      grid-template-columns: repeat(1, 1fr);
       margin: 0 1rem;
     }
   }
