@@ -16,9 +16,9 @@ const initialAnimationState: AnimationState = {
   time_elapsed: [10, 15, 30, 40, 45, 60],
   selected_index: 0,
   drone: {},
-  speed: 1,
-  scaleX: 300,
-  scaleY: 300,
+  speed: 10,
+  scaleX: 150,
+  scaleY: 150,
 };
 
 export const animationReducer = (

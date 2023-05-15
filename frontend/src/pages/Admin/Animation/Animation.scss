@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap; /* Added flex-wrap property to allow wrapping */
+  flex-grow: 1;
 
   /* Removed flex-direction: row as it's the default value */
 

@@ -73,98 +73,114 @@ const Drone = () => {
   const height_padding = 100;
 
   return (
-    <div
-      style={{
-        width: `${width * scaleX + width_padding}px`,
-        height: `${height * scaleY + height_padding}px`,
-        border: "1px solid black",
-        padding: "50px",
-      }}
-    >
-      <motion.div
+    <div>
+      <div
         style={{
-          width: `${drone_width}px`,
-          height: `${drone_height}px`,
-          backgroundImage: "url(./drone.png)",
-          backgroundSize: "cover",
-          position: "relative",
-          top: `${
-            (currentCoordinate.y + offsetY) * scaleY - drone_height / 2
-          }px`,
-          left: `${
-            (currentCoordinate.x + offsetX) * scaleX - drone_width / 2
-          }px`,
+          width: `${width * scaleX + width_padding}px`,
+          height: `${height * scaleY + height_padding}px`,
+          padding: "50px",
         }}
-        animate={{
-          top: `${
-            (nextCoordinateData.y + offsetY) * scaleY - drone_height / 2
-          }px`,
-          left: `${
-            (nextCoordinateData.x + offsetX) * scaleX - drone_width / 2
-          }px`,
-        }}
-        transition={{
-          delay: isLastCoordinate() ? 0 : 0.5,
-          duration: timeToNextCoordinate(),
-        }}
-        onAnimationComplete={() => {
-          nextCoordinate();
-        }}
-      ></motion.div>
-      {/* svg starts at distance of minX and minY then draws line from coordinate to cordinate */}
-      <div>
-        <svg
+      >
+        <motion.div
           style={{
+            width: `${drone_width}px`,
+            height: `${drone_height}px`,
+            backgroundImage: "url(../drone.png)",
+            backgroundSize: "cover",
             position: "relative",
-            top: `${-drone_height}px`,
-            // left: `${-drone_width}px`,
-            // top: `${Math.abs(minY) * scaleY }px`,
-            // left: `${Math.abs(minX) * scaleX }px`,
+            top: `${
+              (currentCoordinate.y + offsetY) * scaleY - drone_height / 2
+            }px`,
+            left: `${
+              (currentCoordinate.x + offsetX) * scaleX - drone_width / 2
+            }px`,
           }}
-          width={`${(maxX - minX) * scaleX + width_padding}px`}
-          height={`${(maxY - minY) * scaleY + height_padding}px`}
-        >
-          {coordinates.map(
-            (coordinate: { x: number; y: number }, index: number) => {
-              return (
-                <motion.circle
-                  key={index}
-                  cx={`${(coordinate.x + offsetX) * scaleX}px`}
-                  cy={`${(coordinate.y + offsetY) * scaleY}px`}
-                  r="5"
-                  fill="red"
-                  animate={{
-                    opacity: selected_index === index ? 1 : 0.5,
-                  }}
-                  transition={{
-                    duration: 0.5,
-                  }}
-                />
-              );
+          animate={{
+            top: `${
+              (nextCoordinateData.y + offsetY) * scaleY - drone_height / 2
+            }px`,
+            left: `${
+              (nextCoordinateData.x + offsetX) * scaleX - drone_width / 2
+            }px`,
+          }}
+          transition={{
+            delay: isLastCoordinate() ? 0 : 0.5,
+            duration: timeToNextCoordinate(),
+          }}
+          onAnimationComplete={() => {
+            nextCoordinate();
+          }}
+        ></motion.div>
+        {/* svg starts at distance of minX and minY then draws line from coordinate to cordinate */}
+        <div>
+          <svg
+            style={{
+              position: "relative",
+              top: `${-drone_height}px`,
+              // left: `${-drone_width}px`,
+              // top: `${Math.abs(minY) * scaleY }px`,
+              // left: `${Math.abs(minX) * scaleX }px`,
+            }}
+            width={`${(maxX - minX) * scaleX + width_padding}px`}
+            height={`${(maxY - minY) * scaleY + height_padding}px`}
+          >
+            {coordinates.map(
+              (coordinate: { x: number; y: number }, index: number) => {
+                return (
+                  <motion.circle
+                    key={index}
+                    cx={`${(coordinate.x + offsetX) * scaleX}px`}
+                    cy={`${(coordinate.y + offsetY) * scaleY}px`}
+                    r="5"
+                    fill={"red"}
+                    animate={{
+                      opacity: selected_index === index ? 1 : 0.5,
+                    }}
+                    transition={{
+                      duration: 0.5,
+                    }}
+                  />
+                );
+              }
+            )}
+            {
+              <motion.circle
+                key={"home"}
+                cx={`${(coordinates[0].x + offsetX) * scaleX}px`}
+                cy={`${(coordinates[0].y + offsetY) * scaleY}px`}
+                r="10"
+                fill={"green"}
+                animate={{
+                  opacity: 1,
+                }}
+                transition={{
+                  duration: 0.5,
+                }}
+              />
             }
-          )}
-          {coordinates.map(
-            (coordinate: { x: number; y: number }, index: number) => {
-              const nextCoordinate =
-                coordinates[(index + 1) % coordinates.length];
-              return (
-                <motion.line
-                  key={index}
-                  x1={`${(coordinate.x + offsetX) * scaleX}px`}
-                  y1={`${(coordinate.y + offsetY) * scaleY}px`}
-                  x2={`${(nextCoordinate.x + offsetX) * scaleX}px`}
-                  y2={`${(nextCoordinate.y + offsetY) * scaleY}px`}
-                  stroke="black"
-                  strokeWidth={index <= currentIndex ? "3" : "0.5"}
-                  animate={{}}
-                  transition={{
-                    duration: 0.5,
-                  }}
-                />
-              );
-            }
-          )}
-          {coordinates.map(
+            {coordinates.map(
+              (coordinate: { x: number; y: number }, index: number) => {
+                const nextCoordinate =
+                  coordinates[(index + 1) % coordinates.length];
+                return (
+                  <motion.line
+                    key={index}
+                    x1={`${(coordinate.x + offsetX) * scaleX}px`}
+                    y1={`${(coordinate.y + offsetY) * scaleY}px`}
+                    x2={`${(nextCoordinate.x + offsetX) * scaleX}px`}
+                    y2={`${(nextCoordinate.y + offsetY) * scaleY}px`}
+                    stroke="black"
+                    strokeWidth={index <= currentIndex ? "3" : "0"}
+                    animate={{}}
+                    transition={{
+                      duration: 0.5,
+                    }}
+                  />
+                );
+              }
+            )}
+
+            {/* {coordinates.map(
             (coordinate: { x: number; y: number }, index: number) => {
               const nextCoordinate =
                 coordinates[(index + 1) % coordinates.length];
@@ -187,8 +203,9 @@ const Drone = () => {
                 />
               );
             }
-          )}
-        </svg>
+          )} */}
+          </svg>
+        </div>
       </div>
     </div>
   );

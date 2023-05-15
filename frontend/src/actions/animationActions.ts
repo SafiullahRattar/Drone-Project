@@ -28,15 +28,8 @@ export const getAnimationDataAction = () => async (dispatch: any) => {
       type: AnimationActionTypes.GET_DATA_REQUEST,
     });
     const { data } = await axios.get("/api/admin/path", axios_config());
-    const path = data[0].path;
-    // console.log(path);
+    const path = data[data.length - 1].path;
     const scale = 0.1;
-    // const coordinates = path.map((p: any) => {
-    //   return { x: (p.coordinates[0] * scale ).toFixed(2), y: (p.coordinates[1] * scale).toFixed(2) };
-    // });
-    // const time_elapsed = path.map((p: any) => p.time_elapsed);
-    // const weight_container = path.map((p: any) => 2);
-    //add a {x:0,y:0} at the beginning of the coordinates array
     const coordinates: { x: number; y: number }[] = [];
     const time_elapsed: any[] = [];
     const weight_container: number[] = [];
@@ -51,9 +44,11 @@ export const getAnimationDataAction = () => async (dispatch: any) => {
         p.coordinates[0] === 0 && p.coordinates[1] === 0 ? 0 : 2
       );
     });
-    console.log(coordinates);
-    console.log(time_elapsed);
-    console.log(weight_container);
+
+    //move the last element to the beginning
+    coordinates.unshift(coordinates.pop()!);
+    time_elapsed.unshift(time_elapsed.pop()!);
+    weight_container.unshift(weight_container.pop()!);
 
     dispatch({
       type: AnimationActionTypes.SET_DATA,

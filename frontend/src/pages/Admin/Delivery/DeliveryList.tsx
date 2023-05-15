@@ -9,6 +9,7 @@ import { RootState } from "../../../store";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { withAdminAuth } from "../../../component/Wrapper/authWrapper";
 import DeliveryFilter from "../../../component/Admin/Filter/DeliveryFilter";
+import axios from "axios";
 
 const AdminDeliveryList = () => {
   const columns: TableColumn[] = [
@@ -21,6 +22,10 @@ const AdminDeliveryList = () => {
       label: "Sender",
       accessor: "sender",
       type: "id",
+    },
+    {
+      label: "Weight",
+      accessor: "weight",
     },
     // {
     //   label: "Package ID",
@@ -96,6 +101,16 @@ const AdminDeliveryList = () => {
   const { deliveries, loading, error } = useAppSelector(
     (state: RootState) => state.deliveryListReducer
   );
+
+  const deliveryMergePackage = (): any[] => {
+    return (deliveries as DeliveryBackend[]).map((delivery) => {
+      return {
+        ...delivery,
+        weight: delivery.package_id.weight,
+      };
+    });
+  };
+
   const { user } = useAppSelector(
     (state: RootState) => state.userSignInReducer
   );
@@ -107,13 +122,13 @@ const AdminDeliveryList = () => {
 
   useEffect(() => {
     if (deliveries) {
-      setDeliveryData(deliveries);
+      setDeliveryData(deliveryMergePackage());
     }
   }, [deliveries]);
 
   useEffect(() => {
     if (deliveries) {
-      let filteredData = (deliveries as DeliveryBackend[]).filter((delivery) =>
+      let filteredData = deliveryMergePackage().filter((delivery) =>
         delivery._id.includes(filterId)
       );
 
@@ -140,9 +155,32 @@ const AdminDeliveryList = () => {
         setFilterStatus={setFilterStatus}
         setFilterDate={setFilterDate}
       />
-      <div style={{
-        overflowX: "auto",
-      }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+        }}
+      >
+        <button
+          onClick={() => {
+            axios
+              .get("http://localhost:8000/path")
+              .then((res) => {
+                console.log(res.data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }}
+        >
+          Calculate Path
+        </button>
+      </div>
+      <div
+        style={{
+          overflowX: "auto",
+        }}
+      >
         <Table
           columns={columns}
           data={deliveryData}

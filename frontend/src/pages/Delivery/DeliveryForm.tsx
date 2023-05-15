@@ -106,6 +106,10 @@ const DeliveryForm = () => {
                 distance,
               })
             );
+
+            // reset the form
+            setDropOffLocation(null);
+            setDistance(0);
           }
         }}
       >
