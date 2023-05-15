@@ -1,3 +1,5 @@
+@import '.././../sass/CommonVariables.scss';
+
 .delivery_tracking {
   display: flex;
   flex-direction: column;
@@ -16,43 +18,11 @@
   }
 
   input {
-    font-size: 16px;
-    // font-size: max(16px, 1em);
-    font-family: inherit;
-    padding: 0.25em 0.5em;
-    background-color: #fff;
-    border: 2px solid #000;
-    border-radius: 4px;
-    padding: 0.75rem 1.25rem;
+    @include inputOne;
   }
 
   button {
-    cursor: pointer;
-    outline: none;
-    padding: 0.75rem 1.25rem;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-family: inherit;
-    border: 1px solid transparent;
-    transition: 0.3s ease all;
-    margin: 0.5em 0.5em;
-    border-color: rgb(0, 0, 0);
-    background: rgba(rgb(255, 255, 255), 0.1);
-    color: rgb(0, 0, 0);
-
-    &:hover {
-      background-color: rgb(32, 32, 32);
-      color: #fff;
-      border-color: rgb(0, 0, 0);
-    }
-    &:active {
-      border-color: rgb(162, 162, 246);
-      background: linear-gradient(
-        rgba(rgb(162, 162, 246), 0.2),
-        rgba(rgb(162, 162, 246), 0.3)
-      );
-      color: rgb(162, 162, 246);
-    }
+    @include buttonOne;
   }
 
   .error {

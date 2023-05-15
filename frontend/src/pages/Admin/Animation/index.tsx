@@ -7,8 +7,9 @@ import Panel from "./Panel";
 import { getAnimationDataAction } from "../../../actions/animationActions";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { RootState } from "../../../store";
+import { withAdminAuth } from "../../../component/Wrapper/authWrapper";
 
-const App = () => {
+const MainAnimation = () => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector(
     (state: RootState) => state.animationReducer
@@ -36,4 +37,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withAdminAuth(MainAnimation);

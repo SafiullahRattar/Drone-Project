@@ -103,11 +103,12 @@ button span {
 .menu-items button {
   text-align: left;
   padding: 0.7rem 1rem;
+  font-weight: 500;
 }
 
 .menu-items a:hover,
 .menu-items button:hover {
-  background-color: #f2f2f2;
+  color: #bf5af2;
 }
 
 .arrow::after {

@@ -36,7 +36,7 @@ const Header = () => {
     <header className={`header ${isMenuOpen ? "show" : ""}`}>
       <div className="nav">
         <Link to="/" className="">
-          <img src="./logo.png" alt="logo" className="logo" />
+          <img src={"/logo.png"} alt="logo" className="logo" />
         </Link>
         <div
           className={`menu-btn ${isMenuOpen ? "close" : ""}`}
@@ -67,10 +67,12 @@ const Header = () => {
             </li>
             {user && user.isAdmin && (
               <li className="menu-items menu-dropdown">
-                <button>
-                  Admin
-                  <span className="arrow"></span>
-                </button>
+                <li className="menu-items">
+                  <Link to="#">
+                    Admin
+                    <span className="arrow"></span>
+                  </Link>
+                </li>
                 {/* <i className="fa fa-caret-down"></i> */}
                 <ul className="dropdown">
                   <li className="menu-items">
@@ -81,6 +83,9 @@ const Header = () => {
                   </li>
                   <li className="menu-items">
                     <Link to="/admin/deliveries">Deliveries</Link>
+                  </li>
+                  <li className="menu-items">
+                    <Link to="/admin/path">Path</Link>
                   </li>
                   {/* <li className="menu-items">
                     <Link to="/admin/price-plan">Price Plan</Link>

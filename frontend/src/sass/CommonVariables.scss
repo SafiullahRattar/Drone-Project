@@ -2,12 +2,35 @@
   font-size: 16px;
   // font-size: max(16px, 1em);
   font-family: inherit;
-  padding: 0.25em 0.5em;
-  background-color: #fff;
-  border: 2px solid #000;
+  background-color: #f2f2f2;
+  border: 0;
   border-radius: 4px;
   padding: 0.75rem 1.25rem;
 }
+
+@mixin selectMenu {
+  font-size: 16px;
+  // font-size: max(16px, 1em);
+  font-family: inherit;
+  background-color: #f2f2f2;
+  border: 0;
+  border-radius: 4px;
+  padding: 0.75rem 1.25rem;
+  appearance: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2); // Example focus style
+  }
+}
+
+// background and text color variable
+$bg-color: #000;
+$text-color: #fff;
+$bg-color-hover: #bf5af2;
+$text-color-hover: #fff;
+$border-color: transparent;
 
 @mixin buttonOne {
   cursor: pointer;
@@ -19,16 +42,16 @@
   border: 1px solid transparent;
   transition: 0.3s ease all;
   margin: 0.5em 0.5em;
-  border-color: rgb(0, 0, 0);
-  background: rgba(rgb(255, 255, 255), 0.1);
-  color: rgb(0, 0, 0);
+  border-color: $border-color;
+  background: $bg-color;
+  color: $text-color;
   // text uppercase
   text-transform: uppercase;
 
   &:hover {
-    background-color: rgb(32, 32, 32);
-    color: #fff;
-    border-color: rgb(0, 0, 0);
+    background-color: $bg-color-hover;
+    color: $text-color-hover;
+    border-color: $border-color;
   }
   &:active {
     border-color: rgb(162, 162, 246);

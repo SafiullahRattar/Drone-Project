@@ -99,7 +99,7 @@ const AdminDroneList = () => {
     },
   ];
 
-  const [showNewForm, setShowNewForm] = useState(true);
+  const [showNewForm, setShowNewForm] = useState(false);
 
   const dispatch = useAppDispatch();
   const { drones, loading, error } = useAppSelector(
@@ -114,7 +114,6 @@ const AdminDroneList = () => {
     dispatch(getDroneListAdminAction());
   }, []);
 
-  console.log(drones);
   // get delivery and pass it admin delivery action
   const onEditClick = (drone: any) => {
     dispatch(adminEditFormAction(droneTableColumns, drone, "DRONE"));
@@ -125,7 +124,9 @@ const AdminDroneList = () => {
     <div className="list">
       <h1>Drones</h1>
       <div className="addNewButton">
-        <button onClick={() => setShowNewForm(!showNewForm)}>Add New</button>
+        <button onClick={() => setShowNewForm(!showNewForm)}>
+          {showNewForm ? "Cancel" : "Add New Drone"}
+        </button>
       </div>
       <div
         style={{
