@@ -32,6 +32,7 @@ const UsersList = () => {
     {
       label: "Joined",
       accessor: "createdAt",
+      type: "date",
     },
   ];
 
@@ -62,12 +63,14 @@ const UsersList = () => {
 
   return (
     <>
-      <Table
+      <div style={{
+        overflowX: "auto",
+      }}><Table
         columns={columns}
         data={users}
         lastColumnEdit={true}
         onEditClick={onEditClick}
-      ></Table>
+      ></Table></div>
     </>
   );
 };

@@ -119,12 +119,14 @@ const AdminDroneList = () => {
 
   return (
     <>
-      <Table
+      <div style={{
+        overflowX: "auto",
+      }}><Table
         columns={droneTableColumns}
         data={drones}
         lastColumnEdit={true}
         onEditClick={onEditClick}
-      ></Table>
+      ></Table></div>
     </>
   );
 };
