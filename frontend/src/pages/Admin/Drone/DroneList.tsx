@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { RootState } from "../../../store";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { fetchDeliveriesAdmin } from "../../../actions/deliveryAction";
 import Table, { TableColumn } from "../../../component/Table";
 import { getDroneListAdminAction } from "../../../actions/droneAction";
 import { withAdminAuth } from "../../../component/Wrapper/authWrapper";
+import Drone from "../../../component/Admin/AddNew/Drone";
 
 const AdminDroneList = () => {
   const droneTableColumns: TableColumn[] = [
@@ -97,6 +98,8 @@ const AdminDroneList = () => {
     },
   ];
 
+  const [showNewForm, setShowNewForm] = useState(true);
+
   const dispatch = useAppDispatch();
   const { drones, loading, error } = useAppSelector(
     (state: RootState) => state.droneListReducer
@@ -119,14 +122,26 @@ const AdminDroneList = () => {
 
   return (
     <>
-      <div style={{
-        overflowX: "auto",
-      }}><Table
-        columns={droneTableColumns}
-        data={drones}
-        lastColumnEdit={true}
-        onEditClick={onEditClick}
-      ></Table></div>
+      <h1>Drone List</h1>
+      <div>
+        <button onClick={() => setShowNewForm(!showNewForm)}>Add New</button>
+      </div>
+      <div
+        style={{
+          overflowX: "auto",
+        }}
+      >
+        {showNewForm ? (
+          <Drone />
+        ) : (
+          <Table
+            columns={droneTableColumns}
+            data={drones}
+            lastColumnEdit={true}
+            onEditClick={onEditClick}
+          ></Table>
+        )}
+      </div>
     </>
   );
 };

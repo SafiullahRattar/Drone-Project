@@ -1,5 +1,5 @@
 import React from "react";
-import "./DeliveryFilter.scss";
+import "./Filter.scss";
 
 interface IProps {
   setFilterId: React.Dispatch<React.SetStateAction<string>>;

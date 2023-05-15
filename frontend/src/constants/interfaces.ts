@@ -130,3 +130,23 @@ export interface AnimationState {
   scaleX: number;
   scaleY: number;
 }
+
+export interface DroneModel {
+  id: string;
+  name: string;
+  status: "available" | "in-use" | "maintenance";
+  currentLocation?: {
+    latitude: number;
+    longitude: number;
+  };
+  batteryLevel: number;
+  lastMaintenanceDate: Date;
+  weightCapacity: number;
+  maxFlightDistance?: number;
+  deliveryRange?: number;
+  speed?: number;
+  chargeRate?: number;
+  drainRate?: number;
+  bcr?: number;
+  totalBatteryCapacity?: number;
+}
