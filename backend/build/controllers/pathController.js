@@ -32,9 +32,18 @@ exports.addPath = (0, express_async_handler_1.default)((req, res) => __awaiter(v
 }));
 exports.getPaths = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // populate("delivery") then get delivery.package_id
-        // const paths = await Path.find().populate("delivery").populate("package_id");
-        const paths = yield pathModel_1.default.find();
+        // Path : {type: [PathModel]}
+        // PathModel : {delivery: {type: mongoose.Schema.Types.ObjectId, ref: "Delivery"}, is_home: {type: Boolean, required: true}, }
+        // populate("path.delivery") from delivery  populate delivery.package_id
+        // const paths = await Path.find().populate("path.delivery").populate("path.drone");
+        const paths = yield pathModel_1.default.find().populate({
+            path: "path.delivery",
+            populate: {
+                path: "package_id",
+                model: "Package",
+            },
+        }).populate('path.drone');
+        console.log(paths);
         res.json(paths);
     }
     catch (err) {

@@ -33,6 +33,7 @@ export const getAnimationDataAction = () => async (dispatch: any) => {
     const coordinates: { x: number; y: number }[] = [];
     const time_elapsed: any[] = [];
     const weight_container: number[] = [];
+    console.log(path)
     path.forEach((p: any) => {
       coordinates.push({
         x: parseFloat((p.coordinates[0] * scale).toFixed(2)),

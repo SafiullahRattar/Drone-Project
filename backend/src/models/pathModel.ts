@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
+import Delivery from "./deliveryModel";
 
 const pathModel = new mongoose.Schema({
   delivery: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Delivery",
+    ref: Delivery,
   },
   time_elapsed: {
     type: Number,

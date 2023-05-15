@@ -22,7 +22,6 @@ const Drone = () => {
     scaleY,
   } = useAppSelector((state: RootState) => state.animationReducer);
 
-  // console.log(coordinates, selected_index, currentIndex)
 
   const dispatch = useAppDispatch();
 
@@ -62,12 +61,6 @@ const Drone = () => {
     dispatch(setAnimationSlectedIndex(currentIndex));
   }, [currentIndex]);
 
-  console.log(
-    coordinates.length,
-    currentIndex,
-    currentCoordinate,
-    nextCoordinateData
-  );
 
   const width_padding = 100;
   const height_padding = 100;

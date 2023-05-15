@@ -1,5 +1,6 @@
 import expressAsyncHandler from "express-async-handler";
 import Path from "../models/pathModel";
+import Delivery from "../models/deliveryModel";
 
 export const addPath = expressAsyncHandler(async (req, res) => {
   // const path_data = req.body.slice(0, req.body.length - 2);
@@ -20,11 +21,21 @@ export const addPath = expressAsyncHandler(async (req, res) => {
 
 export const getPaths = expressAsyncHandler(async (req, res) => {
   try {
-    // populate("delivery") then get delivery.package_id
-    // const paths = await Path.find().populate("delivery").populate("package_id");
-    const paths = await Path.find();
+    // Path : {type: [PathModel]}
+    // PathModel : {delivery: {type: mongoose.Schema.Types.ObjectId, ref: "Delivery"}, is_home: {type: Boolean, required: true}, }
+    // populate("path.delivery") from delivery  populate delivery.package_id
+    // const paths = await Path.find().populate("path.delivery").populate("path.drone");
+    const paths = await Path.find().populate({
+      path: "path.delivery",
+      populate: {
+        path: "package_id",
+        model: "Package",
+      },
+    }).populate('path.drone');
+    console.log(paths);
+
     res.json(paths);
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({ message: err.message });
   }
 });
