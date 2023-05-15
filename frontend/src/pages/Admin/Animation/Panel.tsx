@@ -27,6 +27,7 @@ const Panel = () => {
   const [showDroneData, setShowDroneData] = useState(false);
 
   const calculateRemainingWeight = () => {
+    // TODO#1: Calculate the remaining weight
     const totalWeight = weight_container.reduce(
       (acc: any, curr: any) => acc + curr,
       0
@@ -38,6 +39,19 @@ const Panel = () => {
     return totalWeight - usedWeight;
   };
 
+  const timeToNextCoordinate = (index: number) => {
+    const currentCoordinate = coordinates[index];
+    const nextCoordinateData = coordinates[(index + 1) % coordinates.length];
+
+    return (
+      Math.sqrt(
+        Math.pow(nextCoordinateData.x - currentCoordinate.x, 2) *
+          Math.pow(scaleX, 1) +
+          Math.pow(nextCoordinateData.y - currentCoordinate.y, 2) *
+            Math.pow(scaleY, 1)
+      ) / speed || 0.1
+    );
+  };
   const calculateRemainingTime = () => {
     const timeSpent = time_elapsed[selected_index];
 
@@ -109,8 +123,15 @@ const Panel = () => {
             </div>
           </div>
           <div className="panel__tile">
-            <label htmlFor="left">Time Elapsed</label>
-            <div className="right">{time_elapsed[selected_index]} minutes</div>
+            <label htmlFor="left">Total Time Taken:</label>
+            <div className="right">{time_elapsed[0]} minutes</div>
+          </div>
+          <div className="panel__tile">
+            <label htmlFor="left">Total Weight Delivered:</label>
+            <div className="right">
+              {weight_container.reduce((acc: any, curr: any) => acc + curr, 0)}{" "}
+              kgs
+            </div>
           </div>
           <div className="panel__tile">
             <label htmlFor="left">Remaining Weight: </label>
@@ -121,55 +142,43 @@ const Panel = () => {
             <div className="right">{calculateRemainingTime()} minutes</div>
           </div>
         </div>
-        <div className="panel__drone">
+        <div className="panel_tile">
           <button onClick={() => setShowDroneData(!showDroneData)}>
             {showDroneData ? "Hide" : "Show"} Drone Data
           </button>
+        </div>
+        <div className="panel__drone">
           {showDroneData && (
-            <div className="panel__drone-data">
-              <h3>Drone Data</h3>
-              <p>Weight Container:</p>
-              <ul>
-                {weight_container.map(
-                  (
-                    weight:
-                      | string
-                      | number
-                      | boolean
-                      | React.ReactElement<
-                          any,
-                          string | React.JSXElementConstructor<any>
-                        >
-                      | React.ReactFragment
-                      | React.ReactPortal
-                      | null
-                      | undefined,
-                    index: React.Key | null | undefined
-                  ) => (
-                    <li key={index}>{weight}</li>
-                  )
-                )}
-              </ul>
-              <p>Coordinates:</p>
-              <ul>
-                {coordinates.map(
-                  (
-                    coord: {
-                      x: number;
-                      y: number;
-                    },
-                    index: React.Key | null | undefined
-                  ) => (
-                    <li
-                      key={index}
-                      className={`${index === selected_index ? "current" : ""}`}
-                    >
-                      ({coord.x}, {coord.y})
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
+            <>
+              <div className="panel__drone__data header">
+                <div>Coordinates</div>
+                <div>Weight</div>
+                <div>Time Elapsed</div>
+              </div>
+              {coordinates.map((coordinate: any, index: number) => {
+                return (
+                  <div
+                    className={`panel__drone__data ${
+                      index === selected_index && "current"
+                    }`}
+                    key={index}
+                    style={{
+                      backgroundColor:
+                        index === selected_index ? "#bf5af2" : "",
+                      transition: `background-color ${timeToNextCoordinate(
+                        index
+                      )}s`,
+                    }}
+                  >
+                    <div>
+                      ({coordinate.x.toFixed(2)}, {coordinate.y.toFixed(2)})
+                    </div>
+                    <div>{weight_container[index]}</div>
+                    <div>{index === 0 ? 0 : time_elapsed[index]}</div>
+                  </div>
+                );
+              })}
+            </>
           )}
         </div>
       </div>

@@ -42,6 +42,31 @@
       }
     }
   }
+
+  .panel__drone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .panel__drone__data {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 2rem;
+      width: 100%;
+      column-gap: 5rem;
+      row-gap: 1rem;
+      justify-items: center;
+
+      &.header {
+        font-size: 1.1rem;
+        font-weight: 600;
+        white-space: nowrap;
+        margin-bottom: 0.3rem;
+      }
+    }
+  }
+
   .panel-footer {
     text-align: right;
     button {
@@ -51,5 +76,5 @@
 }
 
 .current {
-  background-color: red;
+  background-color: #bf5af2;
 }
