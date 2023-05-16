@@ -21,8 +21,16 @@ const PathTable = ({ paths, setShowAnimation }: IProps) => {
 
   function calculateTotalTimeElapsed(path: any[]): number {
     let totalTimeElapsed = path[path.length - 1].time_elapsed.toFixed(2);
-
     return totalTimeElapsed;
+  }
+
+  function calculateTotalDistance(path: any[]): string {
+    let totalDistance = 0;
+    for (const pathItem of path) {
+      if (pathItem.delivery) totalDistance += pathItem.delivery.distance;
+    }
+
+    return totalDistance.toFixed(2);
   }
 
   return (
@@ -33,16 +41,28 @@ const PathTable = ({ paths, setShowAnimation }: IProps) => {
             <th>ID</th>
             <th>Total Weight</th>
             <th>Total Time</th>
-            <th>Animation</th>
+            <th>Total Distance</th>
+            <th
+              style={{
+                textAlign: "center",
+              }}
+            >
+              Animation
+            </th>
           </tr>
         </thead>
         <tbody>
           {paths.map((path: any, index: number) => (
             <tr key={path._id}>
-              <td>{path._id}</td>
+              <td>{path._id.substring(0, 5)}...</td>
               <td>{calculateTotalWeight(path.path)}</td>
               <td>{calculateTotalTimeElapsed(path.path)}</td>
-              <td>
+              <td>{calculateTotalDistance(path.path)}</td>
+              <td
+                style={{
+                  textAlign: "center",
+                }}
+              >
                 <button
                   onClick={() => {
                     dispatch(getAnimationDataAction(index));
