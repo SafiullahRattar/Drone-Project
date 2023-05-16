@@ -9,12 +9,11 @@ import pathRoutes from "./routes/pathRoutes";
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
 import passport from "passport";
 import session from "express-session";
-import { generateToken } from "./utils/generateToken";
-import { authMiddleware } from "./middleware/authMiddleware";
 import { authUser } from "./controllers/userController";
 import cors from "cors";
 import adminRoutes from "./routes/adminRoutes";
 import morgan from "morgan";
+import path from 'path';
 
 const app = express();
 dotenv.config();
@@ -54,7 +53,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/package", packageRoutes);
 app.use("/api/delivery", deliveryRoute);
-app.use('/api/admin/path',  pathRoutes)
+app.use("/api/admin/path", pathRoutes);
 
 app.get(
   "/auth/google/callback",
@@ -66,12 +65,19 @@ app.get(
   authUser
 );
 
-app.use("/hello", (req, res) => {
-  res.send("hello world");
-});
-// app.use('/api/orders',orderRoutes)
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.resolve();
+  app.use(express.static(path.join(__dirname, "/frontend/build")));
 
-app.get("/", authMiddleware, (req, res) => {});
+  app.get("*", (req: Request, res: Response) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "uploads/image-1645260047444.png"));
+    // res.send('Api is running ' + __dirname)
+  });
+}
 
 app.use(notFound);
 app.use(errorHandler);
