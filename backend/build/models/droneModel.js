@@ -21,8 +21,12 @@ const droneModelSchema = new mongoose_1.default.Schema({
     weightCapacity: { type: Number, required: true },
     maxFlightDistance: { type: Number },
     deliveryRange: { type: Number },
-    deliveryCapacity: { type: Number },
+    // deliveryCapacity: { type: Number },
     speed: { type: Number },
+    chargeRate: Number,
+    drainRate: Number,
+    bcr: Number,
+    totalBatteryCapacity: Number,
 });
 const Drone = mongoose_1.default.model("Drone", droneModelSchema);
 exports.default = Drone;

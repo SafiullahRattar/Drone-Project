@@ -10,6 +10,7 @@ export const addDelivery = expressAsyncHandler(async (req, res) => {
     priority,
     pickup_location,
     drop_location,
+    distance,
   } = req.body;
   try {
     const newDelivery = new Delivery({
@@ -18,8 +19,9 @@ export const addDelivery = expressAsyncHandler(async (req, res) => {
       sender,
       date,
       priority,
-      // drop_location,
-      // pickup_location,
+      drop_location,
+      pickup_location,
+      distance,
       status: "pending",
     });
 
@@ -129,7 +131,7 @@ export const updateDeliveryStatus_Admin = expressAsyncHandler(
 export const getAllDeliveries = expressAsyncHandler(async (req, res) => {
   try {
     // Get all the deliveries
-    const deliveries = await Delivery.find();
+    const deliveries = await Delivery.find().populate("package_id");
 
     // Return the list of deliveries as a JSON response
     res.json(deliveries);

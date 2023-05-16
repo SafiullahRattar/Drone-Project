@@ -5,6 +5,7 @@ import Table, { TableColumn } from "../../../component/Table";
 import { RootState } from "../../../store";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { adminEditFormAction } from "../../../actions/adminAction";
+import { withAdminAuth } from "../../../component/Wrapper/authWrapper";
 
 const UsersList = () => {
   const columns: TableColumn[] = [
@@ -17,16 +18,21 @@ const UsersList = () => {
       accessor: "email",
     },
     {
-      label: "Address",
-      accessor: "address",
+      label: "Registered?",
+      accessor: "isRegistered",
     },
-    {
-      label: "Admin?",
-      accessor: "isAdmin",
-    },
+    // {
+    //   label: "Address",
+    //   accessor: "address",
+    // },
+    // {
+    //   label: "Admin?",
+    //   accessor: "isAdmin",
+    // },
     {
       label: "Joined",
       accessor: "createdAt",
+      type: "date",
     },
   ];
 
@@ -57,14 +63,16 @@ const UsersList = () => {
 
   return (
     <>
-      <Table
+      <div style={{
+        overflowX: "auto",
+      }}><Table
         columns={columns}
         data={users}
         lastColumnEdit={true}
         onEditClick={onEditClick}
-      ></Table>
+      ></Table></div>
     </>
   );
 };
 
-export default UsersList;
+export default withAdminAuth(UsersList);

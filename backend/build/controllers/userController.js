@@ -17,8 +17,7 @@ const express_async_handler_1 = __importDefault(require("express-async-handler")
 const userModel_1 = __importDefault(require("../models/userModel"));
 const generateToken_1 = require("../utils/generateToken");
 exports.authUser = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    const { email, name } = (_a = req.user) === null || _a === void 0 ? void 0 : _a._json;
+    const { email, name } = req.user._json;
     let user;
     user = yield userModel_1.default.findOne({ email }).select("-password");
     if (!user) {
@@ -32,7 +31,7 @@ exports.authUser = (0, express_async_handler_1.default)((req, res) => __awaiter(
     const jwt = (0, generateToken_1.generateToken)(user._id);
     // console.log(req.user);
     res.cookie("JWT", jwt);
-    res.redirect(process.env.CLIENT_URL);
+    res.redirect(`${process.env.CLIENT_URL}/signUp?jwt=${jwt}`);
 }));
 exports.getUserProfile = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // res.send('Success')
@@ -44,6 +43,7 @@ exports.getUserProfile = (0, express_async_handler_1.default)((req, res) => __aw
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
+            isRegistered: user.isRegistered,
         });
     }
     else {

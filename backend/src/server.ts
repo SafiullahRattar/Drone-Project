@@ -5,6 +5,7 @@ import express, { Request, Response } from "express";
 import userRoutes from "./routes/userRoutes";
 import packageRoutes from "./routes/packageRoutes";
 import deliveryRoute from "./routes/deliveryRoute";
+import pathRoutes from "./routes/pathRoutes";
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
 import passport from "passport";
 import session from "express-session";
@@ -13,6 +14,7 @@ import { authMiddleware } from "./middleware/authMiddleware";
 import { authUser } from "./controllers/userController";
 import cors from "cors";
 import adminRoutes from "./routes/adminRoutes";
+import morgan from "morgan";
 
 const app = express();
 dotenv.config();
@@ -36,6 +38,7 @@ app.use(
     // })
   })
 );
+app.use(morgan("dev"));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -51,6 +54,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/package", packageRoutes);
 app.use("/api/delivery", deliveryRoute);
+app.use('/api/admin/path',  pathRoutes)
 
 app.get(
   "/auth/google/callback",

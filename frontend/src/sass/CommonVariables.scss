@@ -1,0 +1,74 @@
+@mixin inputOne {
+  font-size: 16px;
+  // font-size: max(16px, 1em);
+  width: 250px;
+  height: 1.5rem;
+  font-family: inherit;
+  background-color: #f2f2f2;
+  border: 0;
+  border-radius: 4px;
+  padding: 0.75rem 1.25rem;
+
+  &:focus {
+    outline: none;
+    background-color: #000;
+    color: #fff;
+  }
+}
+
+@mixin selectMenu {
+  font-size: 16px;
+  width: 290px;
+  // font-size: max(16px, 1em);
+  font-family: inherit;
+  background-color: #f2f2f2;
+  border: 0;
+  border-radius: 4px;
+  padding: 0.75rem 1.25rem;
+  appearance: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    background-color: #000;
+    color: #fff;
+  }
+}
+
+// background and text color variable
+$bg-color: #000;
+$text-color: #fff;
+$bg-color-hover: #bf5af2;
+$text-color-hover: #fff;
+$border-color: transparent;
+
+@mixin buttonOne {
+  cursor: pointer;
+  outline: none;
+  padding: 0.25rem 1.25rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid transparent;
+  transition: 0.3s ease all;
+  margin: 0.5em 0.5em;
+  border-color: $border-color;
+  background: $bg-color;
+  color: $text-color;
+  // text uppercase
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: $bg-color-hover;
+    color: $text-color-hover;
+    border-color: $border-color;
+  }
+  &:active {
+    border-color: rgb(162, 162, 246);
+    background: linear-gradient(
+      rgba(rgb(162, 162, 246), 0.2),
+      rgba(rgb(162, 162, 246), 0.3)
+    );
+    color: rgb(162, 162, 246);
+  }
+}

@@ -21,7 +21,7 @@ const getAllDrones = (0, express_async_handler_1.default)((req, res) => __awaite
 }));
 exports.getAllDrones = getAllDrones;
 const addDrone = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id, name, status, currentLocation, batteryLevel, lastMaintenanceDate, weightCapacity, maxFlightDistance, deliveryRange, deliveryCapacity, speed, } = req.body;
+    const { id, name, status, currentLocation, batteryLevel, lastMaintenanceDate, weightCapacity, maxFlightDistance, deliveryRange, deliveryCapacity, speed, chargeRate, drainRate, bcr, totalBatteryCapacity, } = req.body;
     const newDrone = new droneModel_1.default({
         id,
         name,
@@ -34,6 +34,10 @@ const addDrone = (0, express_async_handler_1.default)((req, res) => __awaiter(vo
         deliveryRange,
         deliveryCapacity,
         speed,
+        chargeRate,
+        drainRate,
+        bcr,
+        totalBatteryCapacity,
     });
     const createdDrone = yield newDrone.save();
     res.status(201).json({ drone: createdDrone });
@@ -54,7 +58,9 @@ exports.deleteDrone = deleteDrone;
 // @access  Private (admin only)
 const updateDrone = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const { name, status, currentLocation, batteryLevel, lastMaintenanceDate, weightCapacity, maxFlightDistance, deliveryRange, deliveryCapacity, speed, } = req.body;
+    const { name, status, currentLocation, batteryLevel, lastMaintenanceDate, weightCapacity, maxFlightDistance, deliveryRange, 
+    // deliveryCapacity,
+    speed, chargeRate, drainRate, bcr, totalBatteryCapacity, } = req.body;
     const drone = yield droneModel_1.default.findById(id);
     if (drone) {
         drone.name = name || drone.name;
@@ -66,8 +72,13 @@ const updateDrone = (0, express_async_handler_1.default)((req, res) => __awaiter
         drone.weightCapacity = weightCapacity || drone.weightCapacity;
         drone.maxFlightDistance = maxFlightDistance || drone.maxFlightDistance;
         drone.deliveryRange = deliveryRange || drone.deliveryRange;
-        drone.deliveryCapacity = deliveryCapacity || drone.deliveryCapacity;
+        // drone.deliveryCapacity = deliveryCapacity || drone.deliveryCapacity;
         drone.speed = speed || drone.speed;
+        drone.chargeRate = chargeRate || drone.chargeRate;
+        drone.drainRate = drainRate || drone.drainRate;
+        drone.bcr = bcr || drone.bcr;
+        drone.totalBatteryCapacity =
+            totalBatteryCapacity || drone.totalBatteryCapacity;
         const updatedDrone = yield drone.save();
         res.status(200).json({ drone: updatedDrone });
     }

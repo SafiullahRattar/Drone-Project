@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { Axios, AxiosError } from "axios";
 import Cookies from "js-cookie";
 import {
   AdminDeliveryUpdateActionTypes,
@@ -178,10 +178,10 @@ export const fetchDeliveries = () => {
         type: DeliveryUserListActionTypes.FETCH_DELIVERIES_SUCCESS,
         payload: response.data,
       });
-    } catch (err) {
+    } catch (err: AxiosError | any) {
       return dispatch({
         type: DeliveryUserListActionTypes.FETCH_DELIVERIES_FAILURE,
-        payload: err,
+        payload: err.response.data.message,
       });
     }
   };
@@ -201,10 +201,10 @@ export const fetchDeliveriesAdmin = () => {
         type: DeliveryListActionTypes.DELIVERY_LIST_SUCCESS,
         payload: response.data,
       });
-    } catch (err) {
+    } catch (err: AxiosError | any) {
       return dispatch({
         type: DeliveryListActionTypes.DELIVERY_LIST_FAIL,
-        payload: err,
+        payload: err.response.data.message,
       });
     }
   };

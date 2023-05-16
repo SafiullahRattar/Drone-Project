@@ -6,6 +6,7 @@ export interface user {
   name: string;
   email: string;
   isAdmin: string;
+  isRegistered: string;
   token: string;
 }
 
@@ -50,13 +51,15 @@ export interface Package {
   weight: number;
   size: number;
 }
+
 export interface Delivery {
   receiver: any;
   date: string;
   priority: string;
+  distance: number;
   // status: string;
-  pickup_location: string;
-  drop_location: string;
+  pickup_location: [number, number];
+  drop_location: [number, number];
 }
 
 export interface GetDeliveryByIdAction {
@@ -112,4 +115,38 @@ export interface AdminEditFormState {
   columns: TableColumn[];
   apiForUpdate: string;
   success: boolean;
+}
+
+// Animation
+export interface AnimationState {
+  loading: boolean;
+  error: string;
+  coordinates: { x: number; y: number }[];
+  weight_container: number[];
+  time_elapsed: number[];
+  selected_index: number;
+  drone: {};
+  speed: number;
+  scaleX: number;
+  scaleY: number;
+}
+
+export interface DroneModel {
+  id: string;
+  name: string;
+  status: "available" | "in-use" | "maintenance";
+  currentLocation?: {
+    latitude: number;
+    longitude: number;
+  };
+  batteryLevel: number;
+  lastMaintenanceDate: Date;
+  weightCapacity: number;
+  maxFlightDistance?: number;
+  deliveryRange?: number;
+  speed?: number;
+  chargeRate?: number;
+  drainRate?: number;
+  bcr?: number;
+  totalBatteryCapacity?: number;
 }

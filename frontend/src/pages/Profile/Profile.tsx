@@ -1,5 +1,6 @@
 import React from "react";
 import DeliveryList from "../Delivery/DeliveryList";
+import { withAuth } from "../../component/Wrapper/authWrapper";
 
 const Profile = () => {
   return (
@@ -12,4 +13,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);

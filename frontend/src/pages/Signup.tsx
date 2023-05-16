@@ -20,13 +20,19 @@ const Signup: React.FC = () => {
     (state: RootState) => state.userSignInReducer
   );
 
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  const query = useQuery();
   useEffect(() => {
-    // if (user !== null) {
-    //   navigate(redirect ?? "/");
-    // }
-
-    console.log();
-  }, []);
+    if (query.get("jwt")) {
+      console.log(query.get("jwt"));
+      Cookies.set("JWT", query.get("jwt") ?? "");
+      dispatch(userSignInAction(query.get("jwt") ?? ""));
+    }
+    if (Object.keys(user).length !== 0) {
+      console.log("firsadsfasdft");
+      navigate("/");
+    }
+  }, [user]);
 
   const handleGoogleLogin = () => {
     window.open(`http://localhost:5000/api/users/auth/google`, "_self");

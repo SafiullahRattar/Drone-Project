@@ -11,43 +11,68 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.userSignInReducer);
-  console.log(user);
 
   const signOutHandler = () => {
     dispatch(signOutAction());
     navigate("/");
   };
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  //when a link is clicked, close the menu
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+  }, [navigate]);
+
   // console.log("Navbar");
   // console.log(user);
   return (
-    <header className="header">
-      <div className="nav-area">
-        <Link to="/" className="logo">
-          DDS
+    <header className={`header ${isMenuOpen ? "show" : ""}`}>
+      <div className="nav">
+        <Link to="/" className="">
+          <img src={"/logo.png"} alt="logo" className="logo" />
         </Link>
+        <div
+          className={`menu-btn ${isMenuOpen ? "close" : ""}`}
+          onClick={toggleMenu}
+        >
+          <div className="btn-line"></div>
+          <div className="btn-line"></div>
+          <div className="btn-line"></div>
+        </div>
         <nav
-          className={`${"nav-area"} 
+          className={`${"nav-area"} ${isMenuOpen ? "show" : ""} 
           `}
         >
           <ul className="menus">
             <li className="menu-items">
-              <Link to="/tracking">Tracking</Link>
+              <Link to="/tracking">Track</Link>
             </li>
             {/* <li className="menu-items">
               <Link to="/profile">Service</Link>
             </li> */}
-            <li className="menu-items">
-              <Link to="/delivery">Book a Drone</Link>
-            </li>
+            {user && user.isRegistered && (
+              <li className="menu-items">
+                <Link to="/delivery">Send Package</Link>
+              </li>
+            )}
             <li className="menu-items">
               <Link to="/profile">Profile</Link>
             </li>
             {user && user.isAdmin && (
               <li className="menu-items menu-dropdown">
-                <button>
-                  Admin
-                  <span className="arrow"></span>
-                </button>
+                <li className="menu-items">
+                  <Link to="#">
+                    Admin
+                    <span className="arrow"></span>
+                  </Link>
+                </li>
                 {/* <i className="fa fa-caret-down"></i> */}
                 <ul className="dropdown">
                   <li className="menu-items">
@@ -60,8 +85,11 @@ const Header = () => {
                     <Link to="/admin/deliveries">Deliveries</Link>
                   </li>
                   <li className="menu-items">
-                    <Link to="/admin/price-plan">Price Plan</Link>
+                    <Link to="/admin/path">Path</Link>
                   </li>
+                  {/* <li className="menu-items">
+                    <Link to="/admin/price-plan">Price Plan</Link>
+                  </li> */}
                 </ul>
               </li>
             )}

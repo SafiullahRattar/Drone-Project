@@ -1,10 +1,12 @@
+@import '../../sass/CommonVariables.scss';
+
 .form-container {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
-justify-content: center;
-align-items: center;
+  justify-content: center;
+  align-items: center;
 
   .form-title {
     padding: 0.5rem;
@@ -16,43 +18,29 @@ align-items: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    // width: 50%;
+    width: 100%;
 
     @media screen and (min-width: 768px) {
-      width: 50%;
+      // width: 50%;
     }
     .form-input-container {
       // margin: 0 auto;
       // margin-bottom: 0.5rem;
       display: flex;
       flex-direction: column;
+      width: 100%;
 
       label {
         font-size: 0.9rem;
       }
 
       input {
-        font-size: 16px;
-        // font-size: max(16px, 1em);
-        font-family: inherit;
-        padding: 0.25em 0.5em;
-        background-color: #fff;
-        border: 2px solid #000;
-        border-radius: 4px;
-        padding: 0.75rem 1.25rem;
+        @include inputOne;
+
       }
 
       select {
-        font-size: 16px;
-        // font-size: max(16px, 1em);
-        font-family: inherit;
-        background-color: #fff;
-        border: 2px solid #000;
-        border-radius: 4px;
-        padding: 0.75rem 2.25rem;
-        // expand to parent width
-
-
+        @include selectMenu
       }
       .error {
         font-size: 0.8rem;
@@ -66,33 +54,71 @@ align-items: center;
   padding: 0.5rem;
 
   button {
-    cursor: pointer;
-    outline: none;
-    padding: 0.75rem 1.25rem;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-family: inherit;
-    border: 1px solid transparent;
-    transition: 0.3s ease all;
-    margin: 0.5em 0.5em;
-    border-color: rgb(0, 0, 0);
-    background: rgba(rgb(255, 255, 255), 0.1);
-    color: rgb(0, 0, 0);
-
-    &:hover {
-      background-color: rgb(32, 32, 32);
-      color: #fff;
-      border-color: rgb(0, 0, 0);
-    }
-    &:active {
-      border-color: rgb(162, 162, 246);
-      background: linear-gradient(
-        rgba(rgb(162, 162, 246), 0.2),
-        rgba(rgb(162, 162, 246), 0.3)
-      );
-      color: rgb(162, 162, 246);
-    }
+    @include buttonOne;
   }
 }
 // input {
 // }
+
+.container {
+  display: flex;
+  gap: "5rem";
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  .div-container__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+
+    @media screen and (min-width: 768px) {
+      width: 50%;
+    }
+
+    .div-container__left__title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .div-container__left__text {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .div-container__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+
+    @media screen and (min-width: 768px) {
+      width: 50%;
+    }
+
+    .div-container__right__title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .div-container__right__text {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+  }
+}

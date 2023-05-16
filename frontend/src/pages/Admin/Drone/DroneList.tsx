@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { RootState } from "../../../store";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,9 @@ import { adminEditFormAction } from "../../../actions/adminAction";
 import { fetchDeliveriesAdmin } from "../../../actions/deliveryAction";
 import Table, { TableColumn } from "../../../component/Table";
 import { getDroneListAdminAction } from "../../../actions/droneAction";
+import { withAdminAuth } from "../../../component/Wrapper/authWrapper";
+import Drone from "../../../component/Admin/AddNew/Drone";
+import "../AdminList.scss";
 
 const AdminDroneList = () => {
   const droneTableColumns: TableColumn[] = [
@@ -23,7 +26,11 @@ const AdminDroneList = () => {
       label: "Status",
       accessor: "status",
       type: "select",
-      options: ["available", "in-use", "maintenance"],
+      options: [
+        { value: "available", label: "available" },
+        { value: "in-use", label: "in-use" },
+        { value: "maintenance", label: "maintenance" },
+      ],
     },
     {
       label: "Latitude",
@@ -43,7 +50,7 @@ const AdminDroneList = () => {
     {
       label: "Last Maintenance Date",
       accessor: "lastMaintenanceDate",
-      type: "string",
+      type: "date",
     },
     {
       label: "Weight Capacity",
@@ -60,17 +67,39 @@ const AdminDroneList = () => {
       accessor: "deliveryRange",
       type: "number",
     },
-    {
-      label: "Delivery Capacity",
-      accessor: "deliveryCapacity",
-      type: "number",
-    },
+    // {
+    //   label: "Delivery Capacity",
+    //   accessor: "deliveryCapacity",
+    //   type: "number",
+    // },
     {
       label: "Speed",
       accessor: "speed",
       type: "number",
     },
+    {
+      label: "Charge Rate",
+      accessor: "chargeRate",
+      type: "number",
+    },
+    {
+      label: "Drain Rate",
+      accessor: "drainRate",
+      type: "number",
+    },
+    {
+      label: "BCR",
+      accessor: "bcr",
+      type: "number",
+    },
+    {
+      label: "Total Battery Capacity",
+      accessor: "totalBatteryCapacity",
+      type: "number",
+    },
   ];
+
+  const [showNewForm, setShowNewForm] = useState(false);
 
   const dispatch = useAppDispatch();
   const { drones, loading, error } = useAppSelector(
@@ -82,15 +111,9 @@ const AdminDroneList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
-      navigate("/signIn");
-    } else if (!user.isAdmin) {
-      navigate("/");
-    }
     dispatch(getDroneListAdminAction());
-  }, [dispatch, navigate, user]);
+  }, []);
 
-  console.log(drones);
   // get delivery and pass it admin delivery action
   const onEditClick = (drone: any) => {
     dispatch(adminEditFormAction(droneTableColumns, drone, "DRONE"));
@@ -98,15 +121,31 @@ const AdminDroneList = () => {
   };
 
   return (
-    <>
-      <Table
-        columns={droneTableColumns}
-        data={drones}
-        lastColumnEdit={true}
-        onEditClick={onEditClick}
-      ></Table>
-    </>
+    <div className="list">
+      <h1>Drones</h1>
+      <div className="addNewButton">
+        <button onClick={() => setShowNewForm(!showNewForm)}>
+          {showNewForm ? "Cancel" : "Add New Drone"}
+        </button>
+      </div>
+      <div
+        style={{
+          overflowX: "auto",
+        }}
+      >
+        {showNewForm ? (
+          <Drone />
+        ) : (
+          <Table
+            columns={droneTableColumns}
+            data={drones}
+            lastColumnEdit={true}
+            onEditClick={onEditClick}
+          ></Table>
+        )}
+      </div>
+    </div>
   );
 };
 
-export default AdminDroneList;
+export default withAdminAuth(AdminDroneList);

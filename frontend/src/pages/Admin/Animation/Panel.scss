@@ -1,0 +1,80 @@
+.panel {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5rem;
+  padding: 0 2rem;
+  width: 100%;
+  .panel__header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .panel__tile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    button {
+      height: 1rem;
+      // text inside button to be centered vertically
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .right {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0;
+      width: 50%;
+    }
+  }
+
+  .panel__body {
+    .form-group {
+      margin-bottom: 20px;
+      .form-control {
+        width: 100%;
+      }
+    }
+  }
+
+  .panel__drone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .panel__drone__data {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 2rem;
+      width: 100%;
+      column-gap: 5rem;
+      row-gap: 1rem;
+      justify-items: center;
+
+      &.header {
+        font-size: 1.1rem;
+        font-weight: 600;
+        white-space: nowrap;
+        margin-bottom: 0.3rem;
+      }
+    }
+  }
+
+  .panel-footer {
+    text-align: right;
+    button {
+      margin-left: 10px;
+    }
+  }
+}
+
+.current {
+  background-color: #bf5af2;
+}

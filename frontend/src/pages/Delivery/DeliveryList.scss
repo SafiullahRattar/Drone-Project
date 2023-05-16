@@ -2,24 +2,5 @@
   display: flex;
   justify-content: center;
   margin: 10px;
-  table {
-    border-collapse: collapse;
-    // width: 80%;
-    thead {
-      background-color: #e0e0e0;
-    }
-    th {
-      text-align: left;
-      padding: 10px 0px;
-    }
-    td {
-      cursor: pointer;
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-      &:hover {
-        background-color: #e0e0e0;
-      }
-    }
-  }
+  overflow-x: auto;
 }

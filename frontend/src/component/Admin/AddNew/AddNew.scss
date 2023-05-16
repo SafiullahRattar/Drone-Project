@@ -1,0 +1,49 @@
+form {
+  // default show 4 columns
+  // if the screen is smaller than 768px, show 2 columns
+
+  .form-Fields {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+    width: 100%;
+    column-gap: 5rem;
+    justify-items: center;
+    // margin: 0 5rem;
+
+    .form-Field-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      white-space: nowrap;
+      gap: 1rem;
+
+      label {
+        align-self: flex-start;
+      }
+
+      @media screen and (max-width: 850px) {
+        flex-direction: column;
+
+        label {
+          align-self: center;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1050px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1rem;
+      width: 100%;
+      column-gap: 5rem;
+      justify-items: center;
+      margin: 0 2rem;
+    }
+
+    @media screen and (max-width: 850px) {
+      grid-template-columns: repeat(1, 1fr);
+      margin: 0 1rem;
+    }
+  }
+}

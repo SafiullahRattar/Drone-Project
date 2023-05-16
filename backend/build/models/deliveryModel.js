@@ -31,26 +31,24 @@ const deliverySchema = new mongoose_1.default.Schema({
     },
     price: {
         type: Number,
-        default: 0
+        default: 0,
     },
     status: {
         type: String,
         enum: ["pending", "in-progress", "delivered"],
         required: true,
     },
-    // pickup_location: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: Address,
-    //   required: true,
-    // },
-    // drop_location: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: Address,
-    //   required: true,
-    // },
+    pickup_location: {
+        type: [Number],
+        required: true,
+    },
+    drop_location: {
+        type: [Number],
+        required: true,
+    },
     distance: {
         type: Number,
-        default: 0
+        default: 0,
     },
 });
 const Delivery = mongoose_1.default.model("Delivery", deliverySchema);

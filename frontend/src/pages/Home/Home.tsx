@@ -1,13 +1,15 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { userSignInAction } from "../../actions/userAction";
 import { RootState } from "../../store";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import "./Home.scss";
+import CustomLocation from "../../component/Map";
 
 const Home = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { user, loading, error } = useAppSelector(
     (state) => state.userSignInReducer
   );
@@ -30,6 +32,7 @@ const Home = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // history.push(`/tracking/${trackingId}`);
+    navigate(`/tracking?tracking_id=${trackingId}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,18 +57,6 @@ const Home = () => {
             Track
           </button>
         </form>
-        <h1 className="homePage__title">OR</h1>
-        {Object.keys(user).length !== 0 ? (
-          <>
-            <h1 className="homePage__title">Deliver A Package</h1>
-            <button className="btn">Deliver</button>
-          </>
-        ) : (
-          <>
-            <h1 className="homePage__title">Register to Send a Package</h1>
-            <button className="btn">Sign Up</button>
-          </>
-        )}
       </div>
       <div className="homePage__rightColumn">
         <img src="drone.svg" alt="drone" />

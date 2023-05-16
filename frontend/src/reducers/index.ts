@@ -6,6 +6,7 @@ import {
 } from "./deliveryReducer";
 import { userSignInReducer, userListReducer } from "./userReducer";
 import { droneListReducer } from "./droneReducer";
+import { animationReducer } from "./animationReducer";
 
 export const allReducers = combineReducers({
   userSignInReducer,
@@ -14,4 +15,5 @@ export const allReducers = combineReducers({
   deliveryListReducer,
   droneListReducer,
   adminEditFormReducer,
+  animationReducer,
 });
