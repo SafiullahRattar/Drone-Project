@@ -5,6 +5,7 @@ import { getPathsAction } from "../../../actions/pathActions";
 import PathTable from "./PathTable";
 import DroneAnimation from "../Animation/index";
 import '../AdminList.scss'
+import { withAdminAuth } from "../../../component/Wrapper/authWrapper";
 
 const PathList = () => {
   const dispatch = useAppDispatch();
@@ -43,4 +44,4 @@ const PathList = () => {
   );
 };
 
-export default PathList;
+export default withAdminAuth(PathList);
