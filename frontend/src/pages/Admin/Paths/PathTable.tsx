@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 interface IProps {
   paths: any;
+  setShowAnimation: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PathTable = ({ paths }: IProps) => {
+const PathTable = ({ paths, setShowAnimation }: IProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   function calculateTotalWeight(path: any[]): number {
@@ -45,7 +46,7 @@ const PathTable = ({ paths }: IProps) => {
                 <button
                   onClick={() => {
                     dispatch(getAnimationDataAction(index));
-                    navigate('/admin/animation')
+                    setShowAnimation(true);
                   }}
                 >
                   Animation

@@ -4,10 +4,12 @@ import { useAppDispatch, useAppSelector } from "../../../utils/hooks";
 import { getPathsAction } from "../../../actions/pathActions";
 import PathTable from "./PathTable";
 import DroneAnimation from "../Animation/index";
+import '../AdminList.scss'
 
 const PathList = () => {
   const dispatch = useAppDispatch();
   const [selectedPath, setSelectedPath] = useState(-1);
+  const [showAnimation, setShowAnimation] = useState(false);
   const { loading, error, paths } = useAppSelector(
     (state: RootState) => state.pathsReducer
   );
@@ -19,16 +21,24 @@ const PathList = () => {
   console.log(paths);
 
   return (
-    <div>
-      <h1>Path List</h1>
-      {!loading && !error && paths.length !== 0 && (
-        <div>
-          <PathTable paths={paths} />
+    <div className="list">
+      <h1>{showAnimation ? "Animation" : "Path List"}</h1>
+      {showAnimation && (
+        <div className="addNewButton">
+          <button onClick={() => setShowAnimation(false)}>Show List</button>
         </div>
       )}
-      {/* <div>
-        <DroneAnimation />
-      </div> */}
+      <div>
+        {!showAnimation ? (
+          !loading &&
+          !error &&
+          paths.length !== 0 && (
+            <PathTable paths={paths} setShowAnimation={setShowAnimation} />
+          )
+        ) : (
+          <DroneAnimation />
+        )}
+      </div>
     </div>
   );
 };
