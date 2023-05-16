@@ -14,11 +14,11 @@ const pathRoutes_1 = __importDefault(require("./routes/pathRoutes"));
 const errorMiddleware_1 = require("./middleware/errorMiddleware");
 const passport_1 = __importDefault(require("passport"));
 const express_session_1 = __importDefault(require("express-session"));
-const authMiddleware_1 = require("./middleware/authMiddleware");
 const userController_1 = require("./controllers/userController");
 const cors_1 = __importDefault(require("cors"));
 const adminRoutes_1 = __importDefault(require("./routes/adminRoutes"));
 const morgan_1 = __importDefault(require("morgan"));
+const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 dotenv_1.default.config();
 const corsOptions = {
@@ -47,17 +47,25 @@ app.use("/api/admin", adminRoutes_1.default);
 app.use("/api/users", userRoutes_1.default);
 app.use("/api/package", packageRoutes_1.default);
 app.use("/api/delivery", deliveryRoute_1.default);
-app.use('/api/admin/path', pathRoutes_1.default);
+app.use("/api/admin/path", pathRoutes_1.default);
 app.get("/auth/google/callback", passport_1.default.authenticate("google", {
     // successRedirect: process.env.CLIENT_URL,
     failureRedirect: "/login/failed",
     session: false,
 }), userController_1.authUser);
-app.use("/hello", (req, res) => {
-    res.send("hello world");
-});
-// app.use('/api/orders',orderRoutes)
-app.get("/", authMiddleware_1.authMiddleware, (req, res) => { });
+if (process.env.NODE_ENV === "production") {
+    const __dirname = path_1.default.resolve();
+    app.use(express_1.default.static(path_1.default.join(__dirname, "/frontend/build")));
+    app.get("*", (req, res) => {
+        res.sendFile(path_1.default.resolve(__dirname, "frontend", "build", "index.html"));
+    });
+}
+else {
+    app.get("/", (req, res) => {
+        res.sendFile(path_1.default.join(__dirname, "uploads/image-1645260047444.png"));
+        // res.send('Api is running ' + __dirname)
+    });
+}
 app.use(errorMiddleware_1.notFound);
 app.use(errorMiddleware_1.errorHandler);
 const PORT = process.env.PORT || 5000;
