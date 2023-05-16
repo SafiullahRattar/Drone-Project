@@ -1,11 +1,9 @@
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import {  useState } from "react";
+import {  useNavigate } from "react-router-dom";
 import { userSignInAction } from "../../actions/userAction";
-import { RootState } from "../../store";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import "./Home.scss";
-import CustomLocation from "../../component/Map";
 
 const Home = () => {
   const dispatch = useAppDispatch();

@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import "../sass/Header.scss";
 import { Link, useNavigate } from "react-router-dom";
