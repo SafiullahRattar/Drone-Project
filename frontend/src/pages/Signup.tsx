@@ -4,10 +4,8 @@ import React, { useEffect } from "react";
 import Cookies from "js-cookie";
 
 import "./Signup.scss";
-import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { userSignInAction } from "../actions/userAction";
 import { useAppDispatch, useAppSelector } from "../utils/hooks";
 

@@ -13,7 +13,6 @@ import DroneAnimation from "./pages/Admin/Animation";
 import Signup from "./pages/Signup";
 import AdminDroneList from "./pages/Admin/Drone/DroneList";
 import Profile from "./pages/Profile/Profile";
-import Test from "./Test";
 import PathList from "./pages/Admin/Paths/PathList";
 
 // import "./App.scss";

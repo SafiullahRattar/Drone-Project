@@ -1,8 +1,6 @@
-import { UserEdit, UserList, UserSingIn } from "../constants/action_types";
+import { UserList, UserSingIn } from "../constants/action_types";
 import {
   user,
-  UserEditAction,
-  UserEditState,
   UserListAction,
   UserListState,
   userSignInAction,
@@ -38,28 +36,29 @@ export const userSignInReducer = (
 };
 
 const initUserListState: UserListState = {
-    users: [] as user[],
-    loading: false,
-    error: "",
+  users: [] as user[],
+  loading: false,
+  error: "",
+};
 
-}
+export const userListReducer = (
+  state: UserListState = initUserListState,
+  action: UserListAction
+) => {
+  switch (action.type) {
+    case UserList.REQUEST:
+      return { ...state, loading: true, error: "" };
 
-export const userListReducer = (state: UserListState = initUserListState, action: UserListAction) => {
-    switch (action.type) {
-        case (UserList.REQUEST):
-            return { ...state, loading: true, error: "" }
+    case UserList.SUCCESS:
+      return { ...state, users: action.payload, loading: false };
 
-        case (UserList.SUCCESS):
-            return { ...state, users: action.payload, loading: false }
+    case UserList.FAIL:
+      return { ...state, error: action.payload, loading: false };
 
-        case (UserList.FAIL):
-            return { ...state, error: action.payload, loading: false }
+    case UserList.RESET:
+      return initUserListState;
 
-        case (UserList.RESET):
-            return initUserListState
-
-
-        default:
-            return state
-    }
+    default:
+      return state;
+  }
 };

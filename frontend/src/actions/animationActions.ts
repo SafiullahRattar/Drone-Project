@@ -1,6 +1,4 @@
-import axios from "axios";
 import { AnimationActionTypes } from "../constants/action_types";
-import { axios_config } from "../utils/config";
 import { RootState } from "../store";
 
 export const setAnimationSpeedAction = (speed: number) => ({

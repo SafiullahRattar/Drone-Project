@@ -1,4 +1,3 @@
-import React from "react";
 import "../sass/Table.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
