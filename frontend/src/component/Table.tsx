@@ -1,6 +1,6 @@
 import "../sass/Table.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 export type TableColumn = {
   label: string;
@@ -26,7 +26,7 @@ const renderCellValue = (column: TableColumn, row: any) => {
     // show date (dd/mm/yyyy)
     return new Date(cellValue).toLocaleDateString("en-GB", {
       day: "2-digit",
-      month: 'short',
+      month: "short",
       year: "numeric",
     });
   }
@@ -92,11 +92,14 @@ const Table: React.FC<TableProps> = ({
             ))}
             {lastColumnEdit && (
               <td>
-                <FontAwesomeIcon
+                {/* <FontAwesomeIcon
                   cursor={"pointer"}
                   icon={faEdit}
                   onClick={() => onEditClick && onEditClick(row)}
-                />
+                /> */}
+                <button onClick={() => onEditClick && onEditClick(row)}>
+                  EDIT
+                </button>
               </td>
             )}
           </tr>
