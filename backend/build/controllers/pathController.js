@@ -43,7 +43,6 @@ exports.getPaths = (0, express_async_handler_1.default)((req, res) => __awaiter(
                 model: "Package",
             },
         }).populate('path.drone');
-        console.log(paths);
         res.json(paths);
     }
     catch (err) {

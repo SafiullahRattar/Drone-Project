@@ -5,8 +5,9 @@
   gap: 5rem;
   text-align: center;
   margin: 2rem;
-  // align-items: center;
+  align-items: center;
   justify-content: center;
+  align-self: center;
 
   @media screen and (max-width: 1024px) {
     // flex-direction: column;
@@ -18,13 +19,14 @@
   }
 
   &__leftColumn {
-    flex: 1;
+    // flex: 1;
     // display: flex;
     align-self: center;
   }
 
   &__rightColumn {
-    flex: 1;
+    // flex: 1;
+    width: 50%;
   }
 
   &__title {

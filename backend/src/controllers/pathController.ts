@@ -32,7 +32,6 @@ export const getPaths = expressAsyncHandler(async (req, res) => {
         model: "Package",
       },
     }).populate('path.drone');
-    console.log(paths);
 
     res.json(paths);
   } catch (err: any) {
