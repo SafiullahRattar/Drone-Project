@@ -123,3 +123,10 @@ export enum AnimationActionTypes {
   GET_DATA_SUCCESS = "ANIMATION_GET_DATA_SUCCESS",
   GET_DATA_FAIL = "ANIMATION_GET_DATA_FAIL",
 }
+
+export enum PathsActionTypes {
+  REQUEST = "PATHS_REQUEST",
+  FAIL = "PATHS_FAIL",
+  SUCCESS = "PATHS_SUCCESS",
+  RESET = "PATHS_RESET",
+}

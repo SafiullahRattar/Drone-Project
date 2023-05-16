@@ -15,9 +15,9 @@ const MainAnimation = () => {
     (state: RootState) => state.animationReducer
   );
 
-  useEffect(() => {
-    dispatch(getAnimationDataAction());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAnimationDataAction());
+  // }, []);
 
   return (
     <>
