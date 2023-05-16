@@ -54,6 +54,7 @@ app.get("/auth/google/callback", passport_1.default.authenticate("google", {
     session: false,
 }), userController_1.authUser);
 if (process.env.NODE_ENV === "production") {
+    // if(true){
     const __dirname = path_1.default.resolve();
     app.use(express_1.default.static(path_1.default.join(__dirname, "/frontend/build")));
     app.get("*", (req, res) => {
@@ -62,8 +63,8 @@ if (process.env.NODE_ENV === "production") {
 }
 else {
     app.get("/", (req, res) => {
-        res.sendFile(path_1.default.join(__dirname, "uploads/image-1645260047444.png"));
-        // res.send('Api is running ' + __dirname)
+        // res.sendFile(path.join(__dirname, "uploads/image-1645260047444.png"));
+        res.send("Api is running " + __dirname);
     });
 }
 app.use(errorMiddleware_1.notFound);
@@ -71,4 +72,5 @@ app.use(errorMiddleware_1.errorHandler);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);
+    console.log('NODE_ENV: ', process.env.NODE_ENV);
 });

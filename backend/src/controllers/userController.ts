@@ -21,7 +21,12 @@ export const authUser = expressAsyncHandler(
     const jwt = generateToken(user._id);
     // console.log(req.user);
     res.cookie("JWT", jwt);
-    res.redirect(`${process.env.CLIENT_URL}/signUp?jwt=${jwt}`);
+    if (process.env.NODE_ENV === "production") {
+      res.redirect(`${process.env.SERVER_URL}/signUp?jwt=${jwt}`);
+    } else {
+      res.redirect(`${process.env.CLIENT_URL}/signUp?jwt=${jwt}`);
+    }
+    // res.redirect(`http://localhost:5000/signUp?jwt=${jwt}`);
   }
 );
 

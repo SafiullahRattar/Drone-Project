@@ -31,7 +31,13 @@ exports.authUser = (0, express_async_handler_1.default)((req, res) => __awaiter(
     const jwt = (0, generateToken_1.generateToken)(user._id);
     // console.log(req.user);
     res.cookie("JWT", jwt);
-    res.redirect(`${process.env.CLIENT_URL}/signUp?jwt=${jwt}`);
+    if (process.env.NODE_ENV === "production") {
+        res.redirect(`${process.env.SERVER_URL}/signUp?jwt=${jwt}`);
+    }
+    else {
+        res.redirect(`${process.env.CLIENT_URL}/signUp?jwt=${jwt}`);
+    }
+    // res.redirect(`http://localhost:5000/signUp?jwt=${jwt}`);
 }));
 exports.getUserProfile = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // res.send('Success')
