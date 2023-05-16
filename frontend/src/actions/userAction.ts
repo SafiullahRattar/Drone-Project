@@ -1,5 +1,6 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import {
+  AdminEditFormActionTypes,
   AdminUserUpdateActionTypes,
   DeliveryUserListActionTypes,
   UserList,
@@ -98,6 +99,9 @@ export const adminUpdateUserAction = (user: any) => {
       dispatch({
         type: AdminUserUpdateActionTypes.SUCCESS,
         payload: data,
+      });
+      dispatch({
+        type: AdminEditFormActionTypes.ADMIN_SHOULD_GO_BACK,
       });
     } catch (error: AxiosError | any) {
       dispatch({

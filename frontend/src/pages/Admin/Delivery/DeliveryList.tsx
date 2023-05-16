@@ -71,6 +71,21 @@ const AdminDeliveryList = () => {
     {
       label: "Status",
       accessor: "status",
+      type: "select",
+      options: [
+        {
+          value: "pending",
+          label: "Pending",
+        },
+        {
+          value: "assigned",
+          label: "Assigned",
+        },
+        {
+          value: "delivered",
+          label: "Delivered",
+        },
+      ],
     },
     {
       label: "Pick Up Location",

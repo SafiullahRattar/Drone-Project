@@ -22,11 +22,9 @@ interface EditFormProps {
 }
 
 const AdminEditForm = () => {
-  const { data, columns, apiForUpdate, loading, error } = useAppSelector(
-    (state: RootState) => state.adminEditFormReducer
-  );
+  const { data, columns, apiForUpdate, loading, error, shouldGoBack } =
+    useAppSelector((state: RootState) => state.adminEditFormReducer);
   const [formData, setFormData] = useState<{ [key: string]: string }>(data);
-  const [shouldGoBack, setShouldGoBack] = useState(false);
 
   // Prefill the form data with the current data
   // columns.forEach((field: TableColumn) => {
@@ -53,7 +51,7 @@ const AdminEditForm = () => {
     if (!loading && !error && shouldGoBack) {
       navigate(-1);
     }
-  }, [loading, error, navigate]);
+  }, [loading, error, navigate, shouldGoBack]);
 
   console.log({
     columns,
@@ -75,7 +73,6 @@ const AdminEditForm = () => {
           console.log("should update user", formData);
           dispatch(adminUpdateUserAction(formData));
         }
-        setShouldGoBack(true);
       }}
     >
       {columns.map((field: TableColumn) => {

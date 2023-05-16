@@ -32,7 +32,7 @@ const deliverySchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["pending", "in-progress", "delivered"],
+    enum: ["pending", "assigned", "delivered"],
     required: true,
   },
   pickup_location: {

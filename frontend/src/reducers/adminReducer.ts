@@ -11,6 +11,7 @@ const initialStateAdminEditForm: AdminEditFormState = {
   columns: [],
   apiForUpdate: "",
   success: false,
+  shouldGoBack: false,
 };
 export const adminEditFormReducer = (
   state: AdminEditFormState = initialStateAdminEditForm,
@@ -18,7 +19,7 @@ export const adminEditFormReducer = (
 ) => {
   switch (action.type) {
     case AdminEditFormActionTypes.ADMIN_EDITFORM_REQUEST:
-      return { ...state, loading: true };
+      return { ...state, loading: true, shouldGoBack: false };
     case AdminEditFormActionTypes.ADMIN_EDITFORM_SUCCESS:
       return {
         ...state,
@@ -31,6 +32,8 @@ export const adminEditFormReducer = (
       return { ...state, error: action.payload, loading: false };
     case AdminEditFormActionTypes.ADMIN_EDITFORM_RESET:
       return initialStateAdminEditForm;
+      case AdminEditFormActionTypes.ADMIN_SHOULD_GO_BACK:
+        return { ...state, shouldGoBack: true };
     default:
       return state;
   }

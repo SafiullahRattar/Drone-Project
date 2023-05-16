@@ -2,6 +2,7 @@ import axios, { Axios, AxiosError } from "axios";
 import Cookies from "js-cookie";
 import {
   AdminDeliveryUpdateActionTypes,
+  AdminEditFormActionTypes,
   DeliveryActionTypes,
   DeliveryBackend,
   DeliveryListActionTypes,
@@ -224,6 +225,9 @@ export const adminUpdateDeliveryAction = (delivery: any) => {
       dispatch({
         type: AdminDeliveryUpdateActionTypes.SUCCESS,
         payload: data,
+      });
+      dispatch({
+        type: AdminEditFormActionTypes.ADMIN_SHOULD_GO_BACK,
       });
     } catch (error: AxiosError | any) {
       dispatch({

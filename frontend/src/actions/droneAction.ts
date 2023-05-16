@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import {
   AdminDroneListActionTypes,
   AdminDroneUpdateActionTypes,
+  AdminEditFormActionTypes,
 } from "../constants/action_types";
 import { AppDispatch } from "../store";
 import { axios_config } from "../utils/config";
@@ -47,6 +48,9 @@ export const updateDroneAdminAction =
       dispatch({
         type: AdminDroneUpdateActionTypes.SUCCESS,
         payload: data,
+      });
+      dispatch({
+        type: AdminEditFormActionTypes.ADMIN_SHOULD_GO_BACK,
       });
     } catch (error: AxiosError | any) {
       dispatch({

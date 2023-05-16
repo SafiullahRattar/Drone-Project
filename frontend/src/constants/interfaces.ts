@@ -115,6 +115,7 @@ export interface AdminEditFormState {
   columns: TableColumn[];
   apiForUpdate: string;
   success: boolean;
+  shouldGoBack: boolean;
 }
 
 // Animation
