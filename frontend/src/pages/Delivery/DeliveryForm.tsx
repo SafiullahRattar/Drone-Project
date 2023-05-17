@@ -8,6 +8,7 @@ import "./DeliveryForm.scss";
 import CustomLocation from "../../component/Map";
 import { RootState } from "../../store";
 import { withRegisterAuth } from "../../component/Wrapper/authWrapper";
+import { NewDeliveryActionTypes } from "../../constants/action_types";
 
 const DeliveryForm = () => {
   const dispatch = useAppDispatch();
@@ -56,6 +57,9 @@ const DeliveryForm = () => {
   const { user } = useAppSelector(
     (state: RootState) => state.userSignInReducer
   );
+  const { loading, error, success } = useAppSelector(
+    (state: RootState) => state.newDeliveryReducer
+  );
 
   console.log({
     pickUpLocation,
@@ -63,8 +67,14 @@ const DeliveryForm = () => {
     distance,
   });
 
+  useEffect(() => {
+    //reset the form
+  }, [success]);
+
   return (
     <div>
+      {loading && <div>Loading...</div>}
+      {error && <span className="error">error</span>}
       <Formik
         initialValues={{
           package: {
@@ -92,7 +102,7 @@ const DeliveryForm = () => {
             // status: yup.string().required("Status is required"),
           }),
         })}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           // submit the form
           setSubmitting(false);
 
@@ -110,6 +120,10 @@ const DeliveryForm = () => {
             // reset the form
             setDropOffLocation(null);
             setDistance(0);
+            resetForm();
+            dispatch({
+              type: NewDeliveryActionTypes.SUCCESS,
+            });
           }
         }}
       >

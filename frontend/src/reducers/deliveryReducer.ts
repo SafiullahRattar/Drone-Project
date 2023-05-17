@@ -5,6 +5,7 @@ import {
   DeliveryListActionTypes,
   DeliveryUserListAction,
   DeliveryUserListActionTypes,
+  NewDeliveryActionTypes,
 } from "../constants/action_types";
 import {
   Delivery,
@@ -118,6 +119,24 @@ export const deliveryListReducer = (
       return { ...state, error: action.payload, loading: false };
     case DeliveryListActionTypes.DELIVERY_LIST_RESET:
       return initialStateDeliveryList;
+    default:
+      return state;
+  }
+};
+
+export const newDeliveryReducer = (
+  state = { delivery: {}, loading: false, error: "", success: false },
+  action: any
+) => {
+  switch (action.type) {
+    case NewDeliveryActionTypes.REQUEST:
+      return { loading: true };
+    case NewDeliveryActionTypes.SUCCESS:
+      return { loading: false, success: true, delivery: action.payload };
+    case NewDeliveryActionTypes.FAIL:
+      return { loading: false, error: action.payload };
+    case NewDeliveryActionTypes.RESET:
+      return { delivery: {} };
     default:
       return state;
   }

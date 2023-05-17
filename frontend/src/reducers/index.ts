@@ -3,6 +3,7 @@ import { adminEditFormReducer } from "./adminReducer";
 import {
   deliveryUserListReducer,
   deliveryListReducer,
+  newDeliveryReducer,
 } from "./deliveryReducer";
 import { userSignInReducer, userListReducer } from "./userReducer";
 import { droneListReducer } from "./droneReducer";
@@ -18,4 +19,5 @@ export const allReducers = combineReducers({
   adminEditFormReducer,
   animationReducer,
   pathsReducer,
+  newDeliveryReducer,
 });

@@ -131,3 +131,10 @@ export enum PathsActionTypes {
   SUCCESS = "PATHS_SUCCESS",
   RESET = "PATHS_RESET",
 }
+
+export enum NewDeliveryActionTypes {
+  REQUEST = "NEW_DELIVERY_REQUEST",
+  FAIL = "NEW_DELIVERY_FAIL",
+  SUCCESS = "NEW_DELIVERY_SUCCESS",
+  RESET = "NEW_DELIVERY_RESET",
+}
