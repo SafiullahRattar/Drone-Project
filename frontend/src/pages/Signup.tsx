@@ -33,12 +33,12 @@ const Signup: React.FC = () => {
   }, [user]);
 
   const handleGoogleLogin = () => {
-    window.open(`http://localhost:5000/api/users/auth/google`, "_self");
+    window.open(`https://drab-erin-springbok-toga.cyclic.app/api/users/auth/google`, "_self");
   };
 
   return (
     <div className="signup">
-      <Formik
+      {/* <Formik
         initialValues={{ phoneNumber: 0 }}
         validate={(values) => {
           const errors = {};
@@ -77,7 +77,7 @@ const Signup: React.FC = () => {
         )}
       </Formik>
       <hr />
-      <h4>OR SIGN UP WITH</h4>
+      <h4>OR SIGN UP WITH</h4> */}
       <GoogleButton onClick={handleGoogleLogin} />
     </div>
   );

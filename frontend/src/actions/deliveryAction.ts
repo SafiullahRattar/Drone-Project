@@ -115,7 +115,7 @@ export const postNewDelivery = (
       console.log({ ...package_data });
 
       const package_res = await axios.post(
-        `http://localhost:5000/api/package/`,
+        `/api/package/`,
         {
           ...package_data,
         },
@@ -123,7 +123,7 @@ export const postNewDelivery = (
       );
       const package_id = package_res.data._id;
       const delivery_res = await axios.post(
-        `http://localhost:5000/api/delivery`,
+        `/api/delivery`,
         {
           package_id,
           ...delivery_data,
