@@ -36,7 +36,7 @@ const Panel = () => {
       .slice(0, selected_index)
       .reduce((acc: any, curr: any) => acc + curr, 0);
 
-    return totalWeight - usedWeight;
+    return Math.abs(totalWeight - usedWeight);
   };
 
   const timeToNextCoordinate = (index: number) => {
@@ -55,7 +55,7 @@ const Panel = () => {
   const calculateRemainingTime = () => {
     const timeSpent = time_elapsed[selected_index];
 
-    return Math.round(time_elapsed[time_elapsed.length - 1] - timeSpent);
+    return Math.abs(Math.round(time_elapsed[time_elapsed.length - 1] - timeSpent));
   };
 
   const handleSpeedChange = (value: number) => {
