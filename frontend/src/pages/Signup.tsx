@@ -33,7 +33,7 @@ const Signup: React.FC = () => {
   }, [user]);
 
   const handleGoogleLogin = () => {
-    window.open(`https://drab-erin-springbok-toga.cyclic.app/api/users/auth/google`, "_self");
+    window.open(`http://localhost:5000/api/users/auth/google`, "_self");
   };
 
   return (
